@@ -8,17 +8,22 @@ public class TomyGunScript : MonoBehaviour
 {
     public GameObject player, bullet;
     public int bulletCount, maxBulletCount;
+    float gunShootInterval, gunFireRate;
     public Text ammoCount;
+
     // Start is called before the first frame update
     void Start()
     {
+        gunFireRate = 0.2f;
         bulletCount = maxBulletCount;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButton(0) && bulletCount > 0) {
+        gunShootInterval += Time.deltaTime;
+        if (Input.GetMouseButton(0) && bulletCount > 0 && gunShootInterval > gunFireRate) {
+            gunShootInterval = 0;
             bulletCount--;
             Instantiate(bullet, 
                         gameObject.transform.parent.transform.position + (gameObject.transform.parent.transform.forward * 2), 
