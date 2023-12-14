@@ -1653,7 +1653,8 @@ MonoBehaviour:
   maxSlopeAngle: 35
   slideForce: 400
   slideCounterMovement: 0.2
-  jumpForce: 250
+  jumpForce: 200
+  movementSnappiness: 5
 --- !u!54 &1441905817
 Rigidbody:
   m_ObjectHideFlags: 0

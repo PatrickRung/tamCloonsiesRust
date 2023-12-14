@@ -39,7 +39,8 @@ public class movement : CharacterTemplate
     private float jumpCooldown = 0.25f;
     public float jumpForce = 550f;
     private float jumpCount = 0;
-    
+    public float movementSnappiness = 2;
+
     //Input
     float x, y;
     bool jumping, sprinting, crouching;
@@ -75,6 +76,23 @@ public class movement : CharacterTemplate
     private void Update() {
         MyInput();
         Look();
+        if(!grounded)
+        {
+            smootherJump();
+        }
+        else
+        {
+            timeOffGround = 0;
+        }
+    }
+
+    //provides better jumping because the  character will start to experience more force pushing down as they are in the air for longer
+    //why because realistic and also makes jumping better
+    float timeOffGround = 0;
+    public void smootherJump()
+    {
+        timeOffGround += Time.deltaTime;
+        rb.AddForce(new Vector3(0, timeOffGround * -2, 0));
     }
 
     /// <summary>
