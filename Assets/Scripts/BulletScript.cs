@@ -8,6 +8,11 @@ public class BulletScript : MonoBehaviour
     private Collider bulletColllider;
     public GameObject playerGun, player;
     public float damage;
+
+    public BulletScript(GameObject bulletUser)
+    {
+        this.player = bulletUser;
+    }
     // Start is called before the first frame update
     void Awake()
     {

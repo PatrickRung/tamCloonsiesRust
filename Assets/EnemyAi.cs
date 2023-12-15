@@ -80,7 +80,8 @@ public class EnemyAi : CharacterTemplate
     {
         agent.SetDestination(player.position);
     }
-
+    private Vector3 projectileSpawnPoint;
+    private float attackDisplaceDist = 4;
     private void AttackPlayer()
     {
         agent.SetDestination(transform.position);
@@ -90,7 +91,11 @@ public class EnemyAi : CharacterTemplate
         if (!alreadyAttacked)
         {
             ///Attack code here
-            Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
+            projectileSpawnPoint = new Vector3(transform.position.x + (agent.transform.forward.x * attackDisplaceDist), 
+                                                transform.position.y + (agent.transform.forward.y * attackDisplaceDist), 
+                                                transform.position.z + (agent.transform.forward.z * attackDisplaceDist));
+
+            Rigidbody rb = Instantiate(projectile, projectileSpawnPoint, Quaternion.identity).GetComponent<Rigidbody>();
             rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
             rb.AddForce(transform.up * 2f, ForceMode.Impulse);
             ///
