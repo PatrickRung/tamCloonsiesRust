@@ -10,6 +10,58 @@ public class movement : CharacterTemplate
     public Transform orientation;
     public Transform spawnPoint;
 
+    //wallrunning
+    public LayerMask whatIsWall;
+    public float wallrunForce, maxWallrunTime, maxWallSpeed;
+    bool isWallRight, isWallLeft;
+    bool isWallRunning;
+    public float maxWallRunCameraTilt, wallRunCameraTilt;
+
+
+    private void WallRunInput()
+    {
+        //starts the wallrun
+        if (Input.GetKey(KeyCode.D) && isWallRight) StartWallRun();
+        if (Input.GetKey(KeyCode.A) && isWallLeft) StartWallRun();
+    }
+    
+    private void StartWallRun()
+    {
+        rb.useGravity = false;
+        isWallRunning = true;
+
+        if (rb.velocity.magnitude<=maxWallSpeed)
+        {
+            rb.AddForce(orientation.forward * wallrunForce * Time.deltaTime);
+
+            //make sure stick to wall
+            if (isWallRight)
+                rb.AddForce(orientation.right * wallrunForce / 5 * Time.deltaTime);
+            else
+                rb.AddForce(-orientation.right * wallrunForce / 5 * Time.deltaTime);
+        }
+    }
+
+    private void StopWallRun()
+    {
+        rb.useGravity = true;
+        isWallRunning = false;
+    }
+
+    private void CheckForWall()
+    {
+        isWallRight = Physics.Raycast(transform.position, orientation.right, 1f, whatIsWall);
+        isWallLeft = Physics.Raycast(transform.position, -orientation.right, 1f, whatIsWall);
+
+        //leave wall run
+        if (!isWallLeft && !isWallRight) StopWallRun();
+        // reset double jump
+        if (isWallLeft || isWallRight)
+        {
+            jumpCount = 0;
+            ResetJump();
+        }
+     }
     //Other
     private Rigidbody rb;
 
@@ -76,6 +128,8 @@ public class movement : CharacterTemplate
     private void Update() {
         MyInput();
         Look();
+        CheckForWall();
+        WallRunInput();
         if(!grounded)
         {
             smootherJump();
@@ -189,8 +243,7 @@ public class movement : CharacterTemplate
                 rb.velocity = new Vector3(vel.x, vel.y / 2, vel.z);
             
             Invoke(nameof(ResetJump), jumpCooldown);
-        }else if(jumpCount < 1)
-        {
+        }else if(jumpCount < 1){
             readyToJump = false;
 
             //Add jump forces
@@ -204,8 +257,36 @@ public class movement : CharacterTemplate
             else if (rb.velocity.y > 0)
                 rb.velocity = new Vector3(vel.x, vel.y / 2, vel.z);
             jumpCount ++;
+
+            ResetJump();
+        }
+        //Walljump
+        if (isWallRunning)
+        {
+            readyToJump = false;
+
+            //normal jump
+            if (isWallLeft && !Input.GetKey(KeyCode.D) || isWallRight && !Input.GetKey(KeyCode.A))
+            {
+                rb.AddForce(Vector2.up * jumpForce * 1.5f);
+                rb.AddForce(normalVector * jumpForce * 0.5f);
+            }
+
+            //sideways wallhop
+            if (isWallRight || isWallLeft && Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) rb.AddForce(-orientation.up * jumpForce * 1f);
+            if (isWallRight && Input.GetKey(KeyCode.A)) rb.AddForce(-orientation.right * jumpForce * 3.2f);
+            if (isWallLeft && Input.GetKey(KeyCode.D)) rb.AddForce(orientation.right * jumpForce * 3.2f);
+
+            //forward force
+            rb.AddForce(orientation.forward * jumpForce * 1f);
+
+            //Reset velocity
+            rb.velocity = Vector3.zero;
+
+         
             
-            readyToJump = true;
+
+            Invoke(nameof(ResetJump), jumpCooldown);
         }
     }
     
@@ -217,6 +298,7 @@ public class movement : CharacterTemplate
     private void Look() {
         float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
         float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
+
         //Find current look rotation
         Vector3 rot = playerCam.transform.localRotation.eulerAngles;
         desiredX = rot.y + mouseX;
@@ -226,8 +308,20 @@ public class movement : CharacterTemplate
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
         //Perform the rotations
-        playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, 0);
+        playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, wallRunCameraTilt);
         orientation.transform.localRotation = Quaternion.Euler(0, desiredX, 0);
+
+        //wallrun cam tilt
+
+        if (Math.Abs(wallRunCameraTilt) < maxWallRunCameraTilt && isWallRunning && isWallRight)
+            wallRunCameraTilt += Time.deltaTime * maxWallRunCameraTilt * 2;
+        if (Math.Abs(wallRunCameraTilt) < maxWallRunCameraTilt && isWallRunning && isWallLeft)
+            wallRunCameraTilt -= Time.deltaTime * maxWallRunCameraTilt * 2;
+        //tilt back after wallrun
+        if (wallRunCameraTilt > 0 && !isWallRight && !isWallLeft)
+            wallRunCameraTilt -= Time.deltaTime * maxWallRunCameraTilt * 2;
+        if (wallRunCameraTilt < 0 && !isWallRight && !isWallLeft)
+            wallRunCameraTilt += Time.deltaTime * maxWallRunCameraTilt * 2;
     }
 
     private void CounterMovement(float x, float y, Vector2 mag) {

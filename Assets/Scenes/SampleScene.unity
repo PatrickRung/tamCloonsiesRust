@@ -455,6 +455,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1441905813}
+  LookingAt: {fileID: 0}
 --- !u!1 &364788732
 GameObject:
   m_ObjectHideFlags: 0
@@ -467,7 +468,7 @@ GameObject:
   - component: {fileID: 364788735}
   - component: {fileID: 364788734}
   - component: {fileID: 364788733}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -974,12 +975,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 832575517}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.03, z: 2.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1441905813}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &882119495
 GameObject:
@@ -1914,6 +1915,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 547996267}
+  - {fileID: 832575519}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &1441905814
@@ -1958,6 +1960,14 @@ MonoBehaviour:
   playerCam: {fileID: 330585546}
   orientation: {fileID: 1441905813}
   spawnPoint: {fileID: 0}
+  whatIsWall:
+    serializedVersion: 2
+    m_Bits: 512
+  wallrunForce: 3000
+  maxWallrunTime: 2
+  maxWallSpeed: 30
+  maxWallRunCameraTilt: 25
+  wallRunCameraTilt: 0
   moveSpeed: 4500
   maxSpeed: 20
   grounded: 0
@@ -2031,6 +2041,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onHoverMat: {fileID: 2100000, guid: 46db889cddea25045a145963ab879628, type: 2}
   offHoverMat: {fileID: 2100000, guid: 8ebcfac192332144094860c0afe587bf, type: 2}
+  playerController: {fileID: 0}
 --- !u!65 &1484497028
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2934,7 +2945,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 330585546}
   - {fileID: 410087041}
-  - {fileID: 832575519}
   - {fileID: 1441905813}
   - {fileID: 1699553329}
   - {fileID: 1088397956}
