@@ -30,6 +30,10 @@ public class PlayerController : MonoBehaviour
             }
 
         }
+        else
+        {
+            LookingAt = null;
+        }
 
     }
 }

@@ -17,17 +17,18 @@ public abstract class Button : MonoBehaviour
         playerController = GameObject.Find("playerCam").GetComponent<PlayerController>();
     }
 
-    public void FixedUpdate()
+    public void Update()
     {
         if(playerController.getLookingAt() != null)
         {
             if (playerController.getLookingAt().Equals(this.gameObject))
             {
-                onUserHover();
-                if(Input.GetMouseButtonDown(0))
+                Debug.Log("looking at button");
+                if(Input.GetKeyDown(KeyCode.E))
                 {
                     buttonInteraction();
                 }
+                onUserHover();
             }
             else
             {
