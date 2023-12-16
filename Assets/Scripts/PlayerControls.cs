@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
             if(object.ReferenceEquals(playerInventory[i], null))
             {
                 playerInventory[i] = fistOfFury;
+                item1.text = playerInventory[i].name;
             }
         }
     }
