@@ -267,11 +267,7 @@ public class movement : CharacterTemplate
             readyToJump = false;
             
                 //normal jump
-                if (isWallLeft && !Input.GetKey(KeyCode.D) || isWallRight && !Input.GetKey(KeyCode.A))
-                {
-                    rb.AddForce(Vector2.up * jumpForce * 1.5f);
-                    rb.AddForce(normalVector * jumpForce * 0.5f);
-                }
+               
 
                 //sideways wallhop
                 if (isWallRight || isWallLeft && Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) rb.AddForce(orientation.up * jumpForce * 1.5f);
