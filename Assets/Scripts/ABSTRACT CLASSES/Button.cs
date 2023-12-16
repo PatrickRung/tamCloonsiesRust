@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Button : MonoBehaviour
+public abstract class Button : MonoBehaviour
 {
     public Material onHoverMat, offHoverMat;
     private GameObject buttonObject;
     private Renderer buttonRenderer;
-    public PlayerController playerController;
+    private PlayerController playerController;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +24,10 @@ public class Button : MonoBehaviour
             if (playerController.getLookingAt().Equals(this.gameObject))
             {
                 onUserHover();
+                if(Input.GetMouseButtonDown(0))
+                {
+                    buttonInteraction();
+                }
             }
             else
             {
@@ -36,6 +40,11 @@ public class Button : MonoBehaviour
         }
 
     }
+
+    //if we ever have another button you can extend this button class and replace button interaction
+    //that way it was have the same functionality we just change the function
+    public abstract void buttonInteraction();
+
 
     //changes object color when user looks at it
     public void onUserHover()
