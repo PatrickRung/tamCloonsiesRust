@@ -40,6 +40,11 @@ public class movement : CharacterTemplate
             else
                 rb.AddForce(-orientation.right * wallrunForce / 5 * Time.deltaTime);
         }
+        if ((isWallLeft || isWallRight) && !isWallRunning)
+        {
+            jumpCount = 0;
+            ResetJump();
+        }
     }
 
     private void StopWallRun()
@@ -56,12 +61,8 @@ public class movement : CharacterTemplate
         //leave wall run
         if (!isWallLeft && !isWallRight) StopWallRun();
         // reset double jump
-        if (isWallLeft || isWallRight)
-        {
-            jumpCount = 0;
-            ResetJump();
-        }
-     }
+        
+    }
     //Other
     private Rigidbody rb;
 
@@ -264,34 +265,32 @@ public class movement : CharacterTemplate
         if (isWallRunning)
         {
             readyToJump = false;
-
-            //normal jump
-            if (isWallLeft && !Input.GetKey(KeyCode.D) || isWallRight && !Input.GetKey(KeyCode.A))
-            {
-                rb.AddForce(Vector2.up * jumpForce * 1.5f);
-                rb.AddForce(normalVector * jumpForce * 0.5f);
-            }
-
-            //sideways wallhop
-            if (isWallRight || isWallLeft && Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) rb.AddForce(-orientation.up * jumpForce * 1f);
-            if (isWallRight && Input.GetKey(KeyCode.A)) rb.AddForce(-orientation.right * jumpForce * 3.2f);
-            if (isWallLeft && Input.GetKey(KeyCode.D)) rb.AddForce(orientation.right * jumpForce * 3.2f);
-
-            //forward force
-            rb.AddForce(orientation.forward * jumpForce * 1f);
-
-            //Reset velocity
-            rb.velocity = Vector3.zero;
-
-         
             
+                //normal jump
+                if (isWallLeft && !Input.GetKey(KeyCode.D) || isWallRight && !Input.GetKey(KeyCode.A))
+                {
+                    rb.AddForce(Vector2.up * jumpForce * 1.5f);
+                    rb.AddForce(normalVector * jumpForce * 0.5f);
+                }
 
-            Invoke(nameof(ResetJump), jumpCooldown);
+                //sideways wallhop
+                if (isWallRight || isWallLeft && Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) rb.AddForce(orientation.up * jumpForce * 1.5f);
+                if (isWallRight && Input.GetKey(KeyCode.A)) rb.AddForce(-orientation.right * jumpForce * 5f);
+                if (isWallLeft && Input.GetKey(KeyCode.D)) rb.AddForce(orientation.right * jumpForce * 5f);
+
+                //forward force
+                rb.AddForce(orientation.forward * jumpForce * 1f);
+
+                //Reset velocity
+                rb.velocity = Vector3.zero;
+
+                Invoke(nameof(ResetJump), jumpCooldown);
+            
         }
     }
     
     private void ResetJump() {
-        readyToJump = true;
+            readyToJump = true;
     }
     
     private float desiredX;
