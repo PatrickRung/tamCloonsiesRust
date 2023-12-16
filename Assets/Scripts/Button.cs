@@ -30,6 +30,10 @@ public class Button : MonoBehaviour
                 offUserHover();
             }
         }
+        else
+        {
+            offUserHover();
+        }
 
     }
 

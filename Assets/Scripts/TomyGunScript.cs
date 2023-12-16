@@ -19,15 +19,18 @@ public class TomyGunScript : MonoBehaviour
     }
 
     // Update is called once per frame
+    GameObject firedBullet;
     void Update()
     {
         gunShootInterval += Time.deltaTime;
         if (Input.GetMouseButton(0) && bulletCount > 0 && gunShootInterval > gunFireRate) {
             gunShootInterval = 0;
             bulletCount--;
-            Instantiate(bullet, 
+            firedBullet = Instantiate(bullet, 
                         gameObject.transform.parent.transform.position + (gameObject.transform.parent.transform.forward * 2), 
                         transform.rotation);
+            firedBullet.transform.rotation = player.transform.rotation;
+            firedBullet.GetComponent<Rigidbody>().AddForce(player.transform.forward * 3000f);
             ammoCount.text = bulletCount + "";
         }
         if (Input.GetKeyDown(KeyCode.R))

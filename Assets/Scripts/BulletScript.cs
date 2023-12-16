@@ -9,10 +9,6 @@ public class BulletScript : MonoBehaviour
     public GameObject playerGun, player;
     public float damage;
 
-    public BulletScript(GameObject bulletUser)
-    {
-        this.player = bulletUser;
-    }
     // Start is called before the first frame update
     void Awake()
     {
@@ -20,8 +16,8 @@ public class BulletScript : MonoBehaviour
         playerGun = GameObject.Find("Tommy_gun_2");
         player = GameObject.Find("playerCam");
         bulletRigidBody = GetComponent<Rigidbody>();
-        transform.rotation = player.transform.rotation;
-        bulletRigidBody.AddForce(player.transform.forward * 3000f);
+        //transform.rotation = player.transform.rotation;
+        //bulletRigidBody.AddForce(player.transform.forward * 3000f);
         Invoke("bulletDespawn", 10f); 
     }
 
