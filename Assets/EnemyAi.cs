@@ -98,8 +98,6 @@ public class EnemyAi : CharacterTemplate
             Rigidbody rb = Instantiate(projectile, projectileSpawnPoint, Quaternion.identity).GetComponent<Rigidbody>();
             rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
             rb.AddForce(transform.up * 2f, ForceMode.Impulse);
-            ///
-
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
         }

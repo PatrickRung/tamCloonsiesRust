@@ -2551,7 +2551,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   onHoverMat: {fileID: 2100000, guid: 46db889cddea25045a145963ab879628, type: 2}
   offHoverMat: {fileID: 2100000, guid: 8ebcfac192332144094860c0afe587bf, type: 2}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1097193191045305195, guid: 8b167cb76a1671f42969520dc920c422, type: 3}
   botSpawnPoint: {fileID: 0}
 --- !u!1 &1502595506
 GameObject:
@@ -2669,6 +2669,7 @@ GameObject:
   - component: {fileID: 1629039392}
   - component: {fileID: 1629039395}
   - component: {fileID: 1629039394}
+  - component: {fileID: 1629039396}
   m_Layer: 0
   m_Name: fistOfFury
   m_TagString: Untagged
@@ -2741,6 +2742,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1629039391}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1629039396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1629039391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d746bde5d32c864abcb9a11c273f258, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitRange: 5
 --- !u!1 &1679754343
 GameObject:
   m_ObjectHideFlags: 0
@@ -2855,7 +2869,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  defaulthealth: 0
+  defaulthealth: 200
   maxhealth: 100
   healthbar: {fileID: 379328531}
   agent: {fileID: 0}

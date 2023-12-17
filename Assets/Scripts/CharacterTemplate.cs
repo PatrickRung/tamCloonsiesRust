@@ -1,23 +1,26 @@
-using System.Collections;
+    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CharacterTemplate : MonoBehaviour
 {
-    public float health = 0;
-    public float defaulthealth = 0;
+    public float health;
+    public float defaulthealth;
     public float maxhealth = 100;
     public Image healthbar;
     private void Awake()
     {
         health = defaulthealth;
     }
+    public void FixedUpdate()
+    {
+        UpdateHealth(health / maxhealth);
+    }
 
     public void changeHealth(float value, GameObject character)
     {
         this.health += value;
-        UpdateHealth(health / maxhealth);
         if (health <= 0 && character.GetComponent<movement>() != null)
         {
             character.transform.position = new Vector3(0,2,0);
