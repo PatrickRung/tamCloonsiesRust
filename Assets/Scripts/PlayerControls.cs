@@ -13,9 +13,11 @@ public class PlayerController : MonoBehaviour
     public FlagsAttribute maxLookLength;
     public GameObject tomyGun, fistOfFury;
     public Text item1, item2, item3;
+    private int barLookingAt;
 
     public void Start()
     {
+        barLookingAt = 0;
         playerInventory = new GameObject[3];
         playerInventory[1] = tomyGun;
         for (int i = 0; i < playerInventory.Length; i++) {
@@ -27,6 +29,18 @@ public class PlayerController : MonoBehaviour
         setWeaponActive(0);
         item1.text = playerInventory[0].name;
         updateHotBar();
+    }
+
+    public bool addToInventory(GameObject weapon)
+    {
+        if (object.ReferenceEquals(playerInventory[barLookingAt], fistOfFury))
+        {
+            playerInventory[barLookingAt] = weapon;
+            setWeaponActive(barLookingAt);
+            updateHotBar();
+            return true;
+        }
+        return false;
     }
 
     private void updateHotBar()
@@ -76,16 +90,19 @@ public class PlayerController : MonoBehaviour
         {
             setWeaponActive(0);
             item1.text = playerInventory[0].name;
+            barLookingAt = 0;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             setWeaponActive(1);
             item2.text = playerInventory[1].name;
+            barLookingAt = 1;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             setWeaponActive(2);
             item3.text = playerInventory[2].name;
+            barLookingAt = 2;
         }
     }
 

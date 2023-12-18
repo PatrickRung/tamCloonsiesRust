@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TomyGunScript : MonoBehaviour
+public class TomyGunScript : WeaponTemplate
 {
     public GameObject player, bullet;
     public int bulletCount, maxBulletCount;
@@ -16,6 +16,12 @@ public class TomyGunScript : MonoBehaviour
     {
         gunFireRate = 0.2f;
         bulletCount = maxBulletCount;
+    }
+
+    private void Awake()
+    {
+        player = GameObject.Find("playerCam");
+        ammoCount = GameObject.Find("AmmoCount").GetComponent<Text>();
     }
 
     // Update is called once per frame
@@ -44,5 +50,15 @@ public class TomyGunScript : MonoBehaviour
     {
         bulletCount = maxBulletCount;
         ammoCount.text = bulletCount + "";
+    }
+
+    public override string getDamageInfo()
+    {
+        return bullet.GetComponent<BulletScript>().damage + " damage";
+    }
+
+    public override string getWeaponInfo()
+    {
+        return "A weapon for those who like beboy cowbob";
     }
 }

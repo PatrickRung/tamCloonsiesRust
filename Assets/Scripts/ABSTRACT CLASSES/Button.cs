@@ -8,7 +8,7 @@ public abstract class Button : MonoBehaviour
 
     private GameObject buttonObject;
     private Renderer buttonRenderer;
-    private PlayerController playerController;
+    public PlayerController playerController;
     private bool isBeingLookedAt;
 
     // Start is called before the first frame update
