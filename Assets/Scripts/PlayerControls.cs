@@ -23,14 +23,15 @@ public class PlayerController : MonoBehaviour
             {
                 playerInventory[i] = fistOfFury;
             }
-            updateHotBar();
         }
         setWeaponActive(0);
         item1.text = playerInventory[0].name;
+        updateHotBar();
     }
 
     private void updateHotBar()
     {
+
         item1.text = playerInventory[0].name;
         item2.text = playerInventory[1].name;
         item3.text = playerInventory[2].name;

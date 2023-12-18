@@ -17,6 +17,7 @@ public abstract class Button : MonoBehaviour
         buttonObject = this.gameObject;
         buttonRenderer = this.gameObject.GetComponent<Renderer>();
         playerController = GameObject.Find("playerCam").GetComponent<PlayerController>();
+        buttonRenderer.material = offHoverMat;
     }
 
     public void Update()
@@ -48,6 +49,10 @@ public abstract class Button : MonoBehaviour
     //that way it was have the same functionality we just change the function
     public abstract void buttonInteraction();
 
+    public bool returnLookingAtStatus()
+    {
+        return isBeingLookedAt;
+    }
 
     //changes object color when user looks at it
     public void onUserHover()
