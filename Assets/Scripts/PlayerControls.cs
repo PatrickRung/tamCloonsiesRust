@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
     {
         if (object.ReferenceEquals(playerInventory[barLookingAt], fistOfFury))
         {
-            playerInventory[barLookingAt] = weapon;
+            playerInventory[barLookingAt] = Instantiate(weapon, transform);
             setWeaponActive(barLookingAt);
             updateHotBar();
             return true;

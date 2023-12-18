@@ -33,6 +33,7 @@ public class ItemOnGround : Button
     {
         if(playerController.addToInventory(itemWhenPickedUp))
         {
+            gameDesc.SetActive(false);
             GameObject.Destroy(gameObject);
         }
 
