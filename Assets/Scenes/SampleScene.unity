@@ -201,7 +201,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -540,7 +540,6 @@ MonoBehaviour:
   item1: {fileID: 500874232}
   item2: {fileID: 1679754345}
   item3: {fileID: 422662295}
-  LookingAt: {fileID: 0}
 --- !u!1 &364788732
 GameObject:
   m_ObjectHideFlags: 0

@@ -38,6 +38,8 @@ public class TomyGunScript : MonoBehaviour
             Invoke("reload", 2f);
         }
     }
+
+    //reloads gun lol
     void reload()
     {
         bulletCount = maxBulletCount;

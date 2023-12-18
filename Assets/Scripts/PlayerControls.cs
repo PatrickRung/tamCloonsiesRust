@@ -1,3 +1,6 @@
+//handles what the player is looking at
+//handles inventory and starting weapons
+
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,9 +22,18 @@ public class PlayerController : MonoBehaviour
             if(object.ReferenceEquals(playerInventory[i], null))
             {
                 playerInventory[i] = fistOfFury;
-                item1.text = playerInventory[i].name;
             }
+            updateHotBar();
         }
+        setWeaponActive(0);
+        item1.text = playerInventory[0].name;
+    }
+
+    private void updateHotBar()
+    {
+        item1.text = playerInventory[0].name;
+        item2.text = playerInventory[1].name;
+        item3.text = playerInventory[2].name;
     }
 
     //this is actually the camera controller
@@ -32,7 +44,8 @@ public class PlayerController : MonoBehaviour
         swapWeapon();
     }
 
-    public GameObject LookingAt;
+    //returns what the player is looking at to other classes
+    private GameObject LookingAt;
     public GameObject getLookingAt()
     {
         return LookingAt;
@@ -56,34 +69,33 @@ public class PlayerController : MonoBehaviour
     }
 
     //makes a weapon disapear when other weapon selected
-    public void swapWeapon()
+    private void swapWeapon()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            foreach (GameObject weapon in playerInventory)
-            {
-                weapon.SetActive(false);
-            }
-            playerInventory[0].SetActive(true);
+            setWeaponActive(0);
             item1.text = playerInventory[0].name;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            foreach (GameObject weapon in playerInventory)
-            {
-                weapon.SetActive(false);
-            }
-            playerInventory[1].SetActive(true);
+            setWeaponActive(1);
             item2.text = playerInventory[1].name;
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            foreach (GameObject weapon in playerInventory)
-            {
-                weapon.SetActive(false);
-            }
-            playerInventory[2].SetActive(true);
+            setWeaponActive(2);
             item3.text = playerInventory[2].name;
         }
+    }
+
+    //sets a weapon to be active depending on which spot 
+    private void setWeaponActive(int spot)
+    {
+        foreach (GameObject weapon in playerInventory)
+        {
+            weapon.SetActive(false);
+        }
+        playerInventory[spot].SetActive(true);
+
     }
 }

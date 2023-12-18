@@ -5,9 +5,11 @@ using UnityEngine;
 public abstract class Button : MonoBehaviour
 {
     public Material onHoverMat, offHoverMat;
+
     private GameObject buttonObject;
     private Renderer buttonRenderer;
     private PlayerController playerController;
+    private bool isBeingLookedAt;
 
     // Start is called before the first frame update
     void Start()
@@ -51,11 +53,13 @@ public abstract class Button : MonoBehaviour
     public void onUserHover()
     {
         buttonRenderer.material = onHoverMat;
+        isBeingLookedAt = true;
     }
 
     //changes object color when user stops looking at it
     public void offUserHover()
     {
         buttonRenderer.material = offHoverMat;
+        isBeingLookedAt = false;
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CharacterTemplate : MonoBehaviour
+public abstract class CharacterTemplate : MonoBehaviour
 {
     public float health;
     public float defaulthealth;
