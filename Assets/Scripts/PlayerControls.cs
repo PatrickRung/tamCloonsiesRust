@@ -2,21 +2,28 @@
 //handles inventory and starting weapons
 
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    private GameObject[] playerInventory;
-
     public Transform player;
     public FlagsAttribute maxLookLength;
     public GameObject tomyGun, fistOfFury;
     public Text item1, item2, item3;
+
+    private GameObject[] playerInventory;
     private int barLookingAt;
+    private GameObject worldItems;
+    public Material onMat, offMatt;
 
     public void Start()
     {
+        onMat = Resources.Load<Material>("green");
+        offMatt = Resources.Load<Material>("default");
+  
+        worldItems = GameObject.Find("World Items");
         barLookingAt = 0;
         playerInventory = new GameObject[3];
         playerInventory[1] = tomyGun;
@@ -57,10 +64,11 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = player.transform.position;
         swapWeapon();
+        dropWeapon();
     }
 
     //returns what the player is looking at to other classes
-    private GameObject LookingAt;
+    public GameObject LookingAt;
     public GameObject getLookingAt()
     {
         return LookingAt;
@@ -80,6 +88,21 @@ public class PlayerController : MonoBehaviour
         else
         {
             LookingAt = null;
+        }
+    }
+    public void dropWeapon()
+    {
+        if(Input.GetKeyDown(KeyCode.G) && !playerInventory[barLookingAt].Equals(fistOfFury))
+        {   
+            Destroy(playerInventory[barLookingAt].GetComponent<TomyGunScript>());
+            playerInventory[barLookingAt].transform.SetParent(worldItems.transform);
+            Debug.Log(playerInventory[barLookingAt].name);
+            playerInventory[barLookingAt].AddComponent<BoxCollider>();
+            ItemOnGround itemInfo = playerInventory[barLookingAt].AddComponent(typeof(ItemOnGround)) as ItemOnGround;
+            //just a whole lot of setting values so not too important
+            itemInfo.onHoverMat = onMat; itemInfo.offHoverMat = offMatt; 
+            itemInfo.itemWhenPickedUp = Resources.Load<GameObject>("Prefabs/Tommy_gun_2");
+            playerInventory[barLookingAt] = fistOfFury;
         }
     }
 

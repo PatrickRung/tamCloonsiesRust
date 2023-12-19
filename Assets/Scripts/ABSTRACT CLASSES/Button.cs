@@ -12,7 +12,7 @@ public abstract class Button : MonoBehaviour
     private bool isBeingLookedAt;
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         buttonObject = this.gameObject;
         buttonRenderer = this.gameObject.GetComponent<Renderer>();
@@ -24,7 +24,8 @@ public abstract class Button : MonoBehaviour
     {
         if(playerController.getLookingAt() != null)
         {
-            if (playerController.getLookingAt().Equals(this.gameObject))
+            if (playerController.getLookingAt().Equals(this.gameObject) 
+                && playerController.getLookingAt().name.Equals(this.gameObject.name))
             {
                 Debug.Log("looking at button");
                 if(Input.GetKeyDown(KeyCode.E))

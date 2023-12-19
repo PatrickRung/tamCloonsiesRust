@@ -12,11 +12,19 @@ public class ItemOnGround : Button
     public string name;
     public GameObject itemWhenPickedUp;
 
+    private bool descRemoved;
+
+    public void Awake()
+    {
+        gameDesc = GameObject.Find("World Items").GetComponent<WorldItemStorage>().itemDesc;
+        descName = GameObject.Find("World Items").GetComponent<WorldItemStorage>().itemName;
+    }
 
     public void FixedUpdate()
     {
         if(base.returnLookingAtStatus())
         {
+            descRemoved = false;
             gameDesc.SetActive(true);
             gameDesc.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = name;
             gameDesc.transform.GetChild(1).GetComponent<TextMeshProUGUI>().
@@ -24,9 +32,11 @@ public class ItemOnGround : Button
             gameDesc.transform.GetChild(2).GetComponent<TextMeshProUGUI>().
                 text = itemWhenPickedUp.GetComponent<WeaponTemplate>().getWeaponInfo();
         }
-        else
+        else if(!descRemoved)
         {
+            descRemoved = true;
             gameDesc.SetActive(false);
+            Debug.Log("works");
         }
     }
     public override void buttonInteraction()
