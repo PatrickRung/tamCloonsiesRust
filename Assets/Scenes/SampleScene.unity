@@ -1002,6 +1002,7 @@ MonoBehaviour:
   player: {fileID: 1441905813}
   tomyGun: {fileID: 1858105798}
   fistOfFury: {fileID: 1629039391}
+  ammoCount: {fileID: 1737675818}
   item1: {fileID: 500874232}
   item2: {fileID: 1679754345}
   item3: {fileID: 422662295}

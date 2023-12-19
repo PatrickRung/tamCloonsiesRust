@@ -22,6 +22,7 @@ public class TomyGunScript : WeaponTemplate
     {
         player = GameObject.Find("playerCam");
         ammoCount = GameObject.Find("AmmoCount").GetComponent<Text>();
+        ammoCount.text = "" + bulletCount;
     }
 
     // Update is called once per frame
@@ -43,6 +44,11 @@ public class TomyGunScript : WeaponTemplate
         {
             Invoke("reload", 2f);
         }
+    }
+
+    public override bool isGun()
+    {
+        return true;
     }
 
     //reloads gun lol

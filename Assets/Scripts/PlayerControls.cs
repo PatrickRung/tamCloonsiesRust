@@ -4,13 +4,14 @@
 using System;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
     public Transform player;
     public FlagsAttribute maxLookLength;
-    public GameObject tomyGun, fistOfFury;
+    public GameObject tomyGun, fistOfFury, ammoCount;
     public Text item1, item2, item3;
 
     private GameObject[] playerInventory;
@@ -115,6 +116,7 @@ public class PlayerController : MonoBehaviour
             setWeaponActive(0);
             item1.text = playerInventory[0].name;
             barLookingAt = 0;
+
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
@@ -138,6 +140,13 @@ public class PlayerController : MonoBehaviour
             weapon.SetActive(false);
         }
         playerInventory[spot].SetActive(true);
-
+        if (!object.ReferenceEquals(playerInventory[spot], fistOfFury) && playerInventory[spot].GetComponent<WeaponTemplate>().isGun())
+        {
+            ammoCount.SetActive(true);
+        }
+        else
+        {
+            ammoCount.SetActive(false);
+        }
     }
 }
