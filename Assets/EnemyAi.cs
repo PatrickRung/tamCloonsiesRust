@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -29,6 +30,7 @@ public class EnemyAi : CharacterTemplate
 
     private void Awake()
     {
+        base.Awake();
         player = GameObject.Find("pill").transform;
         agent = GetComponent<NavMeshAgent>();
     }

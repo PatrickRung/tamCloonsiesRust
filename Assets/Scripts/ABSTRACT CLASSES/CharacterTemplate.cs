@@ -9,8 +9,9 @@ public abstract class CharacterTemplate : MonoBehaviour
     public float defaulthealth;
     public float maxhealth = 100;
     public Image healthbar;
-    private void Awake()
+    public void Awake()
     {
+        Debug.Log("testing");
         health = defaulthealth;
     }
     public void FixedUpdate()

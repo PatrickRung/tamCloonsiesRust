@@ -103,6 +103,7 @@ public class movement : CharacterTemplate
     private Vector3 wallNormalVector;
 
     void Awake() {
+        base.Awake();
         rb = GetComponent<Rigidbody>();
     }
     
@@ -123,6 +124,7 @@ public class movement : CharacterTemplate
 
     
     private void FixedUpdate() {
+        base.FixedUpdate(); 
         Movement();
     }
 

@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  defaulthealth: 0
+  defaulthealth: 100
   maxhealth: 100
   healthbar: {fileID: 2397146955158648692}
   agent: {fileID: 0}

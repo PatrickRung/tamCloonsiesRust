@@ -27,7 +27,6 @@ public abstract class Button : MonoBehaviour
             if (playerController.getLookingAt().Equals(this.gameObject) 
                 && playerController.getLookingAt().name.Equals(this.gameObject.name))
             {
-                Debug.Log("looking at button");
                 if(Input.GetKeyDown(KeyCode.E))
                 {
                     buttonInteraction();

@@ -12,10 +12,8 @@ public class BotRespawnButton : Button
     public override void buttonInteraction()
     {
         GameObject currentEnemy = GameObject.Find("enemy");
-        Debug.Log(currentEnemy);
         if (Object.ReferenceEquals(currentEnemy, null))
         {
-            Debug.Log("test");
             currentEnemy = Instantiate(enemy, botSpawnPoint);
             currentEnemy.name = "enemy";
         }

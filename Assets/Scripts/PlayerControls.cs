@@ -14,12 +14,14 @@ public class PlayerController : MonoBehaviour
     public Text item1, item2, item3;
 
     private GameObject[] playerInventory;
+    private GameObject playerHealthBar;
     private int barLookingAt;
     private GameObject worldItems;
     public Material onMat, offMatt;
 
     public void Start()
     {
+        playerHealthBar = GameObject.Find("PlayerHealthBar");
         onMat = Resources.Load<Material>("green");
         offMatt = Resources.Load<Material>("default");
   
@@ -83,7 +85,6 @@ public class PlayerController : MonoBehaviour
             {
                 LookingAt = hit.transform.gameObject;
             }
-
         }
         else
         {
@@ -96,13 +97,13 @@ public class PlayerController : MonoBehaviour
         {   
             Destroy(playerInventory[barLookingAt].GetComponent<TomyGunScript>());
             playerInventory[barLookingAt].transform.SetParent(worldItems.transform);
-            Debug.Log(playerInventory[barLookingAt].name);
             playerInventory[barLookingAt].AddComponent<BoxCollider>();
             ItemOnGround itemInfo = playerInventory[barLookingAt].AddComponent(typeof(ItemOnGround)) as ItemOnGround;
             //just a whole lot of setting values so not too important
             itemInfo.onHoverMat = onMat; itemInfo.offHoverMat = offMatt; 
             itemInfo.itemWhenPickedUp = Resources.Load<GameObject>("Prefabs/Tommy_gun_2");
             playerInventory[barLookingAt] = fistOfFury;
+            updateHotBar();
         }
     }
 

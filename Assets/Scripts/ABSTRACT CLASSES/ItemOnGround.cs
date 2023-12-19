@@ -36,7 +36,6 @@ public class ItemOnGround : Button
         {
             descRemoved = true;
             gameDesc.SetActive(false);
-            Debug.Log("works");
         }
     }
     public override void buttonInteraction()
