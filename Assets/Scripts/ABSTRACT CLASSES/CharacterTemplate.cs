@@ -16,7 +16,7 @@ public abstract class CharacterTemplate : MonoBehaviour
     }
     public void FixedUpdate()
     {
-        UpdateHealth(health / maxhealth);
+        UpdateHealth(health/maxhealth);
     }
 
     public void changeHealth(float value, GameObject character)
