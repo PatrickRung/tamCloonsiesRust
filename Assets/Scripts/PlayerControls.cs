@@ -15,15 +15,13 @@ public class PlayerController : MonoBehaviour
     public Text item1, item2, item3;
 
     private GameObject[] playerInventory;
-    private GameObject playerHealthBar, worldItems;
+    private GameObject playerHealthBar;
     private int barLookingAt;
-    private Material onMat, offMatt;
-    private GameObject UI;
-    private bool inMenu;
+    private GameObject worldItems;
+    public Material onMat, offMatt;
 
     public void Start()
     {
-        UI = GameObject.Find("PlayerUI");
         playerHealthBar = GameObject.Find("PlayerHealthBar");
         onMat = Resources.Load<Material>("green");
         offMatt = Resources.Load<Material>("default");
@@ -70,13 +68,6 @@ public class PlayerController : MonoBehaviour
         transform.position = player.transform.position;
         swapWeapon();
         dropWeapon();
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            for(int i = 0; i < UI.transform.childCount; i++)
-            {
-
-            }
-        }
     }
 
     //returns what the player is looking at to other classes
