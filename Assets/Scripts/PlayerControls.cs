@@ -116,7 +116,6 @@ public class PlayerController : MonoBehaviour
             setWeaponActive(0);
             item1.text = playerInventory[0].name;
             barLookingAt = 0;
-
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
@@ -143,6 +142,7 @@ public class PlayerController : MonoBehaviour
         if (!object.ReferenceEquals(playerInventory[spot], fistOfFury) && playerInventory[spot].GetComponent<WeaponTemplate>().isGun())
         {
             ammoCount.SetActive(true);
+            ammoCount.GetComponent<Text>().text = "" + playerInventory[spot].GetComponent<GunTemplate>().getBulletCount();
         }
         else
         {

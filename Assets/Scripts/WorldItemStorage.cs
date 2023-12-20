@@ -6,6 +6,5 @@ using UnityEngine;
 
 public class WorldItemStorage : MonoBehaviour
 {
-    public GameObject itemDesc;
-    public GameObject itemName;
+    public GameObject itemDesc, itemName, ammoCount;
 }

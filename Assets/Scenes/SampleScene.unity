@@ -2888,6 +2888,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemDesc: {fileID: 571249834}
   itemName: {fileID: 1168367740}
+  ammoCount: {fileID: 1737675818}
 --- !u!1 &1275661624
 GameObject:
   m_ObjectHideFlags: 0
