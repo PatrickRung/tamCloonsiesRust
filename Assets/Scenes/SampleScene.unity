@@ -291,7 +291,6 @@ MonoBehaviour:
   playerController: {fileID: 0}
   gameDesc: {fileID: 571249834}
   descName: {fileID: 1168367740}
-  name: Tommy Gun 2
   itemWhenPickedUp: {fileID: 2024241837240511779, guid: f98d0d91a20d052469a69547b0d95c72,
     type: 3}
 --- !u!23 &22688383
@@ -396,7 +395,6 @@ MonoBehaviour:
   playerController: {fileID: 0}
   gameDesc: {fileID: 571249834}
   descName: {fileID: 1168367740}
-  name: Tommy Gun
   itemWhenPickedUp: {fileID: 2024241837240511779, guid: f98d0d91a20d052469a69547b0d95c72,
     type: 3}
 --- !u!23 &33054618
@@ -1006,7 +1004,6 @@ MonoBehaviour:
   item1: {fileID: 500874232}
   item2: {fileID: 1679754345}
   item3: {fileID: 422662295}
-  titan: {fileID: 0}
   onMat: {fileID: 0}
   offMatt: {fileID: 0}
   LookingAt: {fileID: 0}
@@ -2763,9 +2760,9 @@ MonoBehaviour:
   defaulthealth: 100
   maxhealth: 100
   healthbar: {fileID: 1578096793}
-  playerCam: {fileID: 0}
-  orientation: {fileID: 0}
-  spawnPoint: {fileID: 0}
+  playerCam: {fileID: 330585546}
+  orientation: {fileID: 1070641687}
+  spawnPoint: {fileID: 1007466913}
   moveSpeed: 4500
   maxSpeed: 20
   grounded: 0

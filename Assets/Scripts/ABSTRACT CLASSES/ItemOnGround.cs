@@ -9,7 +9,6 @@ public class ItemOnGround : Button
 {
     public GameObject gameDesc;
     public GameObject descName;
-    public string name;
     public GameObject itemWhenPickedUp;
 
     private bool descRemoved;

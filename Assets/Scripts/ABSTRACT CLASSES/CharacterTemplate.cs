@@ -11,7 +11,6 @@ public abstract class CharacterTemplate : MonoBehaviour
     public Image healthbar;
     public void Awake()
     {
-        Debug.Log("testing");
         health = defaulthealth;
     }
     public void FixedUpdate()

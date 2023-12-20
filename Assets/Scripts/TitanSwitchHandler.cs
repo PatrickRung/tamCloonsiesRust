@@ -20,12 +20,20 @@ public class TitanSwitchHandler : MonoBehaviour
         pilotSpot = GameObject.Find("pilotPos");
         playerController = GameObject.Find("playerCam").GetComponent<PlayerController>();
         cam = GameObject.Find("playerCam");
+        if(object.ReferenceEquals(playerController, null))
+        {
+            Debug.Log("no player controller");
+        }
+        if (object.ReferenceEquals(titan, null))
+        {
+            Debug.Log("no titan");
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(playerController.getLookingAt().Equals(titan) && playerController.getLookingAt().name.Equals(titan.name) && Input.GetKeyDown("e"))
+        if (GameObject.ReferenceEquals(playerController.getLookingAt(), titan) && GameObject.ReferenceEquals(playerController.getLookingAt().name, titan.name) && Input.GetKeyDown("e"))
         {
             player.SetActive(false);
             titan.GetComponent<TitanMovement>().enabled = true;

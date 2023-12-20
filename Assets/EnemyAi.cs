@@ -28,7 +28,7 @@ public class EnemyAi : CharacterTemplate
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
 
-    private void Awake()
+    private new void Awake()
     {
         base.Awake();
         player = GameObject.Find("pill").transform;
