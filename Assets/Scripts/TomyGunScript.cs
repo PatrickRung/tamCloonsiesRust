@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TomyGunScript : WeaponTemplate
+public class TomyGunScript : GunTemplate
 {
     public GameObject player, bullet;
     public int bulletCount, maxBulletCount;
@@ -21,7 +21,8 @@ public class TomyGunScript : WeaponTemplate
     private void Awake()
     {
         player = GameObject.Find("playerCam");
-        ammoCount = GameObject.Find("AmmoCount").GetComponent<Text>();
+        ammoCount = GameObject.Find("World Items").GetComponent<WorldItemStorage>().
+            ammoCount.GetComponent<Text>();
         ammoCount.text = "" + bulletCount;
     }
 
@@ -45,7 +46,10 @@ public class TomyGunScript : WeaponTemplate
             Invoke("reload", 2f);
         }
     }
-
+    public override int getBulletCount()
+    {
+        return bulletCount;
+    }
     public override bool isGun()
     {
         return true;
