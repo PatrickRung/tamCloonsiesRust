@@ -246,6 +246,7 @@ public class TitanMovement : CharacterTemplate
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
         //Perform the rotations
+        playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, 0);
         orientation.transform.localRotation = Quaternion.Euler(0, desiredX, 0);
 
        

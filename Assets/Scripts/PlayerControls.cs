@@ -71,7 +71,6 @@ public class PlayerController : MonoBehaviour
         if (GameObject.Find("titan pill").GetComponent<TitanSwitchHandler>().isintitan)
         {
             transform.position = titan.transform.position;
-            Debug.Log("balls");
         }
             swapWeapon();
         dropWeapon();
