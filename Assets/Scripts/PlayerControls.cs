@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
 
     private GameObject[] playerInventory;
     private GameObject playerHealthBar;
+    public GameObject titan;
     private int barLookingAt;
     private GameObject worldItems;
     public Material onMat, offMatt;
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
     public void Start()
     {
         playerHealthBar = GameObject.Find("PlayerHealthBar");
+        titan = GameObject.Find("titan pill");
         onMat = Resources.Load<Material>("green");
         offMatt = Resources.Load<Material>("default");
   
@@ -62,11 +64,16 @@ public class PlayerController : MonoBehaviour
     }
 
     //this is actually the camera controller
-    //updates camera roation and position according to movement
+    //updates camera rotation and position according to movement
     void Update()
     {
         transform.position = player.transform.position;
-        swapWeapon();
+        if (GameObject.Find("titan pill").GetComponent<TitanSwitchHandler>().isintitan)
+        {
+            transform.position = titan.transform.position;
+            Debug.Log("balls");
+        }
+            swapWeapon();
         dropWeapon();
     }
 
