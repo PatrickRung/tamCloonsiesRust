@@ -18,7 +18,7 @@ public class movement : CharacterTemplate
     public float maxWallRunCameraTilt, wallRunCameraTilt;
 
 
-    public void WallRunInput()
+    public virtual void WallRunInput()
     {
         //starts the wallrun
         if (Input.GetKey(KeyCode.D) && isWallRight) StartWallRun();
@@ -64,7 +64,7 @@ public class movement : CharacterTemplate
         
     }
     //Other
-    private Rigidbody rb;
+    public Rigidbody rb;
 
     //Rotation and look
     private float xRotation;
@@ -88,10 +88,10 @@ public class movement : CharacterTemplate
     public float slideCounterMovement = 0.2f;
 
     //Jumping
-    private bool readyToJump = true;
-    private float jumpCooldown = 0.25f;
+    public bool readyToJump = true;
+    public float jumpCooldown = 0.25f;
     public float jumpForce = 550f;
-    private float jumpCount = 0;
+    public float jumpCount = 0;
     public float movementSnappiness = 2;
 
     //Input
@@ -237,7 +237,7 @@ public class movement : CharacterTemplate
         rb.AddForce(orientation.transform.right * x * moveSpeed * Time.deltaTime * multiplier);
     }
 
-    private void Jump() {
+    public virtual void Jump() {
         if (grounded && readyToJump) {
             jumpCount= 0;
             readyToJump = false;
@@ -295,7 +295,7 @@ public class movement : CharacterTemplate
         }
     }
     
-    private void ResetJump() {
+    public void ResetJump() {
             readyToJump = true;
     }
     
