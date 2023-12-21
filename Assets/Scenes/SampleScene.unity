@@ -3004,7 +3004,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1070641681}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5593e5a450a1ab54a8b09b5d8ab7e0d4, type: 3}
   m_Name: 
@@ -3016,6 +3016,14 @@ MonoBehaviour:
   playerCam: {fileID: 330585546}
   orientation: {fileID: 1070641687}
   spawnPoint: {fileID: 1007466913}
+  whatIsWall:
+    serializedVersion: 2
+    m_Bits: 0
+  wallrunForce: 0
+  maxWallrunTime: 0
+  maxWallSpeed: 0
+  maxWallRunCameraTilt: 0
+  wallRunCameraTilt: 0
   moveSpeed: 4500
   maxSpeed: 20
   grounded: 0
@@ -3024,10 +3032,14 @@ MonoBehaviour:
     m_Bits: 64
   counterMovement: 0.175
   maxSlopeAngle: 35
+  crouchScale: {x: 1, y: 0.5, z: 1}
+  playerScale: {x: 0, y: 0, z: 0}
   slideForce: 400
   slideCounterMovement: 0.2
   jumpForce: 550
   movementSnappiness: 2
+  inMenu: 0
+  timeOffGround: 0
 --- !u!114 &1070641689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3982,11 +3994,14 @@ MonoBehaviour:
     m_Bits: 4294967295
   counterMovement: 0.175
   maxSlopeAngle: 35
+  crouchScale: {x: 1, y: 0.5, z: 1}
+  playerScale: {x: 0, y: 0, z: 0}
   slideForce: 400
   slideCounterMovement: 0.2
   jumpForce: 200
   movementSnappiness: 5
   inMenu: 0
+  timeOffGround: 0
 --- !u!54 &1441905817
 Rigidbody:
   m_ObjectHideFlags: 0
