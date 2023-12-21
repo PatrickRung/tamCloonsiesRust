@@ -8,8 +8,10 @@ public class TomyGunScript : GunTemplate
 {
     public GameObject player, bullet;
     public int bulletCount, maxBulletCount;
-    float gunShootInterval, gunFireRate;
+    public float gunShootInterval, gunFireRate;
     public Text ammoCount;
+
+    private movement movementScript;
     private string prefabName = "TommyGun";
 
     // Start is called before the first frame update
@@ -21,6 +23,8 @@ public class TomyGunScript : GunTemplate
 
     private void Awake()
     {
+        recoilState = false;
+        movementScript = GameObject.Find("pill").GetComponent<movement>();
         player = GameObject.Find("playerCam");
         ammoCount = GameObject.Find("World Items").GetComponent<WorldItemStorage>().
             ammoCount.GetComponent<Text>();
@@ -29,10 +33,15 @@ public class TomyGunScript : GunTemplate
 
     // Update is called once per frame
     GameObject firedBullet;
+    private bool recoilState;
+    private float timeInRecoil;
+    private int shotsFiredInRecoil;
     void Update()
     {
         gunShootInterval += Time.deltaTime;
         if (Input.GetMouseButton(0) && bulletCount > 0 && gunShootInterval > gunFireRate) {
+            shotsFiredInRecoil++;
+            recoilState = true;
             gunShootInterval = 0;
             bulletCount--;
             firedBullet = Instantiate(bullet, 
@@ -46,6 +55,25 @@ public class TomyGunScript : GunTemplate
         {
             Invoke("reload", 2f);
         }
+        if(recoilState)
+        {
+            applyRecoil();
+            if (movementScript.addedRecoil > 0.5)
+            {
+                movementScript.addedRecoil = 0;
+                recoilState = false;
+            }
+        }
+        else
+        {
+            shotsFiredInRecoil = 0;
+            timeInRecoil = 0;
+        }
+    }
+    public void applyRecoil()
+    {
+        timeInRecoil += Time.deltaTime * 8;
+        movementScript.addedRecoil = Mathf.Exp(timeInRecoil) - 0.5f - shotsFiredInRecoil;
     }
     public override int getBulletCount()
     {
