@@ -82,7 +82,7 @@ public class movement : CharacterTemplate
     public float maxSlopeAngle = 35f;
 
     //Crouch & Slide
-    private Vector3 crouchScale = new Vector3(1, 0.5f, 1);
+    public Vector3 crouchScale = new Vector3(1, 0.5f, 1);
     public Vector3 playerScale;
     public float slideForce = 400;
     public float slideCounterMovement = 0.2f;

@@ -24,7 +24,7 @@ public abstract class CharacterTemplate : MonoBehaviour
         if (health <= 0 && gameObject.GetComponent<movement>() != null)
         {
             gameObject.transform.position = new Vector3(0,2,0);
-            health = 100;
+            health = maxhealth;
         }
         else if(health <= 0 && gameObject.GetComponent<movement>() == null)
         {
