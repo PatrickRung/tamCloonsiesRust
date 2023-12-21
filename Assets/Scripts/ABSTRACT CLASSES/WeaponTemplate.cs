@@ -8,4 +8,5 @@ public abstract class WeaponTemplate : MonoBehaviour
     public abstract string getDamageInfo();
     public abstract string getWeaponInfo();
     public abstract bool isGun();
+    public abstract string nameOfPrefab();
 }

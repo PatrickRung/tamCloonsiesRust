@@ -345,7 +345,7 @@ public class TitanMovement : CharacterTemplate
     {
         if (collision.gameObject.layer == 8)
         {
-            changeHealth(-collision.gameObject.GetComponent<BulletScript>().damage, gameObject);
+            changeHealth(-collision.gameObject.GetComponent<BulletScript>().damage);
         }
     }
 

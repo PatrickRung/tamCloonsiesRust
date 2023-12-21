@@ -10,6 +10,7 @@ public class TomyGunScript : GunTemplate
     public int bulletCount, maxBulletCount;
     float gunShootInterval, gunFireRate;
     public Text ammoCount;
+    private string prefabName = "TommyGun";
 
     // Start is called before the first frame update
     void Start()
@@ -70,5 +71,9 @@ public class TomyGunScript : GunTemplate
     public override string getWeaponInfo()
     {
         return "A weapon for those who like beboy cowbob";
+    }
+    public override string nameOfPrefab()
+    {
+        return prefabName;
     }
 }

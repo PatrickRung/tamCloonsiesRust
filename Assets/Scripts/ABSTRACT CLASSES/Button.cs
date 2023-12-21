@@ -5,7 +5,6 @@ using UnityEngine;
 public abstract class Button : MonoBehaviour
 {
     public Material onHoverMat, offHoverMat;
-
     private GameObject buttonObject;
     private Renderer buttonRenderer;
     public PlayerController playerController;
@@ -14,6 +13,9 @@ public abstract class Button : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
+        onHoverMat = Resources.Load<Material>("green");
+        offHoverMat = Resources.Load<Material>("default");
+
         buttonObject = this.gameObject;
         buttonRenderer = this.gameObject.GetComponent<Renderer>();
         playerController = GameObject.Find("playerCam").GetComponent<PlayerController>();

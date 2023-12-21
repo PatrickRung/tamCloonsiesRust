@@ -124,15 +124,23 @@ public class movement : CharacterTemplate
 
     
     private new void FixedUpdate() {
+        if(!inMenu)
+        {
+            Movement();
+        }
         base.FixedUpdate(); 
-        Movement();
-    }
 
+    }
+    //if the user is in the settings or menu thing then we disable looking around
+    public bool inMenu;
     private void Update() {
-        MyInput();
-        Look();
-        CheckForWall();
-        WallRunInput();
+        if(!inMenu)
+        {
+            MyInput();
+            Look();
+            CheckForWall();
+            WallRunInput();
+        }
         if(!grounded)
         {
             smootherJump();
@@ -403,7 +411,7 @@ public class movement : CharacterTemplate
     {
         if (collision.gameObject.layer == 8)
         {
-            changeHealth(-collision.gameObject.GetComponent<BulletScript>().damage, gameObject);
+            changeHealth(-collision.gameObject.GetComponent<BulletScript>().damage);
         }
     }
 

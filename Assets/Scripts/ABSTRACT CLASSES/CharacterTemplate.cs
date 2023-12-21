@@ -18,17 +18,17 @@ public abstract class CharacterTemplate : MonoBehaviour
         UpdateHealth(health/maxhealth);
     }
 
-    public void changeHealth(float value, GameObject character)
+    public void changeHealth(float value)
     {
         this.health += value;
-        if (health <= 0 && character.GetComponent<movement>() != null)
+        if (health <= 0 && gameObject.GetComponent<movement>() != null)
         {
-            character.transform.position = new Vector3(0,2,0);
+            gameObject.transform.position = new Vector3(0,2,0);
             health = 100;
         }
-        else if(health <= 0 && character.GetComponent<movement>() == null)
+        else if(health <= 0 && gameObject.GetComponent<movement>() == null)
         {
-            GameObject.Destroy(character);
+            GameObject.Destroy(gameObject);
         }
 
     }

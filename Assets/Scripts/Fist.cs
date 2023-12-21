@@ -15,7 +15,7 @@ public class Fist : MonoBehaviour
             {
                 if(!object.ReferenceEquals(hit.transform.gameObject.GetComponent<EnemyAi>(), null))
                 {
-                    hit.transform.gameObject.GetComponent<EnemyAi>().changeHealth(-20, hit.transform.gameObject);
+                    hit.transform.gameObject.GetComponent<EnemyAi>().changeHealth(-20);
                 }
             }
         }

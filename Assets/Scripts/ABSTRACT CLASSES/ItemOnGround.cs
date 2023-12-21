@@ -11,6 +11,7 @@ public class ItemOnGround : Button
     public GameObject descName;
     public GameObject itemWhenPickedUp;
 
+
     private bool descRemoved;
 
     public void Awake()
