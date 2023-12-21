@@ -115,6 +115,10 @@ public class PlayerController : MonoBehaviour
             }
         }
         transform.position = player.transform.position;
+        if (GameObject.Find("titan pill").GetComponent<TitanSwitchHandler>().isintitan)
+        {
+            transform.position = GameObject.Find("titan pill").transform.position;
+        }
         swapWeapon();
         dropWeapon();
     }

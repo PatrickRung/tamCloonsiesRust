@@ -18,7 +18,7 @@ public class movement : CharacterTemplate
     public float maxWallRunCameraTilt, wallRunCameraTilt;
 
 
-    private void WallRunInput()
+    public void WallRunInput()
     {
         //starts the wallrun
         if (Input.GetKey(KeyCode.D) && isWallRight) StartWallRun();
@@ -83,7 +83,7 @@ public class movement : CharacterTemplate
 
     //Crouch & Slide
     private Vector3 crouchScale = new Vector3(1, 0.5f, 1);
-    private Vector3 playerScale;
+    public Vector3 playerScale;
     public float slideForce = 400;
     public float slideCounterMovement = 0.2f;
 
@@ -153,7 +153,7 @@ public class movement : CharacterTemplate
 
     //provides better jumping because the  character will start to experience more force pushing down as they are in the air for longer
     //why because realistic and also makes jumping better
-    float timeOffGround = 0;
+    public float timeOffGround = 0;
     public void smootherJump()
     {
         timeOffGround += Time.deltaTime;
@@ -163,7 +163,7 @@ public class movement : CharacterTemplate
     /// <summary>
     /// Find user input. Should put this in its own class but im lazy
     /// </summary>
-    private void MyInput() {
+    public void MyInput() {
         x = Input.GetAxisRaw("Horizontal");
         y = Input.GetAxisRaw("Vertical");
         jumping = Input.GetButton("Jump");
@@ -191,7 +191,7 @@ public class movement : CharacterTemplate
         transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
     }
 
-    private void Movement() {
+    public void Movement() {
         //Extra gravity
         rb.AddForce(Vector3.down * Time.deltaTime * 10);
         
@@ -300,7 +300,7 @@ public class movement : CharacterTemplate
     }
     
     private float desiredX;
-    private void Look() {
+    public void Look() {
         float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
         float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
 

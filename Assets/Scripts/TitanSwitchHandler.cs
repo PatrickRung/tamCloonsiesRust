@@ -12,7 +12,7 @@ public class TitanSwitchHandler : MonoBehaviour
     public GameObject cam;
     public bool isintitan;
 
-    // Start is called before the first frame update
+    //updating variables to real game objects and scripts
     void Start()
     {
         titan = GameObject.Find("titan pill");
@@ -30,10 +30,10 @@ public class TitanSwitchHandler : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+    //checks if player interacts with titan and puts player in titan
     void Update()
     {
-        if (GameObject.ReferenceEquals(playerController.getLookingAt(), titan) && GameObject.ReferenceEquals(playerController.getLookingAt().name, titan.name) && Input.GetKeyDown("e"))
+        if (GameObject.ReferenceEquals(playerController.getLookingAt(), titan) && Input.GetKeyDown("e"))
         {
             player.SetActive(false);
             titan.GetComponent<TitanMovement>().enabled = true;
