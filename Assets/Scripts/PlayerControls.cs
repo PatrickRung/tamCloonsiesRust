@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     private Material onMat, offMatt;
     private movement playerMovement;
     private GameObject MenuObject;
+    private GameObject sensitivitySlider;
 
     //sets all the items in the inventory to be either a fist, health pot, or gun
     //then updates hot bar, UI text and asigns game objects from world
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour
         offMatt = Resources.Load<Material>("default");
         weaponSpot = GameObject.Find("WeaponSpot");
         worldItems = GameObject.Find("World Items");
+        sensitivitySlider = worldItems.GetComponent<WorldItemStorage>().sensitivitySlider;
         barLookingAt = 0;
         playerInventory = new GameObject[3];
         playerInventory[1] = tomyGun;
@@ -133,7 +135,7 @@ public class PlayerController : MonoBehaviour
                     }
                 }
                 playerMovement.inMenu = false;
-
+                playerMovement.setSensitivity(sensitivitySlider.GetComponent<Slider>().value * 100f);
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
             }

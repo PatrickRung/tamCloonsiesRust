@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class movement : CharacterTemplate
 {
@@ -68,8 +69,9 @@ public class movement : CharacterTemplate
 
     //Rotation and look
     private float xRotation;
-    private float sensitivity = 50f;
+    private float sensitivity = 100f;
     private float sensMultiplier = 1f;
+    private GameObject sensitivitySlider, worldStorage;
     
     //Movement
     public float moveSpeed = 4500;
@@ -108,6 +110,9 @@ public class movement : CharacterTemplate
     }
     
     void Start() {
+        worldStorage = GameObject.Find("World Items");
+        sensitivitySlider = worldStorage.GetComponent<WorldItemStorage>().sensitivitySlider;
+        sensitivity = sensitivitySlider.GetComponent<Slider>().value * sensitivity;
         playerScale =  transform.localScale;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -131,6 +136,10 @@ public class movement : CharacterTemplate
         base.FixedUpdate(); 
 
     }
+
+    public void setSensitivity(float sense){this.sensitivity = sense;}
+    public float getSensitivity() { return sensitivity; }
+
     //if the user is in the settings or menu thing then we disable looking around
     public bool inMenu;
     private void Update() {
