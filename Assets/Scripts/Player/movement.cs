@@ -285,7 +285,7 @@ public class movement : CharacterTemplate
         {
             readyToJump = false;
             
-                //normal jump
+                
                
 
                 //sideways wallhop
