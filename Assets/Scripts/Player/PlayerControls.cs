@@ -189,6 +189,7 @@ public class PlayerController : MonoBehaviour
         {
             LookingAt = null;
         }
+
     }
     public void dropWeapon()
     {

@@ -9,7 +9,6 @@ public class movement : CharacterTemplate
     //Assingables
     public Transform playerCam;
     public Transform orientation;
-    public Transform spawnPoint;
 
     //wallrunning
     public LayerMask whatIsWall;
@@ -133,8 +132,12 @@ public class movement : CharacterTemplate
         {
             Movement();
         }
-        base.FixedUpdate(); 
-
+        base.FixedUpdate();
+        //checks if player fell to far
+        if (gameObject.transform.position.y < -100)
+        {
+            changeHealth(-1000000);
+        }
     }
 
     public void setSensitivity(float sense){this.sensitivity = sense;}

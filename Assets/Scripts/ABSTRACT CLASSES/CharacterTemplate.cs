@@ -9,6 +9,7 @@ public abstract class CharacterTemplate : MonoBehaviour
     public float defaulthealth;
     public float maxhealth = 100;
     public Image healthbar;
+    public Transform spawnPoint;
     public void Awake()
     {
         health = defaulthealth;
@@ -23,7 +24,7 @@ public abstract class CharacterTemplate : MonoBehaviour
         this.health += value;
         if (health <= 0 && gameObject.GetComponent<movement>() != null)
         {
-            gameObject.transform.position = new Vector3(0,2,0);
+            gameObject.transform.position = spawnPoint.position;
             health = maxhealth;
         }
         else if(health <= 0 && gameObject.GetComponent<movement>() == null)
