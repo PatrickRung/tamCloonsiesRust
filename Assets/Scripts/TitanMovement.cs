@@ -6,6 +6,7 @@ using UnityEngine;
 public class TitanMovement : movement
 {
     private float dashCount = 0;
+    private float dashCooldown = 5;
     //all the same as regular movement except wallrun
     public new void Awake()
     {
@@ -53,6 +54,11 @@ public class TitanMovement : movement
     public override void WallRunInput()
     {
     }
+    public void dashReset()
+    {
+        dashCount--;
+        jumpCount--;
+    }
     //dash instead of jump
     public override void Jump()
     {
@@ -63,7 +69,9 @@ public class TitanMovement : movement
                 readyToJump = false;
                 rb.AddForce(orientation.forward * jumpForce * 5f);
                 dashCount++;
+                jumpCount++;
                 Invoke(nameof(ResetJump), jumpCooldown);
+                Invoke(nameof(dashReset), dashCooldown);
 
             }
         }
