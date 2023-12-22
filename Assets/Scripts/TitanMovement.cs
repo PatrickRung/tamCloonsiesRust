@@ -6,7 +6,8 @@ using UnityEngine;
 public class TitanMovement : movement
 {
     private float dashCount = 0;
-    private float dashCooldown = 5;
+    private float dashCooldown = 2;
+    private float timePast = 0;
     //all the same as regular movement except wallrun
     public new void Awake()
     {
@@ -49,6 +50,15 @@ public class TitanMovement : movement
         {
             timeOffGround = 0;
         }
+        if (dashCount > 0)
+        {
+            timePast += Time.deltaTime;
+        } else
+        {
+            timePast = 0;
+        }
+        Debug.Log(timePast);
+        Debug.Log(dashCount);
     }
     //wallrun inputs removed, disabling wallrun
     public override void WallRunInput()
@@ -62,7 +72,7 @@ public class TitanMovement : movement
     //dash instead of jump
     public override void Jump()
     {
-        if (dashCount < 3)
+        if (dashCount < 1)
         {
             if (grounded && readyToJump)
             {
@@ -72,7 +82,8 @@ public class TitanMovement : movement
                 jumpCount++;
                 Invoke(nameof(ResetJump), jumpCooldown);
                 Invoke(nameof(dashReset), dashCooldown);
-
+                
+                
             }
         }
         
