@@ -3,6 +3,7 @@
 
 using System;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
@@ -21,17 +22,26 @@ public class PlayerController : MonoBehaviour
     private int barLookingAt;
     private Material onMat, offMatt;
     private movement playerMovement;
+    private GameObject MenuObject;
+    private GameObject sensitivitySlider;
 
     //sets all the items in the inventory to be either a fist, health pot, or gun
     //then updates hot bar, UI text and asigns game objects from world
     public void Start()
     {
+        MenuObject = GameObject.Find("Menu");
+        for(int i = 0; i < MenuObject.transform.childCount; i++)
+        {
+            MenuObject.transform.GetChild(i).gameObject.SetActive(false);
+        }
+
         playerMovement = player.gameObject.GetComponent<movement>();
         playerHealthBar = GameObject.Find("PlayerHealthBar");
         onMat = Resources.Load<Material>("green");
         offMatt = Resources.Load<Material>("default");
         weaponSpot = GameObject.Find("WeaponSpot");
         worldItems = GameObject.Find("World Items");
+        sensitivitySlider = worldItems.GetComponent<WorldItemStorage>().sensitivitySlider;
         barLookingAt = 0;
         playerInventory = new GameObject[3];
         playerInventory[1] = tomyGun;
@@ -87,15 +97,28 @@ public class PlayerController : MonoBehaviour
     //updates camera roation and position according to movement
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.BackQuote))
         {
             if(!playerMovement.inMenu)
             {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 for (int i = 0; i < UI.transform.childCount; i++)
                 {
-                    UI.transform.GetChild(i).gameObject.SetActive(false);
-                    playerMovement.inMenu = true;
+                    if(!UI.transform.GetChild(i).gameObject.name.Equals("Menu"))
+                    {
+                        UI.transform.GetChild(i).gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        UI.transform.GetChild(i).gameObject.SetActive(true);
+                    }
                 }
+                for (int i = 0; i < MenuObject.transform.childCount; i++)
+                {
+                    MenuObject.transform.GetChild(i).gameObject.SetActive(true);
+                }
+                playerMovement.inMenu = true;
             }
             else
             {
@@ -112,6 +135,9 @@ public class PlayerController : MonoBehaviour
                     }
                 }
                 playerMovement.inMenu = false;
+                playerMovement.setSensitivity(sensitivitySlider.GetComponent<Slider>().value * 100f);
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
             }
         }
         transform.position = player.transform.position;
