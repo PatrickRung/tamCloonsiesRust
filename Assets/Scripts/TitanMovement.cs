@@ -50,15 +50,8 @@ public class TitanMovement : movement
         {
             timeOffGround = 0;
         }
-        if (dashCount > 0)
-        {
-            timePast += Time.deltaTime;
-        } else
-        {
-            timePast = 0;
-        }
-        Debug.Log(timePast);
-        Debug.Log(dashCount);
+        
+        
     }
     //wallrun inputs removed, disabling wallrun
     public override void WallRunInput()
@@ -77,7 +70,7 @@ public class TitanMovement : movement
             if (grounded && readyToJump)
             {
                 readyToJump = false;
-                rb.AddForce(orientation.forward * jumpForce * 5f);
+                rb.AddForce(orientation.forward * jumpForce * 500f);
                 dashCount++;
                 jumpCount++;
                 Invoke(nameof(ResetJump), jumpCooldown);
