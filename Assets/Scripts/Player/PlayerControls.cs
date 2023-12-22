@@ -11,56 +11,75 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("ALL NEED TO BE ASSIGNED")]
     public Transform player;
     public FlagsAttribute maxLookLength;
-    public GameObject tomyGun, fistOfFury, ammoCount;
+    public GameObject fistOfFury, ammoCount;
     public Text item1, item2, item3;
     public GameObject UI;
-    public GameObject smallHealthPot;
 
     private GameObject[] playerInventory;
-    private GameObject playerHealthBar, worldItems, weaponSpot;
+    private GameObject playerHealthBar, worldItems, weaponSpot, LookingAt;
     private int barLookingAt;
     private Material onMat, offMatt;
     private movement playerMovement;
     private GameObject MenuObject;
     private GameObject sensitivitySlider;
+    private bool titanExistInLevel;
 
     //sets all the items in the inventory to be either a fist, health pot, or gun
     //then updates hot bar, UI text and asigns game objects from world
     public void Start()
     {
-        MenuObject = GameObject.Find("Menu");
-        for(int i = 0; i < MenuObject.transform.childCount; i++)
-        {
-            MenuObject.transform.GetChild(i).gameObject.SetActive(false);
-        }
-
+        //assigning stuff
         playerMovement = player.gameObject.GetComponent<movement>();
         playerHealthBar = GameObject.Find("PlayerHealthBar");
         onMat = Resources.Load<Material>("green");
         offMatt = Resources.Load<Material>("default");
         weaponSpot = GameObject.Find("WeaponSpot");
         worldItems = GameObject.Find("World Items");
+        MenuObject = GameObject.Find("Menu");
         sensitivitySlider = worldItems.GetComponent<WorldItemStorage>().sensitivitySlider;
+
+        //making the menu invisible
+        for (int i = 0; i < MenuObject.transform.childCount; i++)
+        {
+            MenuObject.transform.GetChild(i).gameObject.SetActive(false);
+        }
+        if(worldItems.GetComponent<WorldItemStorage>().itemDesc.active)
+        {
+            worldItems.GetComponent<WorldItemStorage>().itemDesc.SetActive(false);
+        }
+
+
+        //creating inventory
         barLookingAt = 0;
         playerInventory = new GameObject[3];
-        playerInventory[1] = tomyGun;
-        playerInventory[2] = smallHealthPot;
         for (int i = 0; i < playerInventory.Length; i++) {
             if(object.ReferenceEquals(playerInventory[i], null))
             {
                 playerInventory[i] = fistOfFury;
             }
         }
+
+        //getting UI and player ready for game
         setWeaponActive(0);
         item1.text = playerInventory[0].name;
         updateHotBar();
+
+        //check if titan is in level
+        if(object.ReferenceEquals(GameObject.Find("titan pill"), null)) {
+            titanExistInLevel = false;
+        } else
+        {
+            titanExistInLevel = true;
+        }
     }
-    public GameObject itemInHand()
-    {
-        return playerInventory[barLookingAt];
-    }
+    //returns the item that the player is holding
+    public GameObject itemInHand() { return playerInventory[barLookingAt]; }
+    //returns what the player is looking at to other classes
+    public GameObject getLookingAt() { return LookingAt; }
+
     //if there is a fist then it will add the item
     //if you input null into parameter then it ill just asign the fist to that spot
     //only returns true if the item assigned is not a fist
@@ -83,6 +102,7 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
+    //updates the UI and the position of the weapon
     private void updateHotBar()
     {
         item1.text = playerInventory[0].name;
@@ -142,20 +162,18 @@ public class PlayerController : MonoBehaviour
             }
         }
         transform.position = player.transform.position;
-        if (GameObject.Find("titan pill").GetComponent<TitanSwitchHandler>().isintitan)
+        if (titanExistInLevel)
         {
-            transform.position = GameObject.Find("titan pill").transform.position;
+            if(GameObject.Find("titan pill").GetComponent<TitanSwitchHandler>().isintitan)
+            {
+                transform.position = GameObject.Find("titan pill").transform.position;
+            }
         }
         swapWeapon();
         dropWeapon();
     }
 
-    //returns what the player is looking at to other classes
-    public GameObject LookingAt;
-    public GameObject getLookingAt()
-    {
-        return LookingAt;
-    }
+
     private void FixedUpdate()
     {
         //checks what the user is looking at
