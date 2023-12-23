@@ -19,6 +19,7 @@ public abstract class GunTemplate : WeaponTemplate
     }
     private void Awake()
     {
+        timeInRecoil = -recoilAmount;
         recoilState = false;
         movementScript = GameObject.Find("pill").GetComponent<movement>();
         player = GameObject.Find("playerCam");
@@ -28,7 +29,7 @@ public abstract class GunTemplate : WeaponTemplate
     }
     // Update is called once per frame
     GameObject firedBullet;
-    private bool recoilState;
+    public bool recoilState;
     private float timeInRecoil;
     private int shotsFiredInRecoil;
     void Update()
@@ -39,6 +40,7 @@ public abstract class GunTemplate : WeaponTemplate
             shotsFiredInRecoil++;
             recoilState = true;
             gunShootInterval = 0;
+            timeInRecoil = -recoilAmount;
             bulletCount--;
             firedBullet = Instantiate(bullet,
                         gameObject.transform.parent.transform.position + (gameObject.transform.parent.transform.forward * 2),
@@ -58,8 +60,10 @@ public abstract class GunTemplate : WeaponTemplate
         gunShootInterval += Time.deltaTime;
         if (recoilState)
         {
-            applyRecoil();
-            if (movementScript.addedRecoil > 0.5)
+            shotsFiredInRecoil++;
+            timeInRecoil += Time.deltaTime * 8;
+            movementScript.addedRecoil = Mathf.Pow(timeInRecoil, 3);
+            if (movementScript.addedRecoil >= Mathf.Pow(recoilAmount, 3))
             {
                 movementScript.addedRecoil = 0;
                 recoilState = false;
@@ -68,15 +72,10 @@ public abstract class GunTemplate : WeaponTemplate
         else
         {
             shotsFiredInRecoil = 0;
-            timeInRecoil = 0;
+            timeInRecoil = -recoilAmount;
         }
     }
     public float recoilAmount = 1;
-    public void applyRecoil()
-    {
-        timeInRecoil += Time.deltaTime * 8 / recoilAmount;
-        movementScript.addedRecoil = Mathf.Pow(timeInRecoil, 2) - 0.5f - shotsFiredInRecoil;
-    }
 
     public override bool isGun()
     {

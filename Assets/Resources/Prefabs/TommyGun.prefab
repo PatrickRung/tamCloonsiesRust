@@ -113,4 +113,5 @@ MonoBehaviour:
   gunFireRate: 0.2
   ammoCount: {fileID: 0}
   movementScript: {fileID: 0}
-  recoilAmount: 0.001
+  recoilState: 0
+  recoilAmount: 3

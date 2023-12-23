@@ -324,7 +324,7 @@ public class movement : CharacterTemplate
         //Rotate, and also make sure we dont over- or under-rotate.
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-        xRotation += addedRecoil;
+        xRotation += (addedRecoil/900);
 
         //Perform the rotations
         playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, wallRunCameraTilt);
