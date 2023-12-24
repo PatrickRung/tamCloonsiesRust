@@ -19,6 +19,7 @@ public abstract class GunTemplate : WeaponTemplate
     }
     private void Awake()
     {
+        totalRecoilAdded = 0; totalRecoilReturned = 0;
         timeInRecoil = -recoilAmount;
         recoilState = false;
         movementScript = GameObject.Find("pill").GetComponent<movement>();
@@ -30,7 +31,7 @@ public abstract class GunTemplate : WeaponTemplate
     // Update is called once per frame
     GameObject firedBullet;
     public bool recoilState;
-    private float timeInRecoil;
+    private float timeInRecoil, totalRecoilAdded, totalRecoilReturned;
     private int shotsFiredInRecoil;
     void Update()
     {
@@ -60,11 +61,19 @@ public abstract class GunTemplate : WeaponTemplate
         gunShootInterval += Time.deltaTime;
         if (recoilState)
         {
-            shotsFiredInRecoil++;
             timeInRecoil += Time.deltaTime * 8;
             movementScript.addedRecoil = Mathf.Pow(timeInRecoil, 3);
-            if (movementScript.addedRecoil >= Mathf.Pow(recoilAmount, 3))
+            if(movementScript.addedRecoil < 0)
             {
+                totalRecoilAdded += movementScript.addedRecoil;
+            }
+            else
+            {
+                totalRecoilReturned += movementScript.addedRecoil;
+            }
+            if (-totalRecoilAdded <= totalRecoilReturned)
+            {
+                totalRecoilAdded = 0; totalRecoilReturned = 0;
                 movementScript.addedRecoil = 0;
                 recoilState = false;
             }
