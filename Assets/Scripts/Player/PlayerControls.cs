@@ -202,8 +202,8 @@ public class PlayerController : MonoBehaviour
             //just a whole lot of setting values so not too important
             itemInfo.onHoverMat = onMat; itemInfo.offHoverMat = offMatt; 
             itemInfo.itemWhenPickedUp = Resources.Load<GameObject>("Prefabs/" + playerInventory[barLookingAt].GetComponent<WeaponTemplate>().nameOfPrefab());
-            playerInventory[barLookingAt] = fistOfFury;
             Destroy(playerInventory[barLookingAt].GetComponent<WeaponTemplate>());
+            playerInventory[barLookingAt] = fistOfFury;
             updateHotBar();
         }
     }

@@ -13,6 +13,7 @@ public abstract class GunTemplate : WeaponTemplate
 
     public movement movementScript;
     public abstract int getBulletCount();
+
     void Start()
     {
         bulletCount = maxBulletCount;
@@ -29,12 +30,29 @@ public abstract class GunTemplate : WeaponTemplate
         ammoCount.text = "" + bulletCount;
     }
     // Update is called once per frame
-    GameObject firedBullet;
+    protected GameObject firedBullet;
     public bool recoilState;
-    private float timeInRecoil, totalRecoilAdded, totalRecoilReturned;
+    protected float timeInRecoil, totalRecoilAdded, totalRecoilReturned;
     private int shotsFiredInRecoil;
+    public int getShotsFiredInRecoil() { return shotsFiredInRecoil; }
+    public int getShotsFiredInRecoil(int newNum) { shotsFiredInRecoil = newNum;  return shotsFiredInRecoil; }
     void Update()
     {
+        shootingGun();
+
+        //reloading
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Invoke("reload", 1f);
+        }
+
+        //recoil stuff
+        recoilManagement();
+    }
+
+    public virtual void shootingGun()
+    {
+        gunShootInterval += Time.deltaTime;
         if (Input.GetMouseButton(0) && bulletCount > 0 && gunShootInterval > gunFireRate)
         {
             CancelInvoke();
@@ -50,20 +68,15 @@ public abstract class GunTemplate : WeaponTemplate
             firedBullet.GetComponent<Rigidbody>().AddForce(player.transform.forward * 3000f);
             ammoCount.text = bulletCount + "";
         }
+    }
 
-        //reloading
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Invoke("reload", 1f);
-        }
-
-        //recoil stuff
-        gunShootInterval += Time.deltaTime;
+    public void recoilManagement()
+    {
         if (recoilState)
         {
             timeInRecoil += Time.deltaTime * 8;
             movementScript.addedRecoil = Mathf.Pow(timeInRecoil, 3);
-            if(movementScript.addedRecoil < 0)
+            if (movementScript.addedRecoil < 0)
             {
                 totalRecoilAdded += movementScript.addedRecoil;
             }
