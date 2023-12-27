@@ -6,5 +6,5 @@ using UnityEngine;
 
 public class WorldItemStorage : MonoBehaviour
 {
-    public GameObject itemDesc, itemName, ammoCount, sensitivitySlider;
+    public GameObject itemDesc, itemName, ammoCount, sensitivitySlider, menu;
 }

@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
         offMatt = Resources.Load<Material>("default");
         weaponSpot = GameObject.Find("WeaponSpot");
         worldItems = GameObject.Find("World Items");
-        MenuObject = GameObject.Find("Menu");
+        MenuObject = worldItems.GetComponent<WorldItemStorage>().menu;
         sensitivitySlider = worldItems.GetComponent<WorldItemStorage>().sensitivitySlider;
 
         //making the menu invisible

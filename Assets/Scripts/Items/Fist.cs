@@ -11,10 +11,13 @@ public class Fist : MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, hitRange))
+            if (Physics.Raycast(transform.parent.position, transform.TransformDirection(Vector3.forward), out hit, hitRange))
             {
-                if(!object.ReferenceEquals(hit.transform.gameObject.GetComponent<EnemyAi>(), null))
+                Debug.Log(hit.transform.gameObject.name);
+                Debug.Log(hit.transform.gameObject.GetComponent<EnemyAi>());
+                if (!object.ReferenceEquals(hit.transform.gameObject.GetComponent<EnemyAi>(), null))
                 {
+                    Debug.Log("punch thrown");
                     hit.transform.gameObject.GetComponent<EnemyAi>().changeHealth(-20);
                 }
             }

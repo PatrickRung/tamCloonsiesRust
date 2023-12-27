@@ -3634,6 +3634,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1310255289183527031, guid: 10c6d401c98909f4292c0a84e12f9aa9,
         type: 3}
+      propertyPath: menu
+      value: 
+      objectReference: {fileID: 913634851543503182}
+    - target: {fileID: 1310255289183527031, guid: 10c6d401c98909f4292c0a84e12f9aa9,
+        type: 3}
       propertyPath: itemDesc
       value: 
       objectReference: {fileID: 571249834}
@@ -3923,6 +3928,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6edb26875541f4547bc518b1602272d1, type: 3}
+--- !u!1 &913634851543503182 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7481862212423361554, guid: 6edb26875541f4547bc518b1602272d1,
+    type: 3}
+  m_PrefabInstance: {fileID: 913634851543503181}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2805053960262632745
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -28,6 +28,11 @@ public class EnemyAi : CharacterTemplate
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
 
+    //getter methods
+    public bool getAlreadyAttacked() { return alreadyAttacked; }
+    public void getAlreadyAttacked(bool settingBool) { alreadyAttacked = settingBool; }
+    public float getAttackDisplaceDist() { return attackDisplaceDist;}
+    public Vector3 getProjectileSpawnPoint() { return projectileSpawnPoint; }
     private new void Awake()
     {
         base.Awake();
@@ -83,8 +88,8 @@ public class EnemyAi : CharacterTemplate
         agent.SetDestination(player.position);
     }
     private Vector3 projectileSpawnPoint;
-    private float attackDisplaceDist = 4;
-    private void AttackPlayer()
+    public float attackDisplaceDist = 2;
+    public virtual void AttackPlayer()
     {
         agent.SetDestination(transform.position);
 
@@ -105,7 +110,7 @@ public class EnemyAi : CharacterTemplate
         }
     }
 
-    private void ResetAttack()
+    public void ResetAttack()
     {
         alreadyAttacked = false;
 

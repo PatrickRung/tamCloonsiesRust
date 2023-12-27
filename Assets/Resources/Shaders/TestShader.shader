@@ -24,7 +24,6 @@ Shader "Unlit/TestShader"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             //takes in the parameters from the game
-
             struct App
             {
                 float4 positionOS : POSITION;
