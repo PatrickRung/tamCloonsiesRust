@@ -5,9 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public void PlayGame()
+    public void FireRange()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("FiringRange");
+    }
+    public void NewGame()
+    {
+        SceneManager.LoadScene("LEVEL1");
     }
     public void QuitGame()
     {
