@@ -1,13 +1,16 @@
 Shader "Unlit/TestShader"
 {
     Properties
-    { }
+    {
+        _MainTex("Texture", 2D) = "white" {}
+    }
     SubShader
     {
         //tag is the unity label for what type of shader 
         //opaque makes light not go through the object
         Tags { "RenderType"="Opaque" "RenderPipeline" = "UniversalPipeline"}
 
+        Blend One Zero
         //shader code
         Pass
         {
@@ -47,6 +50,8 @@ Shader "Unlit/TestShader"
                 return OUT;
             }
 
+            sampler2D _MainTex;
+
             half4 frag(v2f IN) : SV_TARGET{
                 //finds the line that face away from the angle of the normal map
                 float dotProduct = dot(IN.normal, IN.viewDir);
@@ -57,7 +62,9 @@ Shader "Unlit/TestShader"
                 half3 fillColor = IN.normal * 0.5 + 0.5;
 
                 half3 finalColor = fillColor * dotProduct;
-
+                [branch] if (finalColor.x) {
+                    return tex2D(_MainTex, IN.normal);
+                }
                 return half4(finalColor, 1.0);
             }
             

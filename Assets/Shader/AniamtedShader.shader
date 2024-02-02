@@ -48,7 +48,7 @@ Shader "Unlit/AnimatedShader"
                 o.uv = TRANSFORM_TEX(v.uv, _MainTexture);
                 //multiplies the offset by time which can be found in the unity built in shader variables
                 //frac set the variable within its parameter back to 0 once it passes 1
-                o.uv += _AnimateXY.xy * frac(float2(_Time.y / 15, 0));
+                o.uv += _AnimateXY.xy * frac(float2(_Time.yy));
                 return o;
             }
 
@@ -61,7 +61,7 @@ Shader "Unlit/AnimatedShader"
                 //second parameter takes a coordinate and maps the color of the pixel to the uv
                 //aka maps picture onto mesh
                 fixed4 textureColor = tex2D(_MainTexture, uvs);
-                return textureColor;
+                return textureColor * 0.1;
 
             }
             ENDCG
