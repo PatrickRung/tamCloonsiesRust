@@ -6,6 +6,8 @@ Shader "Unlit/ShadowCasting"
         [MainColor] _BaseColor("BaseColor", Color) = (1,1,1,1)
         [MainTexture] _BaseMap("BaseMap", 2D) = "white" {}
         _Posterization("Float display name", Float) = 0.5
+
+
     }
 
         SubShader
@@ -32,12 +34,14 @@ Shader "Unlit/ShadowCasting"
         {
             float4 positionOS   : POSITION;
             float2 uv           : TEXCOORD0;
+            half3 normal      : NORMAL;
         };
 
         struct Varyings
         {
             float2 uv           : TEXCOORD0;
             float3 positionWS   : TEXCOORD1;
+            half3 normal        : TEXCOORD2;
             float4 positionHCS  : SV_POSITION;
         };
 
@@ -51,6 +55,7 @@ Shader "Unlit/ShadowCasting"
 
         Varyings vert(Attributes IN)
         {
+
             Varyings OUT;
 
             // GetVertexPositionInputs computes position in different spaces (ViewSpace, WorldSpace, Homogeneous Clip Space)
@@ -58,6 +63,7 @@ Shader "Unlit/ShadowCasting"
             OUT.positionHCS = positionInputs.positionCS;
             OUT.positionWS = positionInputs.positionWS;
             OUT.uv = TRANSFORM_TEX(IN.uv, _BaseMap);
+            OUT.normal = TransformObjectToWorldNormal(IN.normal);
             return OUT;
         }
         float _Posterization;
@@ -70,10 +76,10 @@ Shader "Unlit/ShadowCasting"
             
             half4 color = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv) * _BaseColor;
 
-
+            
+            color *= dot(mainLight.direction, IN.normal.xyz);
             color = round(color * _Posterization) / _Posterization;
-            color *= GetMainLightShadowParams().x;
-            return half4(mainLight.distanceAttenuation, mainLight.distanceAttenuation, mainLight.distanceAttenuation, 0) ;
+            return color;
         }
         ENDHLSL
     }
