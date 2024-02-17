@@ -46,9 +46,10 @@ public abstract class Button : MonoBehaviour
         }
 
     }
-
-    //if we ever have another button you can extend this button class and replace button interaction
-    //that way it was have the same functionality we just change the function
+    /// <summary>
+    /// if we ever have another button you can extend this button class and replace button interaction
+    /// that way it was have the same functionality we just change the function
+    /// </summary>
     public abstract void buttonInteraction();
 
     public bool returnLookingAtStatus()
