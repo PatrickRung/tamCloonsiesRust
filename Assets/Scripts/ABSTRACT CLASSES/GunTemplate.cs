@@ -75,7 +75,14 @@ public abstract class GunTemplate : WeaponTemplate
         if (recoilState)
         {
             timeInRecoil += Time.deltaTime * 8;
-            movementScript.addedRecoil = Mathf.Pow(timeInRecoil, 3);
+            if(movementScript.addedRecoil < 0)
+            {
+                movementScript.addedRecoil = Mathf.Pow(timeInRecoil, 3);
+            }
+            else
+            {
+                movementScript.addedRecoil = Mathf.Pow(timeInRecoil, 5);
+            }
             if (movementScript.addedRecoil < 0)
             {
                 totalRecoilAdded += movementScript.addedRecoil;
