@@ -75,5 +75,12 @@ public class ThrowingHook : MonoBehaviour
             chainGoingOutward = false;
             playerGrabbed = true;
         }
+        if (collision.gameObject.layer == 8)
+        {
+            
+            GameObject.Destroy(gameObject);
+            GameObject.Destroy(gameObject.transform.parent.gameObject);
+
+        }
     }
 }
