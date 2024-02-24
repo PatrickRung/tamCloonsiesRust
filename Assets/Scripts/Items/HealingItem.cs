@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SmallHealingItem : WeaponTemplate
+public class HealingItem : WeaponTemplate
 {
     private PlayerController controller;
     private movement playerMovementScript;
