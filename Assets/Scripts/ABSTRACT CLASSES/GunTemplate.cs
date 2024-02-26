@@ -33,7 +33,7 @@ public abstract class GunTemplate : WeaponTemplate
     protected GameObject firedBullet;
     public bool recoilState;
     protected float timeInRecoil, totalRecoilAdded, totalRecoilReturned;
-    private int shotsFiredInRecoil;
+    public int shotsFiredInRecoil;
     public int getShotsFiredInRecoil() { return shotsFiredInRecoil; }
     public int getShotsFiredInRecoil(int newNum) { shotsFiredInRecoil = newNum;  return shotsFiredInRecoil; }
     void Update()
