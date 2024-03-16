@@ -233,9 +233,9 @@ void LitPassFragment(
     ApplyDecalToSurfaceData(input.positionCS, surfaceData, inputData);
 #endif
     half4 color = UniversalFragmentPBR(inputData, surfaceData);
- 
+    float _Posterization = 1;
    //my code
-    color = round(color * 15) / 15;
+    color = round(color * _Posterization) / _Posterization;
 
     outColor = color;
 

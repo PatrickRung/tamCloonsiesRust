@@ -4,7 +4,7 @@ Shader "Universal Render Pipeline/ModifiedDefaultShader"
     {
         // Specular vs Metallic workflow
         _WorkflowMode("WorkflowMode", Float) = 1.0
-        _Color("Test Color", color) = (1,1,1,1)
+        _Posterization("Posterization", Float) = 1.0
         [MainTexture] _BaseMap("Albedo", 2D) = "white" {}
         [MainColor] _BaseColor("Color", Color) = (1,1,1,1)
 
@@ -215,6 +215,7 @@ Shader "Universal Render Pipeline/ModifiedDefaultShader"
 
             // -------------------------------------
             // Includes
+
             #include "Packages/com.unity.render-pipelines.universal/Shaders/LitInput.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/Shaders/ShadowCasterPass.hlsl"
             ENDHLSL
@@ -222,6 +223,6 @@ Shader "Universal Render Pipeline/ModifiedDefaultShader"
     }
 
     FallBack "Hidden/Universal Render Pipeline/FallbackError"
-    CustomEditor "UnityEditor.Rendering.Universal.ShaderGUI.LitShader"
+    //CustomEditor "UnityEditor.Rendering.Universal.ShaderGUI.LitShader"
 }
 
