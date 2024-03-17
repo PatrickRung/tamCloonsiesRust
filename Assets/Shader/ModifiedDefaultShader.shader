@@ -165,6 +165,7 @@ Shader "Universal Render Pipeline/ModifiedDefaultShader"
             #pragma instancing_options renderinglayer
             #include_with_pragmas "Packages/com.unity.render-pipelines.universal/ShaderLibrary/DOTS.hlsl"
 
+            extern float _Posterization;
             #include "Packages/com.unity.render-pipelines.universal/Shaders/LitInput.hlsl"
             #include "Assets/Shader/NewLitForwardPass.hlsl"
             ENDHLSL

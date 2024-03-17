@@ -19,12 +19,14 @@
 
 struct Attributes
 {
+
     float4 positionOS : POSITION;
     float3 normalOS : NORMAL;
     float4 tangentOS : TANGENT;
     float2 texcoord : TEXCOORD0;
     float2 staticLightmapUV : TEXCOORD1;
     float2 dynamicLightmapUV : TEXCOORD2;
+    float posterization : TEXCOORD3;
     UNITY_VERTEX_INPUT_INSTANCE_ID
 };
 
@@ -32,7 +34,7 @@ struct Varyings
 {
 
     float2 uv : TEXCOORD0;
-
+    float posterization : TEXCOORD3;
 #if defined(REQUIRES_WORLD_SPACE_POS_INTERPOLATOR)
     float3 positionWS               : TEXCOORD1;
 #endif
@@ -146,7 +148,7 @@ Varyings LitPassVertex(Attributes input)
     // this is required to avoid skewing the direction during interpolation
     // also required for per-vertex lighting and SH evaluation
     VertexNormalInputs normalInput = GetVertexNormalInputs(input.normalOS, input.tangentOS);
-
+    
     half3 vertexLight = VertexLighting(vertexInput.positionWS, normalInput.normalWS);
 
     half fogFactor = 0;
@@ -204,6 +206,7 @@ void LitPassFragment(
     , out float4 outRenderingLayers : SV_Target1
 #endif
 )
+
 {
     UNITY_SETUP_INSTANCE_ID(input);
     UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
@@ -233,7 +236,8 @@ void LitPassFragment(
     ApplyDecalToSurfaceData(input.positionCS, surfaceData, inputData);
 #endif
     half4 color = UniversalFragmentPBR(inputData, surfaceData);
-    float _Posterization = 1;
+    
+
    //my code
     color = round(color * _Posterization) / _Posterization;
 
