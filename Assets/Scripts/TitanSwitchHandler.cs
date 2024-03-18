@@ -39,7 +39,6 @@ public class TitanSwitchHandler : MonoBehaviour
             titan.GetComponent<TitanMovement>().enabled = true;
             player.transform.position = pilotSpot.transform.position;
             titan.GetComponent<TitanMovement>().playerCam = cam.transform;
-            titan.GetComponent<TitanMovement>().orientation= titan.transform;
 
             isintitan = true;
         }

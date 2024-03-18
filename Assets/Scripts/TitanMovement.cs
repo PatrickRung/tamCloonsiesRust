@@ -25,10 +25,6 @@ public class TitanMovement : movement
         {
             health = 500;
         }
-        if (defaulthealth <= 0)
-        {
-            defaulthealth = 500;
-        }
     }
 
 
@@ -70,7 +66,7 @@ public class TitanMovement : movement
             if (grounded && readyToJump)
             {
                 readyToJump = false;
-                rb.AddForce(orientation.forward * jumpForce * 500f);
+                rb.AddForce(transform.forward * jumpForce * 500f);
                 dashCount++;
                 jumpCount++;
                 Invoke(nameof(ResetJump), jumpCooldown);

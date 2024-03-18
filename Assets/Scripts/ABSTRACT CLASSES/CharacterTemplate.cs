@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 public abstract class CharacterTemplate : MonoBehaviour
 {
+    [Header("Health")]
     public float health;
-    public float defaulthealth;
     public float maxhealth = 100;
     public Image healthbar;
     public Transform spawnPoint;
     public void Awake()
     {
-        health = defaulthealth;
+        health = maxhealth;
     }
     public void FixedUpdate()
     {
@@ -24,7 +24,14 @@ public abstract class CharacterTemplate : MonoBehaviour
         this.health += value;
         if (health <= 0 && gameObject.GetComponent<movement>() != null)
         {
-            gameObject.transform.position = spawnPoint.position;
+            if(spawnPoint != null)
+            {
+                gameObject.transform.position = spawnPoint.position;
+            }
+            else
+            {
+                gameObject.transform.position = new Vector3(0, 40, 0);
+            }
             health = maxhealth;
         }
         else if(health <= 0 && gameObject.GetComponent<movement>() == null)

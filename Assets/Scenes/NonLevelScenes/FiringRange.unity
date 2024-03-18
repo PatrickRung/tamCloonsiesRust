@@ -1577,7 +1577,6 @@ MonoBehaviour:
   healthbar: {fileID: 1578096793}
   spawnPoint: {fileID: 1007466913}
   playerCam: {fileID: 330585546}
-  orientation: {fileID: 1070641687}
   whatIsWall:
     serializedVersion: 2
     m_Bits: 0
@@ -1606,6 +1605,7 @@ MonoBehaviour:
   movementSnappiness: 2
   inMenu: 0
   timeOffGround: 0
+  gravityAddedForce: 0
   addedRecoil: 0
 --- !u!114 &1070641689
 MonoBehaviour:
@@ -4448,6 +4448,11 @@ PrefabInstance:
       propertyPath: playerCam
       value: 
       objectReference: {fileID: 330585546}
+    - target: {fileID: 7748922046112118563, guid: f74f658bf5bbb454699f25d02f521464,
+        type: 3}
+      propertyPath: gravityAddedForce
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -3,20 +3,65 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
 
 public class movement : CharacterTemplate
 {
     //Assingables
+    [Header("MUST BE ASSIGNED")]
     public Transform playerCam;
-    public Transform orientation;
+    private Transform orientation;
 
     //wallrunning
+    [Header("Wall Running")]
     public LayerMask whatIsWall;
     public float wallrunForce, maxWallrunTime, maxWallSpeed;
-    bool isWallRight, isWallLeft;
-    bool isWallRunning;
-    public float maxWallRunCameraTilt, wallRunCameraTilt;
+    private bool isWallRight, isWallLeft, isWallRunning;
+    [HideInInspector] public float maxWallRunCameraTilt, wallRunCameraTilt;
 
+    //Other
+    [HideInInspector] public Rigidbody rb;
+
+    //Rotation and look
+    private float xRotation;
+    private float sensitivity = 100f;
+    private float sensMultiplier = 1f;
+    private GameObject sensitivitySlider, worldStorage;
+
+    //Movement
+    [Header("Movement")]
+    public float moveSpeed = 4500;
+    public float maxSpeed = 20;
+    public LayerMask whatIsGround;
+    public float counterMovement = 0.175f;
+    public float maxSlopeAngle = 35f;
+    private float threshold = 0.01f;
+    [HideInInspector] public bool grounded;
+
+    //Crouch & Slide
+    [Header("Crouch and Slide")]
+    public Vector3 crouchScale = new Vector3(1, 0.5f, 1);
+    public float slideForce = 400;
+    public float slideCounterMovement = 0.2f;
+    [HideInInspector] public Vector3 playerScale;
+
+    //Jumping
+    [Header("Jump")]
+    public float jumpCooldown = 0.25f;
+    public float jumpForce = 550f;
+    public float movementSnappiness = 2;
+    public float gravityAddedForce;
+    [HideInInspector] public float timeOffGround = 0;
+    [HideInInspector] public float jumpCount = 0;
+    [HideInInspector] public bool readyToJump = true;
+
+    //Input
+    float x, y;
+    private bool jumping, sprinting, crouching;
+
+    //Sliding
+    private Vector3 normalVector = Vector3.up;
+    private Vector3 wallNormalVector;
 
     public virtual void WallRunInput()
     {
@@ -63,49 +108,12 @@ public class movement : CharacterTemplate
         // reset double jump
         
     }
-    //Other
-    public Rigidbody rb;
 
-    //Rotation and look
-    private float xRotation;
-    private float sensitivity = 100f;
-    private float sensMultiplier = 1f;
-    private GameObject sensitivitySlider, worldStorage;
-    
-    //Movement
-    public float moveSpeed = 4500;
-    public float maxSpeed = 20;
-    public bool grounded;
-    public LayerMask whatIsGround;
-    
-    public float counterMovement = 0.175f;
-    private float threshold = 0.01f;
-    public float maxSlopeAngle = 35f;
-
-    //Crouch & Slide
-    public Vector3 crouchScale = new Vector3(1, 0.5f, 1);
-    public Vector3 playerScale;
-    public float slideForce = 400;
-    public float slideCounterMovement = 0.2f;
-
-    //Jumping
-    public bool readyToJump = true;
-    public float jumpCooldown = 0.25f;
-    public float jumpForce = 550f;
-    public float jumpCount = 0;
-    public float movementSnappiness = 2;
-
-    //Input
-    float x, y;
-    bool jumping, sprinting, crouching;
-    
-    //Sliding
-    private Vector3 normalVector = Vector3.up;
-    private Vector3 wallNormalVector;
 
     public new void Awake() {
         base.Awake();
         rb = GetComponent<Rigidbody>();
+        orientation = gameObject.transform;
     }
     
     void Start() {
@@ -119,10 +127,6 @@ public class movement : CharacterTemplate
         if (health <= 0)
         {
             health = 100;
-        }
-        if (defaulthealth <= 0)
-        {
-            defaulthealth = 100;
         }
     }
 
@@ -165,11 +169,11 @@ public class movement : CharacterTemplate
 
     //provides better jumping because the  character will start to experience more force pushing down as they are in the air for longer
     //why because realistic and also makes jumping better
-    public float timeOffGround = 0;
+
     public void smootherJump()
     {
         timeOffGround += Time.deltaTime;
-        rb.AddForce(new Vector3(0, timeOffGround * -2, 0));
+        rb.AddForce(new Vector3(0, timeOffGround * -gravityAddedForce, 0));
     }
 
     /// <summary>
@@ -197,7 +201,7 @@ public class movement : CharacterTemplate
             }
         }
     }
-
+    
     private void StopCrouch() {
         transform.localScale = playerScale;
         transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
@@ -245,7 +249,7 @@ public class movement : CharacterTemplate
         if (grounded && crouching) multiplierV = 0f;
 
         //Apply forces to move player
-        rb.AddForce(orientation.transform.forward * y * moveSpeed * Time.deltaTime * multiplier * multiplierV);
+        rb.AddForce(transform.forward * y * moveSpeed * Time.deltaTime * multiplier * multiplierV);
         rb.AddForce(orientation.transform.right * x * moveSpeed * Time.deltaTime * multiplier);
     }
 
