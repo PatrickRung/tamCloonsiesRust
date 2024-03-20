@@ -16,7 +16,6 @@ public class Fist : MonoBehaviour
     }
     void Update()
     {
-        Debug.Log(readyToHit);
         if (Input.GetMouseButtonDown(0) && readyToHit)
         {
             StartCoroutine(punch());
