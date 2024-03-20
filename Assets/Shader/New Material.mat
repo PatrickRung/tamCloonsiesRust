@@ -123,7 +123,7 @@ Material:
     - _OcclusionStrength: 1
     - _Offset: 0
     - _Parallax: 0.005
-    - _Posterization: 0.5
+    - _Posterization: 11.32
     - _QueueOffset: 0
     - _ReadMask: 255
     - _ReceiveShadows: 1
