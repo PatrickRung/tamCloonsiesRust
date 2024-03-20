@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 using static System.Net.Mime.MediaTypeNames;
@@ -10,6 +11,7 @@ public class movement : CharacterTemplate
     //Assingables
     [Header("MUST BE ASSIGNED")]
     public Transform playerCam;
+    public UserData playerData;
     private Transform orientation;
 
     //wallrunning
@@ -27,6 +29,7 @@ public class movement : CharacterTemplate
     private float sensitivity = 100f;
     private float sensMultiplier = 1f;
     private GameObject sensitivitySlider, worldStorage;
+
 
     //Movement
     [Header("Movement")]
@@ -63,19 +66,42 @@ public class movement : CharacterTemplate
     private Vector3 normalVector = Vector3.up;
     private Vector3 wallNormalVector;
 
+    public new void Awake() {
+        base.Awake();
+        rb = GetComponent<Rigidbody>();
+        orientation = gameObject.transform;
+    }
+    
+    void Start() {
+        worldStorage = GameObject.Find("World Items");
+        sensitivitySlider = worldStorage.GetComponent<WorldItemStorage>().sensitivitySlider;
+        sensitivity = sensitivitySlider.GetComponent<Slider>().value * sensitivity;
+        playerScale =  transform.localScale;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+
+
+
+        if (health <= 0)
+        {
+            health = 100;
+        }
+    }
+
     public virtual void WallRunInput()
     {
         //starts the wallrun
         if (Input.GetKey(KeyCode.D) && isWallRight) StartWallRun();
         if (Input.GetKey(KeyCode.A) && isWallLeft) StartWallRun();
     }
-    
+
     private void StartWallRun()
     {
         rb.useGravity = false;
         isWallRunning = true;
 
-        if (rb.velocity.magnitude<=maxWallSpeed)
+        if (rb.velocity.magnitude <= maxWallSpeed)
         {
             rb.AddForce(orientation.forward * wallrunForce * Time.deltaTime);
 
@@ -106,31 +132,10 @@ public class movement : CharacterTemplate
         //leave wall run
         if (!isWallLeft && !isWallRight) StopWallRun();
         // reset double jump
-        
+
     }
 
 
-    public new void Awake() {
-        base.Awake();
-        rb = GetComponent<Rigidbody>();
-        orientation = gameObject.transform;
-    }
-    
-    void Start() {
-        worldStorage = GameObject.Find("World Items");
-        sensitivitySlider = worldStorage.GetComponent<WorldItemStorage>().sensitivitySlider;
-        sensitivity = sensitivitySlider.GetComponent<Slider>().value * sensitivity;
-        playerScale =  transform.localScale;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
-        if (health <= 0)
-        {
-            health = 100;
-        }
-    }
-
-    
     private new void FixedUpdate() {
         if(!inMenu)
         {

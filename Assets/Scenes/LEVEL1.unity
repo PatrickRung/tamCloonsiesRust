@@ -1642,7 +1642,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  defaulthealth: 300
   maxhealth: 300
   healthbar: {fileID: 824509908}
   spawnPoint: {fileID: 0}
@@ -2094,6 +2093,12 @@ PrefabInstance:
       propertyPath: playerCam
       value: 
       objectReference: {fileID: 86717287}
+    - target: {fileID: 7748922046112118563, guid: 297cdb5144577be49a3bfe56698759a8,
+        type: 3}
+      propertyPath: playerData
+      value: 
+      objectReference: {fileID: 11400000, guid: 648926682905bb246822b958be41716f,
+        type: 2}
     - target: {fileID: 7748922046112118563, guid: 297cdb5144577be49a3bfe56698759a8,
         type: 3}
       propertyPath: spawnPoint

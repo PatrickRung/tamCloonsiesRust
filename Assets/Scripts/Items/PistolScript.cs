@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PistolScript : GunTemplate
+public class PistolScript : hitScan
 {
     private string prefabName = "ancientPistol";
 

@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public GameObject fistOfFury, ammoCount;
     public Text item1, item2, item3;
     public GameObject UI;
+    public UserData userData;
 
     private GameObject[] playerInventory;
     private GameObject playerHealthBar, worldItems, weaponSpot, LookingAt;
@@ -140,23 +141,29 @@ public class PlayerController : MonoBehaviour
                     MenuObject.transform.GetChild(i).gameObject.SetActive(true);
                 }
                 playerMovement.inMenu = true;
+                sensitivitySlider.GetComponent<Slider>().value = userData.playerSensitivity / 100f;
             }
             else
             {
-                playerMovement.inMenu = false;
-                for (int i = 0; i < UI.transform.childCount; i++)
+                if (playerMovement.inMenu)
                 {
-                    if(UI.transform.GetChild(i).gameObject.active)
+                    
+                    playerMovement.inMenu = false;
+                    for (int i = 0; i < UI.transform.childCount; i++)
                     {
-                        UI.transform.GetChild(i).gameObject.SetActive(false);
-                    }
-                    else
-                    {
-                        UI.transform.GetChild(i).gameObject.SetActive(true);
+                        if (UI.transform.GetChild(i).gameObject.active)
+                        {
+                            UI.transform.GetChild(i).gameObject.SetActive(false);
+                        }
+                        else
+                        {
+                            UI.transform.GetChild(i).gameObject.SetActive(true);
+                        }
                     }
                 }
                 playerMovement.inMenu = false;
                 playerMovement.setSensitivity(sensitivitySlider.GetComponent<Slider>().value * 100f);
+                userData.playerSensitivity = sensitivitySlider.GetComponent<Slider>().value * 100f;
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
             }

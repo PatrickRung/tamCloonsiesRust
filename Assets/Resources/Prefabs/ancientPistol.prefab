@@ -76,7 +76,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: afe4dff7ccee6c54db2c6fd677f9a194,
         type: 3}
       propertyPath: m_Name
-      value: pistol
+      value: ancientPistol
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -113,4 +113,13 @@ MonoBehaviour:
   gunFireRate: 0.4
   ammoCount: {fileID: 0}
   movementScript: {fileID: 0}
+  recoilState: 0
+  shotsFiredInRecoil: 0
   recoilAmount: 0.2
+  cam: {fileID: 0}
+  whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 256
+  damage: 10
+  range: 40
+  readyToShoot: 1
