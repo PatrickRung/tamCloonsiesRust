@@ -9,6 +9,11 @@ public class Fist : MonoBehaviour
     // dunno why this is necessary but it absolutely is
     public float punchCooldown = 5.0f;
     // Update is called once per frame
+
+    private void Start()
+    {
+        readyToHit = true;
+    }
     void Update()
     {
         Debug.Log(readyToHit);
@@ -43,7 +48,7 @@ public class Fist : MonoBehaviour
                 hit.transform.gameObject.GetComponent<EnemyAi>().changeHealth(-20);
                 GameObject.Find("pill").GetComponent<Rigidbody>().AddForce(1000 * (-direction.normalized));
                 //currently not working right :(
-                hit.transform.gameObject.GetComponent<Rigidbody>().AddForce(10000000000000 * (direction.normalized));
+                hit.transform.gameObject.GetComponent<Rigidbody>().AddForce(1000 * (direction.normalized));
             }
         }
         //cooldown stuff
