@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    private Rigidbody bulletRigidBody;
+    public Rigidbody bulletRigidBody;
     private Collider bulletColllider;
     public GameObject playerGun, player;
     public float damage;
@@ -22,12 +22,12 @@ public class BulletScript : MonoBehaviour
 
     // Update is called once per frame
 
-    void bulletDespawn()
+    public void bulletDespawn()
     {
         Destroy(gameObject);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.layer == 6)
         {
