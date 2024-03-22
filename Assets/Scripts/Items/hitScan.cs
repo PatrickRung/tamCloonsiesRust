@@ -44,9 +44,10 @@ public abstract class hitScan : GunTemplate
             {
                 Debug.Log(rayHit.collider.name);
                 // checks if the thing on the layer has enemy tag
-                if (rayHit.collider.CompareTag("Enemy"))
-                    //eliminated
+                if(rayHit.collider.GetComponent<EnemyAi>() != null)
+                {
                     rayHit.collider.GetComponent<EnemyAi>().changeHealth(-damage);
+                }
             }
             bulletCount--;
             ammoCount.text = bulletCount + "";
