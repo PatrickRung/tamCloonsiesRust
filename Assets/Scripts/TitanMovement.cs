@@ -7,7 +7,6 @@ public class TitanMovement : movement
 {
     private float dashCount = 0;
     private float dashCooldown = 2;
-    private float timePast = 0;
     //all the same as regular movement except wallrun
     public new void Awake()
     {
@@ -15,7 +14,7 @@ public class TitanMovement : movement
 
     }
 
-    new void Start()
+    private void Start()
     {
         playerScale = transform.localScale;
         Cursor.lockState = CursorLockMode.Locked;
@@ -34,7 +33,7 @@ public class TitanMovement : movement
         Movement();
     }
 
-    private new void Update()
+    private void Update()
     {
         MyInput();
         Look();

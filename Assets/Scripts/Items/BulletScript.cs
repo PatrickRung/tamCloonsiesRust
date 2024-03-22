@@ -8,6 +8,7 @@ public class BulletScript : MonoBehaviour
     private Collider bulletColllider;
     public GameObject playerGun, player;
     public float damage;
+    public GameObject explosion;
 
     // Start is called before the first frame update
     void Awake()
@@ -24,7 +25,13 @@ public class BulletScript : MonoBehaviour
 
     public void bulletDespawn()
     {
+        if (!object.Equals(explosion, null))
+        {
+            GameObject newPackage = Instantiate(explosion, null);
+            newPackage.transform.position = gameObject.transform.position;
+        }
         Destroy(gameObject);
+
     }
 
     public void OnCollisionEnter(Collision collision)

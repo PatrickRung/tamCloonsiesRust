@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
         {
             MenuObject.transform.GetChild(i).gameObject.SetActive(false);
         }
-        if(worldItems.GetComponent<WorldItemStorage>().itemDesc.active)
+        if(worldItems.GetComponent<WorldItemStorage>().itemDesc.activeSelf)
         {
             worldItems.GetComponent<WorldItemStorage>().itemDesc.SetActive(false);
         }
@@ -151,7 +151,7 @@ public class PlayerController : MonoBehaviour
                     playerMovement.inMenu = false;
                     for (int i = 0; i < UI.transform.childCount; i++)
                     {
-                        if (UI.transform.GetChild(i).gameObject.active)
+                        if (UI.transform.GetChild(i).gameObject.activeSelf)
                         {
                             UI.transform.GetChild(i).gameObject.SetActive(false);
                         }
