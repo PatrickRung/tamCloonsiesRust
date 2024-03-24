@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
         MenuObject = worldItems.GetComponent<WorldItemStorage>().menu;
         sensitivitySlider = worldItems.GetComponent<WorldItemStorage>().sensitivitySlider;
         sensitivitySlider.GetComponent<Slider>().value = userData.playerSensitivity / 100f;
-        playerMovement.setSensitivity(sensitivitySlider.GetComponent<Slider>().value * 100f);
+        playerMovement.setSensitivity(userData.playerSensitivity);
 
         //making the menu invisible
         for (int i = 0; i < MenuObject.transform.childCount; i++)
@@ -164,8 +164,8 @@ public class PlayerController : MonoBehaviour
                     }
                 }
                 playerMovement.inMenu = false;
-                playerMovement.setSensitivity(sensitivitySlider.GetComponent<Slider>().value * 100f);
-                userData.playerSensitivity = sensitivitySlider.GetComponent<Slider>().value * 100f;
+                playerMovement.setSensitivity(Mathf.Round(sensitivitySlider.GetComponent<Slider>().value * 100f));
+                userData.playerSensitivity = Mathf.Round(sensitivitySlider.GetComponent<Slider>().value * 100f);
                 Cursor.lockState = CursorLockMode.Locked;
                 Cursor.visible = false;
             }

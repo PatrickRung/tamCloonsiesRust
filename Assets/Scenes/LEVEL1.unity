@@ -249,12 +249,6 @@ Transform:
   - {fileID: 1719149457}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &86717287 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 759494531147215029, guid: 3b7c0645a076b6d4c9c480773302fcdf,
-    type: 3}
-  m_PrefabInstance: {fileID: 811467110}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &144996736 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5106914679879567469, guid: 297cdb5144577be49a3bfe56698759a8,
@@ -1287,18 +1281,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 824509906}
   m_CullTransparentMesh: 1
---- !u!114 &849303747 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3678827801538710700, guid: 956f31527dc09154b871a4ae9f638517,
-    type: 3}
-  m_PrefabInstance: {fileID: 1960877947}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &857230049
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1934,34 +1916,78 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7748922046112118563, guid: 297cdb5144577be49a3bfe56698759a8,
         type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748922046112118563, guid: 297cdb5144577be49a3bfe56698759a8,
+        type: 3}
+      propertyPath: health
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748922046112118563, guid: 297cdb5144577be49a3bfe56698759a8,
+        type: 3}
+      propertyPath: grounded
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748922046112118563, guid: 297cdb5144577be49a3bfe56698759a8,
+        type: 3}
+      propertyPath: maxSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748922046112118563, guid: 297cdb5144577be49a3bfe56698759a8,
+        type: 3}
       propertyPath: healthbar
       value: 
-      objectReference: {fileID: 849303747}
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748922046112118563, guid: 297cdb5144577be49a3bfe56698759a8,
+        type: 3}
+      propertyPath: jumpCount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7748922046112118563, guid: 297cdb5144577be49a3bfe56698759a8,
         type: 3}
       propertyPath: jumpForce
-      value: 150
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748922046112118563, guid: 297cdb5144577be49a3bfe56698759a8,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 7748922046112118563, guid: 297cdb5144577be49a3bfe56698759a8,
         type: 3}
       propertyPath: playerCam
       value: 
-      objectReference: {fileID: 86717287}
+      objectReference: {fileID: 0}
     - target: {fileID: 7748922046112118563, guid: 297cdb5144577be49a3bfe56698759a8,
         type: 3}
       propertyPath: playerData
       value: 
-      objectReference: {fileID: 11400000, guid: 648926682905bb246822b958be41716f,
-        type: 2}
+      objectReference: {fileID: 0}
     - target: {fileID: 7748922046112118563, guid: 297cdb5144577be49a3bfe56698759a8,
         type: 3}
       propertyPath: spawnPoint
       value: 
-      objectReference: {fileID: 884581275}
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748922046112118563, guid: 297cdb5144577be49a3bfe56698759a8,
+        type: 3}
+      propertyPath: playerScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748922046112118563, guid: 297cdb5144577be49a3bfe56698759a8,
+        type: 3}
+      propertyPath: playerScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748922046112118563, guid: 297cdb5144577be49a3bfe56698759a8,
+        type: 3}
+      propertyPath: playerScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7748922046112118563, guid: 297cdb5144577be49a3bfe56698759a8,
         type: 3}
       propertyPath: gravityAddedForce
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6721166633574910037, guid: 297cdb5144577be49a3bfe56698759a8, type: 3}

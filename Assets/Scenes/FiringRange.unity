@@ -2010,6 +2010,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7149764007287686515}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &1441905815 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 7067868471508701311, guid: f74f658bf5bbb454699f25d02f521464,
+    type: 3}
+  m_PrefabInstance: {fileID: 7149764007287686515}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1484497026
 GameObject:
   m_ObjectHideFlags: 0
@@ -3922,9 +3928,44 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7748922046112118563, guid: f74f658bf5bbb454699f25d02f521464,
         type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 1441905815}
+    - target: {fileID: 7748922046112118563, guid: f74f658bf5bbb454699f25d02f521464,
+        type: 3}
+      propertyPath: health
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748922046112118563, guid: f74f658bf5bbb454699f25d02f521464,
+        type: 3}
+      propertyPath: grounded
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748922046112118563, guid: f74f658bf5bbb454699f25d02f521464,
+        type: 3}
+      propertyPath: maxSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748922046112118563, guid: f74f658bf5bbb454699f25d02f521464,
+        type: 3}
       propertyPath: healthbar
       value: 
       objectReference: {fileID: 1485328522}
+    - target: {fileID: 7748922046112118563, guid: f74f658bf5bbb454699f25d02f521464,
+        type: 3}
+      propertyPath: jumpCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748922046112118563, guid: f74f658bf5bbb454699f25d02f521464,
+        type: 3}
+      propertyPath: jumpForce
+      value: 125
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748922046112118563, guid: f74f658bf5bbb454699f25d02f521464,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 2000
+      objectReference: {fileID: 0}
     - target: {fileID: 7748922046112118563, guid: f74f658bf5bbb454699f25d02f521464,
         type: 3}
       propertyPath: playerCam
@@ -3932,8 +3973,33 @@ PrefabInstance:
       objectReference: {fileID: 330585546}
     - target: {fileID: 7748922046112118563, guid: f74f658bf5bbb454699f25d02f521464,
         type: 3}
+      propertyPath: playerScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748922046112118563, guid: f74f658bf5bbb454699f25d02f521464,
+        type: 3}
+      propertyPath: playerScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748922046112118563, guid: f74f658bf5bbb454699f25d02f521464,
+        type: 3}
+      propertyPath: playerScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748922046112118563, guid: f74f658bf5bbb454699f25d02f521464,
+        type: 3}
+      propertyPath: counterMovement
+      value: 0.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748922046112118563, guid: f74f658bf5bbb454699f25d02f521464,
+        type: 3}
       propertyPath: gravityAddedForce
-      value: 3
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748922046112118563, guid: f74f658bf5bbb454699f25d02f521464,
+        type: 3}
+      propertyPath: slideCounterMovement
+      value: 1.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
