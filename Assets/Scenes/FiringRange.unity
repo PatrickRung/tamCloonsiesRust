@@ -1397,6 +1397,7 @@ MonoBehaviour:
   healthbar: {fileID: 1578096793}
   spawnPoint: {fileID: 1007466913}
   playerCam: {fileID: 330585546}
+  playerData: {fileID: 0}
   whatIsWall:
     serializedVersion: 2
     m_Bits: 0
@@ -3741,6 +3742,12 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1441905813}
+    - target: {fileID: 5677117513177861242, guid: 7131b0f32072b66479ac6747f25c45a9,
+        type: 3}
+      propertyPath: userData
+      value: 
+      objectReference: {fileID: 11400000, guid: 648926682905bb246822b958be41716f,
+        type: 2}
     - target: {fileID: 5677117513177861242, guid: 7131b0f32072b66479ac6747f25c45a9,
         type: 3}
       propertyPath: ammoCount

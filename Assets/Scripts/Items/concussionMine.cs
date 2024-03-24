@@ -13,11 +13,14 @@ public class concussionMine : BulletScript
         }
         if (collision.gameObject.layer == 7)
         {
-
-            Vector3 direction = new Vector3(collision.gameObject.transform.position.x, collision.gameObject.transform.position.y - .5f, collision.gameObject.transform.position.z) - new Vector3(transform.position.x, transform.position.y, transform.position.z);
-            collision.gameObject.GetComponent<Rigidbody>().AddForce(1000*(direction));
-            bulletDespawn();
-
+            explosion(collision.gameObject);
         }
+    }
+    public void explosion(GameObject player)
+    {
+        Vector3 direction = new Vector3(player.transform.position.x, player.transform.position.y - .5f, player.transform.position.z) 
+                                        - new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        player.GetComponent<Rigidbody>().AddForce(1000 * direction / (direction.magnitude));
+        bulletDespawn();
     }
 }

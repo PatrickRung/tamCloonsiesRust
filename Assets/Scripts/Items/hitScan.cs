@@ -12,6 +12,7 @@ public abstract class hitScan : GunTemplate
     public int damage;
     public int range;
     public bool readyToShoot = true;
+    private GameObject playerBody;
 
     private void Awake()
     {
@@ -21,7 +22,8 @@ public abstract class hitScan : GunTemplate
         totalRecoilReturned = 0;
         timeInRecoil = -recoilAmount;
         recoilState = false;
-        movementScript = GameObject.Find("pill").GetComponent<movement>();
+        playerBody = GameObject.Find("pill");
+        movementScript = playerBody.GetComponent<movement>();
         player = GameObject.Find("playerCam");
         ammoCount = GameObject.Find("World Items").GetComponent<WorldItemStorage>().
             ammoCount.GetComponent<Text>();
@@ -40,13 +42,17 @@ public abstract class hitScan : GunTemplate
             gunShootInterval = 0;
             //does raycast checks if it hit the layer the enemy is on
 
-            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out rayHit, range, whatIsEnemy))
+            if (Physics.Raycast(cam.transform.position, cam.transform.forward, out rayHit, range))
             {
-                Debug.Log(rayHit.collider.name);
+                Debug.Log("hit something");
                 // checks if the thing on the layer has enemy tag
-                if(rayHit.collider.GetComponent<EnemyAi>() != null)
+                if (rayHit.collider.GetComponent<EnemyAi>() != null)
                 {
                     rayHit.collider.GetComponent<EnemyAi>().changeHealth(-damage);
+                }
+                else if (rayHit.collider.GetComponent<concussionMine>() != null)
+                {
+                    rayHit.collider.GetComponent<concussionMine>().explosion(playerBody);
                 }
             }
             bulletCount--;

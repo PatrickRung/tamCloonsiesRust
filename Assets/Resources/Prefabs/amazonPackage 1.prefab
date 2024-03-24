@@ -11,17 +11,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 00bdc9447cbcded4789d5b378a7ccc2d,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 98.1
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 00bdc9447cbcded4789d5b378a7ccc2d,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 33.25
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 00bdc9447cbcded4789d5b378a7ccc2d,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 210.3
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 00bdc9447cbcded4789d5b378a7ccc2d,
         type: 3}
@@ -77,6 +77,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: amazonPackage 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 00bdc9447cbcded4789d5b378a7ccc2d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

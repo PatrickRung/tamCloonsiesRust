@@ -27,7 +27,6 @@ public class BulletScript : MonoBehaviour
     {
         if (!explosion.Equals(null))
         {
-            Debug.Log(explosion);
             GameObject newPackage = Instantiate(explosion, null);
             newPackage.transform.position = gameObject.transform.position;
         }

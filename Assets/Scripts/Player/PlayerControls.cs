@@ -41,6 +41,8 @@ public class PlayerController : MonoBehaviour
         worldItems = GameObject.Find("World Items");
         MenuObject = worldItems.GetComponent<WorldItemStorage>().menu;
         sensitivitySlider = worldItems.GetComponent<WorldItemStorage>().sensitivitySlider;
+        sensitivitySlider.GetComponent<Slider>().value = userData.playerSensitivity / 100f;
+        playerMovement.setSensitivity(sensitivitySlider.GetComponent<Slider>().value * 100f);
 
         //making the menu invisible
         for (int i = 0; i < MenuObject.transform.childCount; i++)

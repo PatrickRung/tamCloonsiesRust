@@ -79,10 +79,6 @@ public class movement : CharacterTemplate
         playerScale =  transform.localScale;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
-
-
-
         if (health <= 0)
         {
             health = 100;
@@ -177,8 +173,11 @@ public class movement : CharacterTemplate
 
     public void smootherJump()
     {
-        timeOffGround += Time.deltaTime;
-        rb.AddForce(new Vector3(0, timeOffGround * -gravityAddedForce, 0));
+        if(!isWallRunning)
+        {
+            timeOffGround += Time.deltaTime;
+        }
+        rb.AddForce(new Vector3(0, timeOffGround * timeOffGround * -gravityAddedForce, 0));
     }
 
     /// <summary>
@@ -275,7 +274,8 @@ public class movement : CharacterTemplate
                 rb.velocity = new Vector3(vel.x, vel.y / 2, vel.z);
             
             Invoke(nameof(ResetJump), jumpCooldown);
-        }else if(jumpCount < 1){
+        }else if(jumpCount < 1 && !isWallRunning)
+        {
             readyToJump = false;
 
             //Add jump forces
@@ -295,18 +295,35 @@ public class movement : CharacterTemplate
         //Walljump
         if (isWallRunning)
         {
-            readyToJump = false;
-            
-                
-               
+            readyToJump = false;  
+                   
+                if (isWallRight && Input.GetKey(KeyCode.A))
+                {
+                    rb.AddForce(-orientation.right * jumpForce * 5f);
+                    rb.AddForce(orientation.up * jumpForce * 1.5f);
+                    
+                }
+                else if (isWallLeft && Input.GetKey(KeyCode.D))
+                {
 
-                //sideways wallhop
-                if (isWallRight || isWallLeft && Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) rb.AddForce(orientation.up * jumpForce * 1.5f);
-                if (isWallRight && Input.GetKey(KeyCode.A)) rb.AddForce(-orientation.right * jumpForce * 5f);
-                if (isWallLeft && Input.GetKey(KeyCode.D)) rb.AddForce(orientation.right * jumpForce * 5f);
+                    rb.AddForce(orientation.right * jumpForce * 5f);
+                    rb.AddForce(orientation.up * jumpForce * 1.5f);
+                }
+                else if(isWallLeft)
+                {
+                    rb.AddForce(orientation.right * jumpForce * 5f);
+                    rb.AddForce(orientation.up * jumpForce * 1.5f);
+                }
+                else if (isWallRight)
+                {
+                    rb.AddForce(-orientation.right * jumpForce * 5f);
+                    rb.AddForce(orientation.up * jumpForce * 1.5f);
+                }
 
-                //forward force
-                rb.AddForce(orientation.forward * jumpForce * 1f);
+
+
+            //forward force
+            rb.AddForce(orientation.forward * jumpForce * 1f);
 
                 //Reset velocity
                 rb.velocity = Vector3.zero;
