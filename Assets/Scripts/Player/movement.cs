@@ -25,8 +25,9 @@ public class movement : CharacterTemplate
     [HideInInspector] public Rigidbody rb;
 
     //Rotation and look
+    [Header("Rotation and look")]
     private float xRotation;
-    private float sensitivity = 100f;
+    public float sensitivity = 100f;
     private float sensMultiplier = 1f;
     private GameObject sensitivitySlider, worldStorage;
 
@@ -74,8 +75,6 @@ public class movement : CharacterTemplate
     
     void Start() {
         worldStorage = GameObject.Find("World Items");
-        sensitivitySlider = worldStorage.GetComponent<WorldItemStorage>().sensitivitySlider;
-        sensitivity = sensitivitySlider.GetComponent<Slider>().value * sensitivity;
         playerScale =  transform.localScale;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

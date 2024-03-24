@@ -123,3 +123,6 @@ MonoBehaviour:
   damage: 10
   range: 40
   readyToShoot: 1
+  bulletTrail: {fileID: 0}
+  debugSphere: {fileID: 9194639087812610114, guid: 04a63847404487c4bb4460196b81d57d,
+    type: 3}

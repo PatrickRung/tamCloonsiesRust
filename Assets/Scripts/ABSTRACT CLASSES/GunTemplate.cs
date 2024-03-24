@@ -36,7 +36,7 @@ public abstract class GunTemplate : WeaponTemplate
     public int shotsFiredInRecoil;
     public int getShotsFiredInRecoil() { return shotsFiredInRecoil; }
     public int getShotsFiredInRecoil(int newNum) { shotsFiredInRecoil = newNum;  return shotsFiredInRecoil; }
-    void Update()
+    public void Update()
     {
         shootingGun();
 

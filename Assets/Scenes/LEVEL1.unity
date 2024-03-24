@@ -1922,7 +1922,7 @@ PrefabInstance:
     - target: {fileID: 7748922046112118563, guid: 297cdb5144577be49a3bfe56698759a8,
         type: 3}
       propertyPath: health
-      value: 80
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7748922046112118563, guid: 297cdb5144577be49a3bfe56698759a8,
         type: 3}
@@ -1932,7 +1932,7 @@ PrefabInstance:
     - target: {fileID: 7748922046112118563, guid: 297cdb5144577be49a3bfe56698759a8,
         type: 3}
       propertyPath: maxSpeed
-      value: 15
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 7748922046112118563, guid: 297cdb5144577be49a3bfe56698759a8,
         type: 3}
@@ -1942,7 +1942,7 @@ PrefabInstance:
     - target: {fileID: 7748922046112118563, guid: 297cdb5144577be49a3bfe56698759a8,
         type: 3}
       propertyPath: jumpCount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7748922046112118563, guid: 297cdb5144577be49a3bfe56698759a8,
         type: 3}
@@ -1952,7 +1952,7 @@ PrefabInstance:
     - target: {fileID: 7748922046112118563, guid: 297cdb5144577be49a3bfe56698759a8,
         type: 3}
       propertyPath: moveSpeed
-      value: 2000
+      value: 1500
       objectReference: {fileID: 0}
     - target: {fileID: 7748922046112118563, guid: 297cdb5144577be49a3bfe56698759a8,
         type: 3}
@@ -1986,8 +1986,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7748922046112118563, guid: 297cdb5144577be49a3bfe56698759a8,
         type: 3}
+      propertyPath: counterMovement
+      value: 0.54
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748922046112118563, guid: 297cdb5144577be49a3bfe56698759a8,
+        type: 3}
       propertyPath: gravityAddedForce
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748922046112118563, guid: 297cdb5144577be49a3bfe56698759a8,
+        type: 3}
+      propertyPath: wallRunCameraTilt
+      value: 0.10634321
+      objectReference: {fileID: 0}
+    - target: {fileID: 7748922046112118563, guid: 297cdb5144577be49a3bfe56698759a8,
+        type: 3}
+      propertyPath: slideCounterMovement
+      value: 1.2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6721166633574910037, guid: 297cdb5144577be49a3bfe56698759a8, type: 3}

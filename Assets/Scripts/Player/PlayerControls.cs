@@ -41,7 +41,6 @@ public class PlayerController : MonoBehaviour
         worldItems = GameObject.Find("World Items");
         MenuObject = worldItems.GetComponent<WorldItemStorage>().menu;
         sensitivitySlider = worldItems.GetComponent<WorldItemStorage>().sensitivitySlider;
-        sensitivitySlider.GetComponent<Slider>().value = userData.playerSensitivity / 100f;
         playerMovement.setSensitivity(userData.playerSensitivity);
 
         //making the menu invisible
@@ -145,24 +144,21 @@ public class PlayerController : MonoBehaviour
                 playerMovement.inMenu = true;
                 sensitivitySlider.GetComponent<Slider>().value = userData.playerSensitivity / 100f;
             }
-            else
+            else if (playerMovement.inMenu)
             {
-                if (playerMovement.inMenu)
+                playerMovement.inMenu = false;
+                for (int i = 0; i < UI.transform.childCount; i++)
                 {
-                    
-                    playerMovement.inMenu = false;
-                    for (int i = 0; i < UI.transform.childCount; i++)
+                    if (UI.transform.GetChild(i).gameObject.activeSelf)
                     {
-                        if (UI.transform.GetChild(i).gameObject.activeSelf)
-                        {
-                            UI.transform.GetChild(i).gameObject.SetActive(false);
-                        }
-                        else
-                        {
-                            UI.transform.GetChild(i).gameObject.SetActive(true);
-                        }
+                        UI.transform.GetChild(i).gameObject.SetActive(false);
+                    }
+                    else
+                    {
+                        UI.transform.GetChild(i).gameObject.SetActive(true);
                     }
                 }
+
                 playerMovement.inMenu = false;
                 playerMovement.setSensitivity(Mathf.Round(sensitivitySlider.GetComponent<Slider>().value * 100f));
                 userData.playerSensitivity = Mathf.Round(sensitivitySlider.GetComponent<Slider>().value * 100f);
