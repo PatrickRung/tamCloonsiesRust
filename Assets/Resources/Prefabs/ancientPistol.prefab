@@ -117,12 +117,15 @@ MonoBehaviour:
   shotsFiredInRecoil: 0
   recoilAmount: 0.2
   cam: {fileID: 0}
+  debugMode: 0
   whatIsEnemy:
     serializedVersion: 2
     m_Bits: 256
   damage: 10
   range: 40
   readyToShoot: 1
-  bulletTrail: {fileID: 0}
+  bulletTrail: {fileID: 1931770146022230377, guid: 56475aa631dd53645be9dbb77a6c5448,
+    type: 3}
   debugSphere: {fileID: 9194639087812610114, guid: 04a63847404487c4bb4460196b81d57d,
     type: 3}
+  inDebugWorld: {fileID: 0}

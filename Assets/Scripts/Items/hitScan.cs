@@ -38,14 +38,16 @@ public abstract class hitScan : GunTemplate
     {
         gunShootInterval += Time.deltaTime;
         //checks bullet count and keystroke
-        if(debugMode)
-        {
+
             if (Physics.Raycast(cam.transform.position, cam.transform.forward, out rayHit, range))
             {
-                inDebugWorld.transform.position = rayHit.point;
+                if (debugMode)
+                {
+                    inDebugWorld.transform.position = rayHit.point;
+                }
                 accurateHitscanPos = rayHit.point;
             }
-        }
+
 
 
 
@@ -66,7 +68,9 @@ public abstract class hitScan : GunTemplate
                     debugSphereTemp.transform.position = accurateHitscanPos;
                 }
 
-
+                GameObject trail = Instantiate(bulletTrail);
+                trail.GetComponent<LineRenderer>().SetPosition(0, transform.position);
+                trail.GetComponent<LineRenderer>().SetPosition(1, accurateHitscanPos);
                 Debug.Log("hit something");
                 // checks if the thing on the layer has enemy tag
                 if (rayHit.collider.GetComponent<EnemyAi>() != null)
