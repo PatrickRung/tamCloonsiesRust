@@ -112,5 +112,5 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   damage: 80
-  range: 20
+  range: 100
   readyToShoot: 0

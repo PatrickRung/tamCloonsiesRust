@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour
     //updates camera roation and position according to movement
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.BackQuote))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             if(!playerMovement.inMenu)
             {
