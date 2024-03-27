@@ -378,6 +378,12 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.025821647, y: 0.15607893, z: 0.10980714}
   m_Center: {x: 0, y: -0.05825457, z: 0.06286118}
+--- !u!4 &213642213 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 759494531147215029, guid: 3b7c0645a076b6d4c9c480773302fcdf,
+    type: 3}
+  m_PrefabInstance: {fileID: 811467110}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &396678185 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7481862212423361554, guid: 956f31527dc09154b871a4ae9f638517,
@@ -818,6 +824,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 48707742}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &705616958 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2340871137388309283, guid: 297cdb5144577be49a3bfe56698759a8,
+    type: 3}
+  m_PrefabInstance: {fileID: 1295615168}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &724378154
 GameObject:
   m_ObjectHideFlags: 0
@@ -1938,7 +1956,7 @@ PrefabInstance:
         type: 3}
       propertyPath: healthbar
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 705616958}
     - target: {fileID: 7748922046112118563, guid: 297cdb5144577be49a3bfe56698759a8,
         type: 3}
       propertyPath: jumpCount
@@ -1958,7 +1976,7 @@ PrefabInstance:
         type: 3}
       propertyPath: playerCam
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 213642213}
     - target: {fileID: 7748922046112118563, guid: 297cdb5144577be49a3bfe56698759a8,
         type: 3}
       propertyPath: playerData
