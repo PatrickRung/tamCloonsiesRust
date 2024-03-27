@@ -5,12 +5,19 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "UserData", menuName = "ScriptableObjects/UserDataStorage", order = 1)]
 public class UserData : ScriptableObject
 {
-    public float playerSensitivity;
+    public float playerSensitivity = 50f;
 
     
     public UserData(float playerSensitivity)
     {
-        this.playerSensitivity = playerSensitivity;
+        if(playerSensitivity != 0)
+        {
+            this.playerSensitivity = playerSensitivity;
+        }
+        else
+        {
+            this.playerSensitivity = 50f;
+        }
     }
     
 }

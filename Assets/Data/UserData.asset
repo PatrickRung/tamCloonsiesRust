@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f8b6e90d3bdb1641bad61e2d5ab0474, type: 3}
   m_Name: UserData
   m_EditorClassIdentifier: 
-  playerSensitivity: 0
+  playerSensitivity: 50
