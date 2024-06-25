@@ -32,6 +32,7 @@ public abstract class CharacterTemplate : MonoBehaviour
             {
                 gameObject.transform.position = new Vector3(0, 40, 0);
             }
+            gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
             health = maxhealth;
         }
         else if(health <= 0 && gameObject.GetComponent<movement>() == null)
