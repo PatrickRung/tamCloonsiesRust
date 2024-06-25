@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class concussionMine : BulletScript
 {
+
+
+
     
     public new void OnCollisionEnter(Collision collision) {
         if (collision.gameObject.layer == 6||collision.gameObject.layer == 9)
@@ -11,7 +14,7 @@ public class concussionMine : BulletScript
             bulletRigidBody.velocity=Vector3.zero;
             CancelInvoke();
         }
-        if (collision.gameObject.layer == 7)
+        if (collision.gameObject.layer == 7 || collision.gameObject.layer == 8)
         {
             explosion(collision.gameObject);
         }
