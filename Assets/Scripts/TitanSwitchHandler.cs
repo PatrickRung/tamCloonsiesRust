@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TitanSwitchHandler : MonoBehaviour
 { 
-    
     public GameObject titan;
     public GameObject player;
     public GameObject pilotSpot;
