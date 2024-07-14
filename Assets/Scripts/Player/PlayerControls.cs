@@ -34,7 +34,6 @@ public class PlayerController : MonoBehaviour
     {
         //assigning stuff
         player = transform;
-        userData = Resources.Load<UserData>("Data/UserData.asset");
         playerMovement = player.gameObject.GetComponent<movement>();
         playerHealthBar = GameObject.Find("PlayerHealthBar");
         onMat = Resources.Load<Material>("green");
@@ -43,7 +42,7 @@ public class PlayerController : MonoBehaviour
         worldItems = GameObject.Find("World Items");
         MenuObject = worldItems.GetComponent<WorldItemStorage>().menu;
         sensitivitySlider = worldItems.GetComponent<WorldItemStorage>().sensitivitySlider;
-        playerMovement.setSensitivity(userData.playerSensitivity);
+
 
         //making the menu invisible
         for (int i = 0; i < MenuObject.transform.childCount; i++)

@@ -26,8 +26,14 @@ public class RocketLauncherGameManager : MonoBehaviour
 
     void StartButtons()
     {
-        if (GUILayout.Button("Host")) m_NetworkManager.StartHost();
-        if (GUILayout.Button("Client")) m_NetworkManager.StartClient();
+        if (GUILayout.Button("Host")) {
+            m_NetworkManager.StartHost();
+            GameObject.Find("playerCam").GetComponent<PlayerController>().Awake();
+        } 
+        if (GUILayout.Button("Client")) {
+            m_NetworkManager.StartClient();
+            GameObject.Find("playerCam").GetComponent<PlayerController>().Awake();
+        }
         if (GUILayout.Button("Server")) m_NetworkManager.StartServer();
     }
 }

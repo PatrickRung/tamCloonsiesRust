@@ -13,6 +13,9 @@ public abstract class CharacterTemplate : MonoBehaviour
     public void Awake()
     {
         health = maxhealth;
+        if(gameObject.layer == 7) {
+            healthbar = GameObject.Find("healthBar (1)").GetComponent<Image>();
+        }
     }
     public void FixedUpdate()
     {

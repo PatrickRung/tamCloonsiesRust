@@ -71,9 +71,14 @@ public class movement : CharacterTemplate
         base.Awake();
         rb = GetComponent<Rigidbody>();
         orientation = gameObject.transform;
-    }
-    
-    void Start() {
+        playerData = Resources.Load<UserData>("Data/UserData");
+
+        //will find any game object named "SpawnFloor" and will use it as the spawm point
+        spawnPoint =  GameObject.Find("SpawnFloor").transform;
+
+        Debug.Log(playerData.playerSensitivity);
+        setSensitivity(playerData.playerSensitivity);
+        playerCam = GameObject.Find("playerCam").transform;
         worldStorage = GameObject.Find("World Items");
         playerScale =  transform.localScale;
         Cursor.lockState = CursorLockMode.Locked;
