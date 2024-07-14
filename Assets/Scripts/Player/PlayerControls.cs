@@ -30,9 +30,11 @@ public class PlayerController : MonoBehaviour
 
     //sets all the items in the inventory to be either a fist, health pot, or gun
     //then updates hot bar, UI text and asigns game objects from world
-    public void Start()
+    public void Awake()
     {
         //assigning stuff
+        player = transform;
+        userData = Resources.Load<UserData>("Data/UserData.asset");
         playerMovement = player.gameObject.GetComponent<movement>();
         playerHealthBar = GameObject.Find("PlayerHealthBar");
         onMat = Resources.Load<Material>("green");

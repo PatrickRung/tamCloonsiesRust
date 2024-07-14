@@ -13,6 +13,10 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("LEVEL1");
     }
+    public void RocketLauncherGame()
+    {
+        SceneManager.LoadScene("RocketLauncherGame");
+    }
     public void QuitGame()
     {
         Application.Quit();

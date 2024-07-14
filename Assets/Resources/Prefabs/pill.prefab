@@ -124,13 +124,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d457b738877648944a4e86dbde456804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  defaulthealth: 100
+  health: 100
   maxhealth: 100
   healthbar: {fileID: 0}
-  playerCam: {fileID: 0}
-  orientation: {fileID: 5106914679879567469}
   spawnPoint: {fileID: 0}
+  playerCam: {fileID: 0}
+  playerData: {fileID: 11400000, guid: 648926682905bb246822b958be41716f, type: 2}
   whatIsWall:
     serializedVersion: 2
     m_Bits: 512
@@ -138,27 +137,29 @@ MonoBehaviour:
   maxWallrunTime: 2
   maxWallSpeed: 30
   maxWallRunCameraTilt: 25
-  wallRunCameraTilt: 0
+  wallRunCameraTilt: 0.10634321
   rb: {fileID: 0}
-  moveSpeed: 4500
-  maxSpeed: 20
-  grounded: 0
+  sensitivity: 100
+  moveSpeed: 1500
+  maxSpeed: 11
   whatIsGround:
     serializedVersion: 2
     m_Bits: 4294967295
-  counterMovement: 0.175
+  counterMovement: 0.54
   maxSlopeAngle: 35
+  grounded: 1
   crouchScale: {x: 1, y: 0.5, z: 1}
-  playerScale: {x: 0, y: 0, z: 0}
   slideForce: 400
-  slideCounterMovement: 0.2
-  readyToJump: 1
+  slideCounterMovement: 1.2
+  playerScale: {x: 1, y: 1, z: 1}
   jumpCooldown: 0.25
-  jumpForce: 200
-  jumpCount: 0
+  jumpForce: 125
   movementSnappiness: 5
-  inMenu: 0
+  gravityAddedForce: 5
   timeOffGround: 0
+  jumpCount: 0
+  readyToJump: 1
+  inMenu: 0
   addedRecoil: 0
 --- !u!54 &7067868471508701311
 Rigidbody:

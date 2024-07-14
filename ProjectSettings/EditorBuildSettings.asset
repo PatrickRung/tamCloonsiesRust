@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/NonLevelScenes/menuScene.unity
+    path: Assets/Scenes/menuScene.unity
     guid: 5242a901d18875b40b3656c30cffd268
   - enabled: 1
     path: Assets/Scenes/FiringRange.unity
@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LEVEL1.unity
     guid: 618629be02b05054e895ba9be84d7af4
+  - enabled: 1
+    path: Assets/Scenes/RocketLauncherGame.unity
+    guid: ee47602de33b6db4cbcac87bad84cedb
   m_configObjects: {}
