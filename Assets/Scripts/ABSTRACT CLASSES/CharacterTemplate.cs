@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Unity.Netcode;
 
-public abstract class CharacterTemplate : MonoBehaviour
+public abstract class CharacterTemplate : NetworkBehaviour
 {
     [Header("Health")]
     public float health;

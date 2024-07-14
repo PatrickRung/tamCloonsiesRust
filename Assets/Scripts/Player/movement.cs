@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using static System.Net.Mime.MediaTypeNames;
+using Unity.Netcode;
 
 public class movement : CharacterTemplate
 {
@@ -40,7 +42,8 @@ public class movement : CharacterTemplate
     public float counterMovement = 0.175f;
     public float maxSlopeAngle = 35f;
     private float threshold = 0.01f;
-    [HideInInspector] public bool grounded;
+    [HideInInspector] public bool grounded, multiplayerEnabled;
+    public NetworkVariable<Vector3> Position = new NetworkVariable<Vector3>();
 
     //Crouch & Slide
     [Header("Crouch and Slide")]
@@ -68,13 +71,15 @@ public class movement : CharacterTemplate
     private Vector3 wallNormalVector;
 
     public new void Awake() {
+        //LATER IMPLEMENT CHECK FOR WHEN WE ARE IN MULTIPLAYER MODE
+        multiplayerEnabled = true;
         base.Awake();
         rb = GetComponent<Rigidbody>();
         orientation = gameObject.transform;
         playerData = Resources.Load<UserData>("Data/UserData");
 
         //will find any game object named "SpawnFloor" and will use it as the spawm point
-        spawnPoint =  GameObject.Find("SpawnFloor").transform;
+        spawnPoint =  GameObject.Find("SpawnPoint").transform;
 
         Debug.Log(playerData.playerSensitivity);
         setSensitivity(playerData.playerSensitivity);
@@ -140,6 +145,13 @@ public class movement : CharacterTemplate
         if(!inMenu)
         {
             Movement();
+
+            if(multiplayerEnabled) {
+                updatePosRPC();
+            }
+        }
+        else {
+            transform.position = Position.Value;
         }
         base.FixedUpdate();
         //checks if player fell to far
@@ -149,26 +161,34 @@ public class movement : CharacterTemplate
         }
     }
 
+        [Rpc(SendTo.Everyone)]
+        void updatePosRPC(RpcParams rpcParams = default)
+        {
+            Position.Value = transform.position;
+        }
+
     public void setSensitivity(float sense){this.sensitivity = sense;}
     public float getSensitivity() { return sensitivity; }
 
     //if the user is in the settings or menu thing then we disable looking around
     public bool inMenu;
     private void Update() {
-        if(!inMenu)
-        {
-            MyInput();
-            Look();
-            CheckForWall();
-            WallRunInput();
-        }
-        if(!grounded)
-        {
-            smootherJump();
-        }
-        else
-        {
-            timeOffGround = 0;
+        if(IsOwner) {
+            if(!inMenu)
+            {
+                MyInput();
+                Look();
+                CheckForWall();
+                WallRunInput();
+            }
+            if(!grounded)
+            {
+                smootherJump();
+            }
+            else
+            {
+                timeOffGround = 0;
+            }
         }
     }
 
@@ -357,6 +377,9 @@ public class movement : CharacterTemplate
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
         xRotation += (addedRecoil/900);
+
+        //move the camera to the position of the players head
+        playerCam.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y + 1, gameObject.transform.position.z);
 
         //Perform the rotations
         playerCam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, wallRunCameraTilt);
