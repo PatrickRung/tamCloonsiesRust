@@ -43,7 +43,8 @@ public class movement : CharacterTemplate
     public float maxSlopeAngle = 35f;
     private float threshold = 0.01f;
     [HideInInspector] public bool grounded, multiplayerEnabled;
-    public NetworkVariable<Vector3> Position = new NetworkVariable<Vector3>();
+    //network variable is a variable that is sinced over the server
+    public NetworkVariable<Vector3> Position = new NetworkVariable<Vector3>(new Vector3(0,0,0), NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
 
     //Crouch & Slide
     [Header("Crouch and Slide")]
@@ -142,13 +143,10 @@ public class movement : CharacterTemplate
 
 
     private new void FixedUpdate() {
-        if(!inMenu)
+        if(!inMenu & IsOwner)
         {
             Movement();
-
-            if(multiplayerEnabled) {
-                updatePosRPC();
-            }
+            Position.Value = transform.position;
         }
         else {
             transform.position = Position.Value;
@@ -160,12 +158,6 @@ public class movement : CharacterTemplate
             changeHealth(-1000000);
         }
     }
-
-        [Rpc(SendTo.Everyone)]
-        void updatePosRPC(RpcParams rpcParams = default)
-        {
-            Position.Value = transform.position;
-        }
 
     public void setSensitivity(float sense){this.sensitivity = sense;}
     public float getSensitivity() { return sensitivity; }
