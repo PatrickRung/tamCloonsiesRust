@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static System.Net.Mime.MediaTypeNames;
 using Unity.Netcode;
+using UnityEngine.SceneManagement;
 
 public class movement : CharacterTemplate
 {
@@ -72,6 +73,19 @@ public class movement : CharacterTemplate
     private Vector3 wallNormalVector;
 
     public new void Awake() {
+
+        //adds the method call changedActiveScene to be called when scene is changed
+        SceneManager.activeSceneChanged += ChangedActiveScene;
+        //if the player has the awake funciton called in the menu it will try to grab objects that do not exist thus creating errors
+        //MUST RECALL AWAKE FUNCTION IN OTHER SCENES
+        if(SceneManager.GetActiveScene().name.Equals("menuScene")) {
+            enabled = false;
+
+            return;
+        }
+        else {
+            enabled = true;
+        }
         //LATER IMPLEMENT CHECK FOR WHEN WE ARE IN MULTIPLAYER MODE
         multiplayerEnabled = true;
         base.Awake();
@@ -93,7 +107,14 @@ public class movement : CharacterTemplate
         {
             health = 100;
         }
+        transform.position = spawnPoint.transform.position;
     }
+
+    private void ChangedActiveScene(Scene current, Scene next)
+    {
+        Awake();
+    }
+
 
     public virtual void WallRunInput()
     {
@@ -157,6 +178,7 @@ public class movement : CharacterTemplate
         {
             changeHealth(-1000000);
         }
+
     }
 
     public void setSensitivity(float sense){this.sensitivity = sense;}
