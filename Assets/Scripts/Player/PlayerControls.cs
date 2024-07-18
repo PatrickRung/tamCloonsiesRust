@@ -19,11 +19,11 @@ public class PlayerController : MonoBehaviour
     public GameObject UI;
     public UserData userData;
 
+    [HideInInspector] public movement playerMovement;
     private GameObject[] playerInventory;
     private GameObject playerHealthBar, worldItems, weaponSpot, LookingAt;
     private int barLookingAt;
     private Material onMat, offMatt;
-    private movement playerMovement;
     private GameObject MenuObject;
     private GameObject sensitivitySlider;
     private bool titanExistInLevel;
@@ -33,13 +33,11 @@ public class PlayerController : MonoBehaviour
     public void Awake()
     {
         //assigning stuff
-        player = transform;
-        playerMovement = player.gameObject.GetComponent<movement>();
+        worldItems = GameObject.Find("World Items");
         playerHealthBar = GameObject.Find("PlayerHealthBar");
         onMat = Resources.Load<Material>("green");
         offMatt = Resources.Load<Material>("default");
         weaponSpot = GameObject.Find("WeaponSpot");
-        worldItems = GameObject.Find("World Items");
         MenuObject = worldItems.GetComponent<WorldItemStorage>().menu;
         sensitivitySlider = worldItems.GetComponent<WorldItemStorage>().sensitivitySlider;
 
@@ -91,6 +89,11 @@ public class PlayerController : MonoBehaviour
         if (object.ReferenceEquals(playerInventory[barLookingAt], fistOfFury))
         {
             playerInventory[barLookingAt] = Instantiate(weapon, transform);
+            if (playerInventory[barLookingAt].TryGetComponent<GunTemplate>(out GunTemplate gunTemplate))
+            {
+                gunTemplate.movementScript = playerMovement;
+                Debug.Log("THIS WORKS");
+            }
             playerInventory[barLookingAt].transform.position = weaponSpot.transform.position;
             setWeaponActive(barLookingAt);
             updateHotBar();

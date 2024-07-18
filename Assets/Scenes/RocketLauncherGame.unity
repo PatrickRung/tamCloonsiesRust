@@ -1255,6 +1255,7 @@ MonoBehaviour:
   ammoCount: {fileID: 2307798546259739325}
   sensitivitySlider: {fileID: 5763255220718472778}
   menu: {fileID: 7481862213146852201}
+  player: {fileID: 0}
 --- !u!224 &1338411880985259296
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2669,6 +2670,8 @@ GameObject:
   - component: {fileID: 3153974439597764450}
   - component: {fileID: 5032121073952369688}
   - component: {fileID: 1611070802651142441}
+  - component: {fileID: 8357667102903915498}
+  - component: {fileID: 8357667102903915499}
   m_Layer: 0
   m_Name: RocketLauncher
   m_TagString: Untagged
@@ -2775,7 +2778,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 712802176017037500}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c5b619df8a4ca54a842f62a522301a5, type: 3}
   m_Name: 
@@ -2788,6 +2791,7 @@ MonoBehaviour:
   item3: {fileID: 5720286027201418834}
   UI: {fileID: 7588664191445687326}
   userData: {fileID: 11400000, guid: 648926682905bb246822b958be41716f, type: 2}
+  playerMovement: {fileID: 0}
 --- !u!114 &5720286027201418834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3624,6 +3628,58 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5404560550511181148}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &8357667102903915498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5404560550511181148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1589349884
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &8357667102903915499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5404560550511181148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e96cb6065543e43c4a752faaa1468eb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UseUnreliableDeltas: 0
+  SyncPositionX: 1
+  SyncPositionY: 1
+  SyncPositionZ: 1
+  SyncRotAngleX: 1
+  SyncRotAngleY: 1
+  SyncRotAngleZ: 1
+  SyncScaleX: 1
+  SyncScaleY: 1
+  SyncScaleZ: 1
+  PositionThreshold: 0.001
+  RotAngleThreshold: 0.01
+  ScaleThreshold: 0.01
+  UseQuaternionSynchronization: 0
+  UseQuaternionCompression: 0
+  UseHalfFloatPrecision: 0
+  InLocalSpace: 0
+  Interpolate: 1
+  SlerpPosition: 0
 --- !u!114 &8484479675375631014
 MonoBehaviour:
   m_ObjectHideFlags: 0

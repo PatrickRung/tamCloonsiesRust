@@ -23,7 +23,6 @@ public abstract class GunTemplate : WeaponTemplate
         totalRecoilAdded = 0; totalRecoilReturned = 0;
         timeInRecoil = -recoilAmount;
         recoilState = false;
-        movementScript = GameObject.Find("pill").GetComponent<movement>();
         player = GameObject.Find("playerCam");
         ammoCount = GameObject.Find("World Items").GetComponent<WorldItemStorage>().
             ammoCount.GetComponent<Text>();

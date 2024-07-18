@@ -74,6 +74,7 @@ public class movement : CharacterTemplate
 
     public new void Awake() {
 
+
         //adds the method call changedActiveScene to be called when scene is changed
         SceneManager.activeSceneChanged += ChangedActiveScene;
         //if the player has the awake funciton called in the menu it will try to grab objects that do not exist thus creating errors
@@ -86,12 +87,24 @@ public class movement : CharacterTemplate
         else {
             enabled = true;
         }
+
+        //player controller which is held on the camera will keep on trying to acces the player which is still being loaded by the server
+        //activiting the player controller will give time for the server to load and then the player controller can call Awake and Update with 
+        //all its needed properties
+        playerCam = GameObject.Find("playerCam").transform;
+        playerCam.GetComponent<PlayerController>().enabled = true;
+
+
         //LATER IMPLEMENT CHECK FOR WHEN WE ARE IN MULTIPLAYER MODE
         multiplayerEnabled = true;
+
+        //more assigning
         base.Awake();
         rb = GetComponent<Rigidbody>();
         orientation = gameObject.transform;
         playerData = Resources.Load<UserData>("Data/UserData");
+        playerCam.GetComponent<PlayerController>().player = gameObject.transform;
+        playerCam.GetComponent<PlayerController>().playerMovement = gameObject.GetComponent<movement>();
 
         //will find any game object named "SpawnFloor" and will use it as the spawm point
         spawnPoint =  GameObject.Find("SpawnPoint").transform;
@@ -100,6 +113,7 @@ public class movement : CharacterTemplate
         setSensitivity(playerData.playerSensitivity);
         playerCam = GameObject.Find("playerCam").transform;
         worldStorage = GameObject.Find("World Items");
+        worldStorage.GetComponent<WorldItemStorage>().player = gameObject;
         playerScale =  transform.localScale;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -108,11 +122,14 @@ public class movement : CharacterTemplate
             health = 100;
         }
         transform.position = spawnPoint.transform.position;
+
+        
     }
 
     private void ChangedActiveScene(Scene current, Scene next)
     {
         Awake();
+
     }
 
 
