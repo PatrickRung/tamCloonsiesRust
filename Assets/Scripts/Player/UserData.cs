@@ -6,6 +6,8 @@ using UnityEngine;
 public class UserData : ScriptableObject
 {
     public float playerSensitivity = 50f;
+    public bool isHost;
+    public string code;
 
     
     public UserData(float playerSensitivity)

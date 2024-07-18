@@ -435,7 +435,8 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 173047395}
-    PlayerPrefab: {fileID: 0}
+    PlayerPrefab: {fileID: 2408755452579813586, guid: f74f658bf5bbb454699f25d02f521464,
+      type: 3}
     Prefabs:
       NetworkPrefabsLists:
       - {fileID: 11400000, guid: c933d83691aa7e141afb41ba7f96f5d7, type: 2}
@@ -1882,7 +1883,7 @@ MonoBehaviour:
   ActiveSceneSynchronization: 0
   SceneMigrationSynchronization: 1
   SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
+  DontDestroyWithOwner: 1
   AutoObjectParentSync: 1
 --- !u!1 &1084957937
 GameObject:

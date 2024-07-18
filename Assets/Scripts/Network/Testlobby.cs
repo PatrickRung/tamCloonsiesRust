@@ -57,6 +57,8 @@ public class NetworkManagingUI : NetworkBehaviour
 
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
 
+
+
     }
 
     public async void CreateRelay() {
@@ -76,6 +78,7 @@ public class NetworkManagingUI : NetworkBehaviour
                 allocation.ConnectionData);
 
             NetworkManager.Singleton.StartHost();
+            GameObject player = GameObject.Find("pill(Clone)");
         } catch(RelayServiceException e) {
             Debug.Log(e);
         }
@@ -153,9 +156,7 @@ public class NetworkManagingUI : NetworkBehaviour
     }
 
     public void startGame() {
-        Scene menuScene = SceneManager.GetActiveScene();
         NetworkManager.Singleton.SceneManager.LoadScene("RocketLauncherGame", LoadSceneMode.Single);
-        NetworkManager.Singleton.SceneManager.UnloadScene(menuScene);
     }
 
 

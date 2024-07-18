@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Unity.Netcode;
+using UnityEngine.SceneManagement;
 
 public abstract class CharacterTemplate : NetworkBehaviour
 {
@@ -14,7 +15,7 @@ public abstract class CharacterTemplate : NetworkBehaviour
     public void Awake()
     {
         health = maxhealth;
-        if(gameObject.layer == 7) {
+        if(gameObject.layer == 7 && !(SceneManager.GetActiveScene().name == "menuScene")) {
             healthbar = GameObject.Find("healthBar (1)").GetComponent<Image>();
         }
     }

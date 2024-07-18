@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: -6939214437288970718}
   - component: {fileID: 7748922046112118563}
   - component: {fileID: 7067868471508701311}
-  - component: {fileID: 6721166633574910037}
   m_Layer: 7
   m_Name: pill
   m_TagString: Untagged
@@ -213,24 +212,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &6721166633574910037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2408755452579813586}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 243f8bb10e815424b8d36108657025ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  titan: {fileID: 0}
-  player: {fileID: 0}
-  pilotSpot: {fileID: 0}
-  playerController: {fileID: 0}
-  cam: {fileID: 0}
-  isintitan: 0
 --- !u!1 &2897748726867236436
 GameObject:
   m_ObjectHideFlags: 0
