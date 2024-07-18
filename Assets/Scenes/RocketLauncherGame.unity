@@ -1256,6 +1256,7 @@ MonoBehaviour:
   sensitivitySlider: {fileID: 5763255220718472778}
   menu: {fileID: 7481862213146852201}
   player: {fileID: 0}
+  PlayerCamera: {fileID: 712802176017037500}
 --- !u!224 &1338411880985259296
 RectTransform:
   m_ObjectHideFlags: 0

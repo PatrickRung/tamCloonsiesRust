@@ -88,10 +88,14 @@ public class movement : CharacterTemplate
             enabled = true;
         }
 
+        //if the the player is not the owner then it will not assign variables however base.awake still needs to be called to calculate health
+        base.Awake();
+        if(!IsOwner) return;
         //player controller which is held on the camera will keep on trying to acces the player which is still being loaded by the server
         //activiting the player controller will give time for the server to load and then the player controller can call Awake and Update with 
         //all its needed properties
-        playerCam = GameObject.Find("playerCam").transform;
+        worldStorage = GameObject.Find("World Items");
+        playerCam = worldStorage.GetComponent<WorldItemStorage>().PlayerCamera.transform;
         playerCam.GetComponent<PlayerController>().enabled = true;
 
 
@@ -99,7 +103,7 @@ public class movement : CharacterTemplate
         multiplayerEnabled = true;
 
         //more assigning
-        base.Awake();
+        
         rb = GetComponent<Rigidbody>();
         orientation = gameObject.transform;
         playerData = Resources.Load<UserData>("Data/UserData");
@@ -111,8 +115,7 @@ public class movement : CharacterTemplate
 
         Debug.Log(playerData.playerSensitivity);
         setSensitivity(playerData.playerSensitivity);
-        playerCam = GameObject.Find("playerCam").transform;
-        worldStorage = GameObject.Find("World Items");
+
         worldStorage.GetComponent<WorldItemStorage>().player = gameObject;
         playerScale =  transform.localScale;
         Cursor.lockState = CursorLockMode.Locked;
