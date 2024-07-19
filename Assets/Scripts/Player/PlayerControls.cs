@@ -105,6 +105,7 @@ public class PlayerController : NetworkBehaviour
             if(worldItems.GetComponent<WorldItemStorage>().multiplayerEnabled && (IsHost || IsServer)) {
                 playerInventory[barLookingAt].GetComponent<NetworkObject>().Spawn();
                 Debug.Log("spawning weapon on both server and client");
+                playerInventory[barLookingAt].transform.parent = transform;
             }
             else {
 
