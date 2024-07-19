@@ -6,14 +6,20 @@ using UnityEngine;
 
 public class EntitySpawnHandler : NetworkBehaviour
 {
-    // NetworkPrefabsList NetworkPrefabs;
+    public NetworkPrefabsList NetworkPrefabs;
 
-    // public void SpawnEntity(String Entity) {
-    //     NetworkPrefabs.Contains(Entity);
-    //     SpawnEntityRpc();
-    // }
-    
-    // void SpawnEntityRpc(RpcParams rpcParams = default) {
-    //     currSpawningObject.Value.GetComponent<NetworkObject>().Spawn();
-    // }
+    public void SpawnEntity(GameObject Entity) {
+        int indexOfPrefab = -1;
+        for(int i = 0; i < NetworkPrefabs.PrefabList.Count; i++) {
+            if(NetworkPrefabs.PrefabList[i].Prefab == Entity) {
+                indexOfPrefab = i;
+            }
+        }
+        SpawnEntityRpc(indexOfPrefab);
+    }
+    [Rpc(SendTo.Server)]
+    void SpawnEntityRpc(int indexOfPrefab) {
+        if(indexOfPrefab == -1) return;
+        NetworkPrefabs.PrefabList[indexOfPrefab].Prefab.GetComponent<NetworkObject>().Spawn();
+    }
 }

@@ -102,7 +102,7 @@ public class PlayerController : NetworkBehaviour
             setWeaponActive(barLookingAt);
             updateHotBar();
             //spawn on both server and client
-            if(worldItems.GetComponent<WorldItemStorage>().multiplayerEnabled && (IsHost || IsServer)) {
+            if(worldItems.GetComponent<WorldItemStorage>().multiplayerEnabled && IsOwner && (IsServer || IsHost)) {
                 playerInventory[barLookingAt].GetComponent<NetworkObject>().Spawn();
                 Debug.Log("spawning weapon on both server and client");
                 playerInventory[barLookingAt].transform.parent = transform;
