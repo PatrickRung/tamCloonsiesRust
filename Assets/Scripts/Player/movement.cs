@@ -113,7 +113,6 @@ public class movement : CharacterTemplate
         //will find any game object named "SpawnFloor" and will use it as the spawm point
         spawnPoint =  GameObject.Find("SpawnPoint").transform;
 
-        Debug.Log(playerData.playerSensitivity);
         setSensitivity(playerData.playerSensitivity);
 
         worldStorage.GetComponent<WorldItemStorage>().player = gameObject;
@@ -125,7 +124,7 @@ public class movement : CharacterTemplate
             health = 100;
         }
         transform.position = spawnPoint.transform.position;
-
+        //worldStorage.GetComponent<WorldItemStorage>().entitySpawnHandling.GetComponent<NetworkObject>().Spawn();
         
     }
 

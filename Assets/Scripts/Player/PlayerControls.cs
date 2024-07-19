@@ -3,13 +3,14 @@
 //handles inventory and starting weapons
 
 using System;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     [Header("ALL NEED TO BE ASSIGNED")]
     public Transform player;
@@ -76,6 +77,10 @@ public class PlayerController : MonoBehaviour
             titanExistInLevel = true;
         }
     }
+
+    public void DisableControls() {
+        enabled = false;
+    }
     //returns the item that the player is holding
     public GameObject itemInHand() { return playerInventory[barLookingAt]; }
     //returns what the player is looking at to other classes
@@ -92,12 +97,22 @@ public class PlayerController : MonoBehaviour
             if (playerInventory[barLookingAt].TryGetComponent<GunTemplate>(out GunTemplate gunTemplate))
             {
                 gunTemplate.movementScript = playerMovement;
-                Debug.Log("THIS WORKS");
             }
             playerInventory[barLookingAt].transform.position = weaponSpot.transform.position;
             setWeaponActive(barLookingAt);
             updateHotBar();
+            //spawn on both server and client
+            if(worldItems.GetComponent<WorldItemStorage>().multiplayerEnabled && (IsHost || IsServer)) {
+                playerInventory[barLookingAt].GetComponent<NetworkObject>().Spawn();
+                Debug.Log("spawning weapon on both server and client");
+            }
+            else {
+
+            }
+
             return true;
+
+            
         }
         else if(object.ReferenceEquals(playerInventory[barLookingAt], null)
             || object.ReferenceEquals(weapon, null))
@@ -124,6 +139,8 @@ public class PlayerController : MonoBehaviour
     //updates camera roation and position according to movement
     void Update()
     {
+
+        if(transform.Equals(null) || player.Equals(null)) return;
         if (Input.GetKeyDown(KeyCode.P))
         {
             if(!playerMovement.inMenu)
@@ -214,6 +231,8 @@ public class PlayerController : MonoBehaviour
             Destroy(playerInventory[barLookingAt].GetComponent<WeaponTemplate>());
             playerInventory[barLookingAt] = fistOfFury;
             updateHotBar();
+
+
         }
     }
 

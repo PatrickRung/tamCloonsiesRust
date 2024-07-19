@@ -6,10 +6,11 @@ using UnityEngine.UI;
 
 public abstract class GunTemplate : WeaponTemplate
 {
-    public GameObject player, bullet;
+    public GameObject player, bullet, worldItems;
     public int bulletCount, maxBulletCount;
     public float gunShootInterval, gunFireRate;
     public Text ammoCount;
+
 
     public movement movementScript;
     public abstract int getBulletCount();
@@ -24,7 +25,8 @@ public abstract class GunTemplate : WeaponTemplate
         timeInRecoil = -recoilAmount;
         recoilState = false;
         player = GameObject.Find("playerCam");
-        ammoCount = GameObject.Find("World Items").GetComponent<WorldItemStorage>().
+        worldItems =  GameObject.Find("World Items");
+        ammoCount = worldItems.GetComponent<WorldItemStorage>().
             ammoCount.GetComponent<Text>();
         ammoCount.text = "" + bulletCount;
     }

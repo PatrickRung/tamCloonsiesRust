@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class WorldItemStorage : MonoBehaviour
 {
+    //universially required gameobjects
+    public bool multiplayerEnabled;
     public GameObject itemDesc, 
         itemName, 
         ammoCount, 
@@ -13,4 +15,6 @@ public class WorldItemStorage : MonoBehaviour
         menu, 
         player, 
         PlayerCamera;
+    //gameobjects required for online
+    public GameObject entitySpawnHandling;
 }

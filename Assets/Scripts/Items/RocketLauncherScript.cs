@@ -49,13 +49,20 @@ public class RocketLauncherScript : GunTemplate
             base.gunShootInterval = 0;
             base.timeInRecoil = -base.recoilAmount;
             base.bulletCount--;
-            firedBullet = Instantiate(bullet,
-                        gameObject.transform.parent.transform.position + (gameObject.transform.parent.transform.forward * 2),
-                        transform.rotation);
-            firedBullet.transform.rotation = base.player.transform.rotation;
-            firedBullet.GetComponent<Rigidbody>().AddForce(player.transform.forward * 30000f);
-            firedBullet.GetComponent<Rigidbody>().useGravity = false;
-            base.ammoCount.text = base.bulletCount + "";
+            if(worldItems.GetComponent<WorldItemStorage>().multiplayerEnabled) {
+
+            }
+            else {
+                firedBullet = Instantiate(bullet,
+                            gameObject.transform.parent.transform.position + (gameObject.transform.parent.transform.forward * 2),
+                            transform.rotation);
+                firedBullet.transform.rotation = base.player.transform.rotation;
+                firedBullet.GetComponent<Rigidbody>().AddForce(player.transform.forward * 30000f);
+                firedBullet.GetComponent<Rigidbody>().useGravity = false;
+                base.ammoCount.text = base.bulletCount + "";
+            }
         }
     }
+
+    
 }
