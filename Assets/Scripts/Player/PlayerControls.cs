@@ -93,7 +93,17 @@ public class PlayerController : NetworkBehaviour
     {
         if (object.ReferenceEquals(playerInventory[barLookingAt], fistOfFury))
         {
-            playerInventory[barLookingAt] = Instantiate(weapon, transform);
+            //instead of instantiating localy this if statement will send an RPC call to the server to spawn the weapon on the server
+            if(worldItems.GetComponent<WorldItemStorage>().multiplayerEnabled && IsClient) {
+                Debug.Log("initializing spawning on server");
+                int EntityID = worldItems.GetComponent<WorldItemStorage>().entitySpawnHandling.GetComponent<EntitySpawnHandler>().SpawnEntity(weapon);
+                Debug.Log(weapon.name + "(Clone) " + EntityID);
+                playerInventory[barLookingAt] = GameObject.Find(weapon.name + "(Clone) " + EntityID);
+            }
+            else {
+                playerInventory[barLookingAt] = Instantiate(weapon, transform);
+            }
+
             if (playerInventory[barLookingAt].TryGetComponent<GunTemplate>(out GunTemplate gunTemplate))
             {
                 gunTemplate.movementScript = playerMovement;
@@ -106,9 +116,6 @@ public class PlayerController : NetworkBehaviour
                 playerInventory[barLookingAt].GetComponent<NetworkObject>().Spawn();
                 Debug.Log("spawning weapon on both server and client");
                 playerInventory[barLookingAt].transform.parent = transform;
-            }
-            else {
-
             }
 
             return true;

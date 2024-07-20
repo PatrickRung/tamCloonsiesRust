@@ -1326,7 +1326,7 @@ MonoBehaviour:
   menu: {fileID: 7481862213146852201}
   player: {fileID: 0}
   PlayerCamera: {fileID: 712802176017037500}
-  entitySpawnHandling: {fileID: 0}
+  entitySpawnHandling: {fileID: 1192678914}
 --- !u!224 &1338411880985259296
 RectTransform:
   m_ObjectHideFlags: 0
