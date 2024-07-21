@@ -131,7 +131,6 @@ public class movement : CharacterTemplate
     private void ChangedActiveScene(Scene current, Scene next)
     {
         Awake();
-
     }
 
 

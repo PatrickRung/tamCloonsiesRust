@@ -5,6 +5,11 @@ using UnityEngine;
 public class RocketLauncherScript : GunTemplate
 {
     [HideInInspector] public GameObject projectile;
+    public EntitySpawnHandler spawnHandler;
+    void Awake() {
+        base.Awake();
+        spawnHandler = worldItems.GetComponent<WorldItemStorage>().entitySpawnHandling.GetComponent<EntitySpawnHandler>();
+    }
     public override string getDamageInfo()
     {
         return "rocket launch thing";
@@ -50,7 +55,7 @@ public class RocketLauncherScript : GunTemplate
             base.timeInRecoil = -base.recoilAmount;
             base.bulletCount--;
             if(worldItems.GetComponent<WorldItemStorage>().multiplayerEnabled) {
-
+                spawnHandler.SpawnEntity(bullet);
             }
             else {
                 firedBullet = Instantiate(bullet,

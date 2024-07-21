@@ -19,7 +19,7 @@ public abstract class GunTemplate : WeaponTemplate
     {
         bulletCount = maxBulletCount;
     }
-    private void Awake()
+    public void Awake()
     {
         totalRecoilAdded = 0; totalRecoilReturned = 0;
         timeInRecoil = -recoilAmount;

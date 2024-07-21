@@ -3,6 +3,7 @@
 //handles inventory and starting weapons
 
 using System;
+using Unity.Collections;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEditor;
@@ -20,6 +21,7 @@ public class PlayerController : NetworkBehaviour
     public GameObject UI;
     public UserData userData;
 
+
     [HideInInspector] public movement playerMovement;
     private GameObject[] playerInventory;
     private GameObject playerHealthBar, worldItems, weaponSpot, LookingAt;
@@ -28,6 +30,7 @@ public class PlayerController : NetworkBehaviour
     private GameObject MenuObject;
     private GameObject sensitivitySlider;
     private bool titanExistInLevel;
+    public int PlayerNetCodeID;
 
     //sets all the items in the inventory to be either a fist, health pot, or gun
     //then updates hot bar, UI text and asigns game objects from world
@@ -41,6 +44,7 @@ public class PlayerController : NetworkBehaviour
         weaponSpot = GameObject.Find("WeaponSpot");
         MenuObject = worldItems.GetComponent<WorldItemStorage>().menu;
         sensitivitySlider = worldItems.GetComponent<WorldItemStorage>().sensitivitySlider;
+        PlayerNetCodeID = (int)NetworkManager.LocalClientId;
 
 
         //making the menu invisible
@@ -89,20 +93,13 @@ public class PlayerController : NetworkBehaviour
     //if there is a fist then it will add the item
     //if you input null into parameter then it ill just asign the fist to that spot
     //only returns true if the item assigned is not a fist
+    int EntityID= 0;
     public bool addToInventory(GameObject weapon)
     {
         if (object.ReferenceEquals(playerInventory[barLookingAt], fistOfFury))
         {
             //instead of instantiating localy this if statement will send an RPC call to the server to spawn the weapon on the server
-            if(worldItems.GetComponent<WorldItemStorage>().multiplayerEnabled && IsClient) {
-                Debug.Log("initializing spawning on server");
-                int EntityID = worldItems.GetComponent<WorldItemStorage>().entitySpawnHandling.GetComponent<EntitySpawnHandler>().SpawnEntity(weapon);
-                Debug.Log(weapon.name + "(Clone) " + EntityID);
-                playerInventory[barLookingAt] = GameObject.Find(weapon.name + "(Clone) " + EntityID);
-            }
-            else {
-                playerInventory[barLookingAt] = Instantiate(weapon, transform);
-            }
+            playerInventory[barLookingAt] = Instantiate(weapon, transform);
 
             if (playerInventory[barLookingAt].TryGetComponent<GunTemplate>(out GunTemplate gunTemplate))
             {
@@ -127,8 +124,22 @@ public class PlayerController : NetworkBehaviour
         {
             playerInventory[barLookingAt] = fistOfFury;
             updateHotBar();
+            
         }
         return false;
+    }
+    [Rpc(SendTo.ClientsAndHost)]
+    public void addItemToClientRPC(FixedString512Bytes weaponName) {
+        if(!IsOwner && IsServer) return;
+        playerInventory[barLookingAt] = GameObject.Find(weaponName + "(Clone)");
+        playerInventory[barLookingAt].name = weaponName + " " + EntityID;
+        if (playerInventory[barLookingAt].TryGetComponent<GunTemplate>(out GunTemplate gunTemplate))
+        {
+            gunTemplate.movementScript = playerMovement;
+        }
+        playerInventory[barLookingAt].transform.position = weaponSpot.transform.position;
+        setWeaponActive(barLookingAt);
+        updateHotBar();
     }
 
     //updates the UI and the position of the weapon
