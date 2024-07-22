@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class RocketLauncherScript : GunTemplate
@@ -43,7 +44,7 @@ public class RocketLauncherScript : GunTemplate
 
     }
 
-    public override void shootingGun()
+    public override async void shootingGun()
     {
         gunShootInterval += Time.deltaTime;
         if (Input.GetMouseButton(0) && base.bulletCount > 0 && base.gunShootInterval > base.gunFireRate)
@@ -54,18 +55,20 @@ public class RocketLauncherScript : GunTemplate
             base.gunShootInterval = 0;
             base.timeInRecoil = -base.recoilAmount;
             base.bulletCount--;
-            if(worldItems.GetComponent<WorldItemStorage>().multiplayerEnabled) {
-                spawnHandler.SpawnEntity(bullet);
+            if(worldItems.GetComponent<WorldItemStorage>().multiplayerEnabled && !IsServer) {
+                ulong ID = await spawnHandler.SpawnEntity(bullet, gameObject.transform.parent.transform.position + (gameObject.transform.parent.transform.forward * 2), transform.rotation) ;
+                spawnHandler.NetworkEntityAddForce(ID, player.transform.forward * 30000f);
             }
             else {
                 firedBullet = Instantiate(bullet,
                             gameObject.transform.parent.transform.position + (gameObject.transform.parent.transform.forward * 2),
                             transform.rotation);
-                firedBullet.transform.rotation = base.player.transform.rotation;
                 firedBullet.GetComponent<Rigidbody>().AddForce(player.transform.forward * 30000f);
                 firedBullet.GetComponent<Rigidbody>().useGravity = false;
-                base.ammoCount.text = base.bulletCount + "";
+
             }
+
+                base.ammoCount.text = base.bulletCount + "";
         }
     }
 
