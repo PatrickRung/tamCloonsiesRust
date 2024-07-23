@@ -119,9 +119,9 @@ public class movement : CharacterTemplate
         playerScale =  transform.localScale;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        if (health <= 0)
+        if (health.Value <= 0)
         {
-            health = 100;
+            health.Value = 100;
         }
         transform.position = spawnPoint.transform.position;
         //worldStorage.GetComponent<WorldItemStorage>().entitySpawnHandling.GetComponent<NetworkObject>().Spawn();
@@ -518,5 +518,11 @@ public class movement : CharacterTemplate
 
     private void StopGrounded() {
         grounded = false;
+    }
+    [Rpc(SendTo.Everyone)]
+    public void PlayerDiedRPC(ulong ID) {
+        if(OwnerClientId != ID) return;
+        inMenu = true;
+        playerCam.GetComponent<PlayerController>().openUI("DeathScreen");
     }
 }

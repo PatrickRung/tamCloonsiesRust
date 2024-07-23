@@ -110,7 +110,6 @@ public class PlayerController : NetworkBehaviour
             updateHotBar();
             //spawn on both server and client
             if(worldItems.GetComponent<WorldItemStorage>().multiplayerEnabled && IsOwner && (IsServer || IsHost)) {
-                playerInventory[barLookingAt].GetComponent<NetworkObject>().Spawn();
                 Debug.Log("spawning weapon on both server and client");
                 playerInventory[barLookingAt].transform.parent = transform;
             }
@@ -164,25 +163,7 @@ public class PlayerController : NetworkBehaviour
         {
             if(!playerMovement.inMenu)
             {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                for (int i = 0; i < UI.transform.childCount; i++)
-                {
-                    if(!UI.transform.GetChild(i).gameObject.name.Equals("Menu"))
-                    {
-                        UI.transform.GetChild(i).gameObject.SetActive(false);
-                    }
-                    else
-                    {
-                        UI.transform.GetChild(i).gameObject.SetActive(true);
-                    }
-                }
-                for (int i = 0; i < MenuObject.transform.childCount; i++)
-                {
-                    MenuObject.transform.GetChild(i).gameObject.SetActive(true);
-                }
-                playerMovement.inMenu = true;
-                sensitivitySlider.GetComponent<Slider>().value = userData.playerSensitivity / 100f;
+                openUI("Menu");
             }
             else if (playerMovement.inMenu)
             {
@@ -207,15 +188,30 @@ public class PlayerController : NetworkBehaviour
             }
         }
         transform.position = player.transform.position;
-        if (titanExistInLevel)
-        {
-            if(GameObject.Find("titan pill").GetComponent<TitanSwitchHandler>().isintitan)
-            {
-                transform.position = GameObject.Find("titan pill").transform.position;
-            }
-        }
         swapWeapon();
         dropWeapon();
+    }
+
+    public void openUI(String UILabel) {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            for (int i = 0; i < UI.transform.childCount; i++)
+            {
+                if(!UI.transform.GetChild(i).gameObject.name.Equals(UILabel))
+                {
+                    UI.transform.GetChild(i).gameObject.SetActive(false);
+                }
+                else
+                {
+                    UI.transform.GetChild(i).gameObject.SetActive(true);
+                }
+            }
+            for (int i = 0; i < MenuObject.transform.childCount; i++)
+            {
+                MenuObject.transform.GetChild(i).gameObject.SetActive(true);
+            }
+            playerMovement.inMenu = true;
+            sensitivitySlider.GetComponent<Slider>().value = userData.playerSensitivity / 100f;
     }
 
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -55,20 +56,24 @@ public class RocketLauncherScript : GunTemplate
             base.gunShootInterval = 0;
             base.timeInRecoil = -base.recoilAmount;
             base.bulletCount--;
-            if(worldItems.GetComponent<WorldItemStorage>().multiplayerEnabled && !IsServer) {
+            if(worldItems.GetComponent<WorldItemStorage>().multiplayerEnabled) {
+                Debug.Log("tying to spawn proj");
+
+                Debug.Log("yes this works on the client");
                 ulong ID = await spawnHandler.SpawnEntity(bullet, gameObject.transform.parent.transform.position + (gameObject.transform.parent.transform.forward * 2), transform.rotation) ;
                 spawnHandler.NetworkEntityAddForce(ID, player.transform.forward * 30000f);
+                
             }
             else {
                 firedBullet = Instantiate(bullet,
-                            gameObject.transform.parent.transform.position + (gameObject.transform.parent.transform.forward * 2),
-                            transform.rotation);
-                firedBullet.GetComponent<Rigidbody>().AddForce(player.transform.forward * 30000f);
+                    gameObject.transform.parent.transform.position + (gameObject.transform.parent.transform.forward * 2),
+                    transform.rotation);
                 firedBullet.GetComponent<Rigidbody>().useGravity = false;
+                firedBullet.GetComponent<Rigidbody>().AddForce(player.transform.forward * 30000f);
+
 
             }
-
-                base.ammoCount.text = base.bulletCount + "";
+            base.ammoCount.text = base.bulletCount + "";
         }
     }
 

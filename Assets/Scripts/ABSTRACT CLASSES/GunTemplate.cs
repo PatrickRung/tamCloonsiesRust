@@ -26,8 +26,8 @@ public abstract class GunTemplate : WeaponTemplate
         recoilState = false;
         player = GameObject.Find("playerCam");
         worldItems =  GameObject.Find("World Items");
-        ammoCount = worldItems.GetComponent<WorldItemStorage>().
-            ammoCount.GetComponent<Text>();
+        movementScript = worldItems.GetComponent<WorldItemStorage>().player.GetComponent<movement>();
+        ammoCount = worldItems.GetComponent<WorldItemStorage>().ammoCount.GetComponent<Text>();
         ammoCount.text = "" + bulletCount;
     }
     // Update is called once per frame

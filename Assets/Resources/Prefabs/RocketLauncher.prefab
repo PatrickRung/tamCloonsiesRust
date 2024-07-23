@@ -83,13 +83,14 @@ MonoBehaviour:
   bulletCount: 4
   maxBulletCount: 4
   gunShootInterval: 5
-  gunFireRate: 5
+  gunFireRate: 2
   ammoCount: {fileID: 0}
   movementScript: {fileID: 0}
   recoilState: 0
   shotsFiredInRecoil: 0
   recoilAmount: 1
   projectile: {fileID: 0}
+  spawnHandler: {fileID: 0}
 --- !u!23 &2159786709945846424
 MeshRenderer:
   m_ObjectHideFlags: 0

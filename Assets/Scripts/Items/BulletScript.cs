@@ -1,22 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class BulletScript : MonoBehaviour
+public class BulletScript : NetworkBehaviour
 {
     public Rigidbody bulletRigidBody;
     private Collider bulletColllider;
-    public GameObject playerGun, player;
-    public float damage;
+    public WorldItemStorage worldItems;
+    public GameObject playerCam;
+    public int damage;
     public GameObject explosion = null;
 
     // Start is called before the first frame update
     void Awake()
     {
         bulletColllider = gameObject.GetComponent<Collider>();
-        playerGun = GameObject.Find("Tommy_gun_2");
-        player = GameObject.Find("playerCam");
+        worldItems = GameObject.Find("World Items").GetComponent<WorldItemStorage>();
+        playerCam = worldItems.PlayerCamera;   
         bulletRigidBody = GetComponent<Rigidbody>();
+        
 
         Invoke("bulletDespawn", 10f); 
     }
@@ -30,6 +33,9 @@ public class BulletScript : MonoBehaviour
             GameObject newPackage = Instantiate(explosion, null);
             newPackage.transform.position = gameObject.transform.position;
         }
+        if(worldItems.GetComponent<WorldItemStorage>().multiplayerEnabled) {
+            despawnRPC();
+        }
         Destroy(gameObject);
 
     }
@@ -40,5 +46,11 @@ public class BulletScript : MonoBehaviour
         {
             bulletDespawn();
         }
+    }
+    [Rpc(SendTo.Server)]
+    void despawnRPC() {
+        if(!IsServer) return;
+        gameObject.GetComponent<NetworkObject>().Despawn();
+        Destroy(gameObject);
     }
 }
