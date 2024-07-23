@@ -119,10 +119,6 @@ public class movement : CharacterTemplate
         playerScale =  transform.localScale;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        if (health.Value <= 0)
-        {
-            health.Value = 100;
-        }
         transform.position = spawnPoint.transform.position;
         //worldStorage.GetComponent<WorldItemStorage>().entitySpawnHandling.GetComponent<NetworkObject>().Spawn();
         
@@ -506,13 +502,6 @@ public class movement : CharacterTemplate
         if (!cancellingGrounded) {
             cancellingGrounded = true;
             Invoke(nameof(StopGrounded), Time.deltaTime * delay);
-        }
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.layer == 8)
-        {
-            changeHealth(-collision.gameObject.GetComponent<BulletScript>().damage);
         }
     }
 
