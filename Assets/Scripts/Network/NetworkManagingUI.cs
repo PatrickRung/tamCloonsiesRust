@@ -21,7 +21,7 @@ public class NetworkManagingUI : NetworkBehaviour
 {
 
     private Lobby hostLobby;
-    GameObject lobbyCodeInput;
+    public GameObject lobbyCodeInput;
 
     private float heartBeatTimer;
     //async allows the rest of the game to continue working while await function 
@@ -48,7 +48,6 @@ public class NetworkManagingUI : NetworkBehaviour
     //authentication
     private async void Start() {
         //assigning 
-        lobbyCodeInput = GameObject.Find("LobbyCodeInput");
 
         await UnityServices.InitializeAsync();
         AuthenticationService.Instance.SignedIn += () => {

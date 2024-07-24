@@ -2,14 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Netcode;
+using UnityEngine.UI;
+using System.Linq;
+using TMPro;
 
-public class RocketLauncherGameManager : MonoBehaviour
+public class RocketLauncherGameManager : NetworkBehaviour
 {
+    private NetworkVariable<int> PlayerOneScore = new NetworkVariable<int>(0);
+    private NetworkVariable<int> PlayerTwoScore = new NetworkVariable<int>(0);
+    public List<ulong> playerIDList = new List<ulong>();
 
-    private NetworkManager m_NetworkManager;
     // Start is called before the first frame update
     void Awake()
     {
-        m_NetworkManager = GetComponent<NetworkManager>();
+        UpdateScreenScoreBoard();
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        for(int i = 0; i < players.Length; i++) {
+            playerIDList.Add(players[i].GetComponent<movement>().OwnerClientId);
+        }
+    }
+    [Rpc(SendTo.Server)]
+    public void UpdateScoreBoardRPC(ulong player) {
+        if(player == playerIDList[0]) {
+            PlayerOneScore.Value++;
+        }
+        else if(player == playerIDList[1]) {
+            PlayerTwoScore.Value++;
+        }
+        UpdateScreenScoreBoard();
+    }
+    void UpdateScreenScoreBoard() {
+        gameObject.GetComponent<TextMeshProUGUI>().text = PlayerOneScore.Value + " Player One -------- Player Two " + PlayerTwoScore.Value;
     }
 }

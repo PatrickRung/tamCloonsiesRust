@@ -32,7 +32,7 @@ public class movement : CharacterTemplate
     private float xRotation;
     public float sensitivity = 100f;
     private float sensMultiplier = 1f;
-    private GameObject sensitivitySlider, worldStorage;
+    private GameObject sensitivitySlider;
 
 
     //Movement
@@ -71,6 +71,9 @@ public class movement : CharacterTemplate
     //Sliding
     private Vector3 normalVector = Vector3.up;
     private Vector3 wallNormalVector;
+
+    //Display
+    private GameObject Objective;
 
     public new void Awake() {
 
@@ -120,7 +123,7 @@ public class movement : CharacterTemplate
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         transform.position = spawnPoint.transform.position;
-        //worldStorage.GetComponent<WorldItemStorage>().entitySpawnHandling.GetComponent<NetworkObject>().Spawn();
+        Objective = GameObject.Find("Objective");
         
     }
 
@@ -513,5 +516,9 @@ public class movement : CharacterTemplate
         if(OwnerClientId != ID) return;
         inMenu = true;
         playerCam.GetComponent<PlayerController>().openUI("DeathScreen");
+        Debug.Log(ID);
+        Debug.Log(Objective.transform.position);
+        Objective.SetActive(true);
+        Objective.GetComponent<RocketLauncherGameManager>().UpdateScoreBoardRPC(ID);
     }
 }

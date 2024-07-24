@@ -50,7 +50,9 @@ public class PlayerController : NetworkBehaviour
         //making the menu invisible
         for (int i = 0; i < MenuObject.transform.childCount; i++)
         {
-            MenuObject.transform.GetChild(i).gameObject.SetActive(false);
+            if(!UI.transform.GetChild(i).gameObject.name.Equals("Objective")) {
+                MenuObject.transform.GetChild(i).gameObject.SetActive(false);
+            }
         }
         if(worldItems.GetComponent<WorldItemStorage>().itemDesc.activeSelf)
         {
@@ -197,7 +199,7 @@ public class PlayerController : NetworkBehaviour
             Cursor.visible = true;
             for (int i = 0; i < UI.transform.childCount; i++)
             {
-                if(!UI.transform.GetChild(i).gameObject.name.Equals(UILabel))
+                if(!UI.transform.GetChild(i).gameObject.name.Equals(UILabel) || !UI.transform.GetChild(i).gameObject.name.Equals("Objective"))
                 {
                     UI.transform.GetChild(i).gameObject.SetActive(false);
                 }

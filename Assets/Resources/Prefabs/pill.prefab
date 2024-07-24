@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 7067868471508701311}
   m_Layer: 7
   m_Name: pill
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -145,10 +145,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d457b738877648944a4e86dbde456804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health:
+    m_InternalValue: 0
   maxhealth: 100
   healthbar: {fileID: 0}
   spawnPoint: {fileID: 0}
+  worldStorage: {fileID: 0}
   playerCam: {fileID: 0}
   playerData: {fileID: 11400000, guid: 648926682905bb246822b958be41716f, type: 2}
   whatIsWall:

@@ -12,6 +12,7 @@ public abstract class CharacterTemplate : NetworkBehaviour
     public int maxhealth = 100;
     public Image healthbar;
     public Transform spawnPoint;
+    public GameObject worldStorage;
     public void Awake()
     {
         changeHealthRPC(maxhealth);
@@ -70,9 +71,8 @@ public abstract class CharacterTemplate : NetworkBehaviour
         {
             GameObject.Destroy(gameObject);
         }
-
     }
-    
+
 
     public void UpdateHealth(float fraction)
     {
