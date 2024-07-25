@@ -5,6 +5,7 @@ using Unity.Netcode;
 using UnityEngine.UI;
 using System.Linq;
 using TMPro;
+using Unity.VisualScripting;
 
 public class RocketLauncherGameManager : NetworkBehaviour
 {
@@ -23,6 +24,9 @@ public class RocketLauncherGameManager : NetworkBehaviour
             playerIDList.Add(players[i].GetComponent<movement>().OwnerClientId);
         }
     }
+    void FixedUpdate() {
+        UpdateScreenScoreBoard();
+    }
     [Rpc(SendTo.Server)]
     public void UpdateScoreBoardRPC(ulong player) {
         if(player == playerIDList[0]) {
@@ -31,8 +35,7 @@ public class RocketLauncherGameManager : NetworkBehaviour
         else if(player == playerIDList[1]) {
             PlayerTwoScore.Value++;
         }
-        UpdateScreenScoreBoard();
-    }
+    }    
     void UpdateScreenScoreBoard() {
         gameObject.GetComponent<TextMeshProUGUI>().text = PlayerOneScore.Value + " Player One -------- Player Two " + PlayerTwoScore.Value;
     }
