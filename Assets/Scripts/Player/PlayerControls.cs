@@ -199,7 +199,7 @@ public class PlayerController : NetworkBehaviour
             Cursor.visible = true;
             for (int i = 0; i < UI.transform.childCount; i++)
             {
-                if(!UI.transform.GetChild(i).gameObject.name.Equals(UILabel) || !UI.transform.GetChild(i).gameObject.name.Equals("Objective"))
+                if(!UI.transform.GetChild(i).gameObject.name.Equals(UILabel) && !UI.transform.GetChild(i).gameObject.name.Equals("Objective"))
                 {
                     UI.transform.GetChild(i).gameObject.SetActive(false);
                 }

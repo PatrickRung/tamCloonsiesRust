@@ -513,7 +513,7 @@ public class movement : CharacterTemplate
     }
     [Rpc(SendTo.Everyone)]
     public void PlayerDiedRPC(ulong ID) {
-        if(OwnerClientId != ID) return;
+        if(playerCam.GetComponent<PlayerController>() == null) return;
         inMenu = true;
         playerCam.GetComponent<PlayerController>().openUI("DeathScreen");
         Debug.Log(ID);
