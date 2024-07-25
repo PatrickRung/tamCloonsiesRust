@@ -117,8 +117,9 @@ public class movement : CharacterTemplate
         spawnPoint =  GameObject.Find("SpawnPoint").transform;
 
         setSensitivity(playerData.playerSensitivity);
-
-        worldStorage.GetComponent<WorldItemStorage>().player = gameObject;
+        if(worldStorage.GetComponent<WorldItemStorage>().player == null) {
+            worldStorage.GetComponent<WorldItemStorage>().player = gameObject;
+        }
         playerScale =  transform.localScale;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -513,7 +514,7 @@ public class movement : CharacterTemplate
     }
     [Rpc(SendTo.Everyone)]
     public void PlayerDiedRPC(ulong ID) {
-        if(playerCam.GetComponent<PlayerController>() == null) return;
+        if(playerCam == null) return;
         inMenu = true;
         playerCam.GetComponent<PlayerController>().openUI("DeathScreen");
         Debug.Log(ID);
@@ -521,4 +522,5 @@ public class movement : CharacterTemplate
         Objective.SetActive(true);
         Objective.GetComponent<RocketLauncherGameManager>().UpdateScoreBoardRPC(ID);
     }
+
 }

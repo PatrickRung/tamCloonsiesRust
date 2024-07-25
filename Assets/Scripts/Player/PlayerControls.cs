@@ -169,24 +169,7 @@ public class PlayerController : NetworkBehaviour
             }
             else if (playerMovement.inMenu)
             {
-                playerMovement.inMenu = false;
-                for (int i = 0; i < UI.transform.childCount; i++)
-                {
-                    if (UI.transform.GetChild(i).gameObject.activeSelf)
-                    {
-                        UI.transform.GetChild(i).gameObject.SetActive(false);
-                    }
-                    else
-                    {
-                        UI.transform.GetChild(i).gameObject.SetActive(true);
-                    }
-                }
-
-                playerMovement.inMenu = false;
-                playerMovement.setSensitivity(Mathf.Round(sensitivitySlider.GetComponent<Slider>().value * 100f));
-                userData.playerSensitivity = Mathf.Round(sensitivitySlider.GetComponent<Slider>().value * 100f);
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
+                closeUI();
             }
         }
         transform.position = player.transform.position;
@@ -214,6 +197,26 @@ public class PlayerController : NetworkBehaviour
             }
             playerMovement.inMenu = true;
             sensitivitySlider.GetComponent<Slider>().value = userData.playerSensitivity / 100f;
+    }
+    public void closeUI() {
+        playerMovement.inMenu = false;
+        for (int i = 0; i < UI.transform.childCount; i++)
+        {
+            if (UI.transform.GetChild(i).gameObject.name.Equals("DeathScreen") || UI.transform.GetChild(i).gameObject.name.Equals("Menu"))
+            {
+                UI.transform.GetChild(i).gameObject.SetActive(false);
+            }
+            else
+            {
+                UI.transform.GetChild(i).gameObject.SetActive(true);
+            }
+        }
+
+        playerMovement.inMenu = false;
+        playerMovement.setSensitivity(Mathf.Round(sensitivitySlider.GetComponent<Slider>().value * 100f));
+        userData.playerSensitivity = Mathf.Round(sensitivitySlider.GetComponent<Slider>().value * 100f);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
 
