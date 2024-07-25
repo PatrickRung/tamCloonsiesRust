@@ -13,6 +13,8 @@ public class RocketLauncherGameManager : NetworkBehaviour
     private NetworkVariable<int> PlayerTwoScore = new NetworkVariable<int>(0);
     public List<ulong> playerIDList = new List<ulong>();
     public WorldItemStorage worldItems;
+    int winAmount = 1;
+
 
     // Start is called before the first frame update
     void Awake()
@@ -26,6 +28,29 @@ public class RocketLauncherGameManager : NetworkBehaviour
     }
     void FixedUpdate() {
         UpdateScreenScoreBoard();
+        if(PlayerOneScore.Value == winAmount) {
+                GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+                for(int i = 0; i < players.Length; i++) {
+                    if(playerIDList[0] == players[i].GetComponent<movement>().OwnerClientId) {
+                        players[i].GetComponent<movement>().playerCam.GetComponent<PlayerController>().openUI("DefeatScreen");
+                    }
+                    else {
+                        players[i].GetComponent<movement>().playerCam.GetComponent<PlayerController>().openUI("VictoryScreen");
+                    }
+                }
+            }
+            else if(PlayerTwoScore.Value == winAmount) {
+                GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+                for(int i = 0; i < players.Length; i++) {
+                    if(playerIDList[1] == players[i].GetComponent<movement>().OwnerClientId) {
+                        players[i].GetComponent<movement>().playerCam.GetComponent<PlayerController>().openUI("DefeatScreen");
+
+                    }
+                    else {
+                        players[i].GetComponent<movement>().playerCam.GetComponent<PlayerController>().openUI("VictoryScreen");
+                    }
+                }
+            }
     }
     [Rpc(SendTo.Server)]
     public void UpdateScoreBoardRPC(ulong player) {
@@ -35,6 +60,7 @@ public class RocketLauncherGameManager : NetworkBehaviour
         else if(player == playerIDList[1]) {
             PlayerTwoScore.Value++;
         }
+
     }    
     void UpdateScreenScoreBoard() {
         gameObject.GetComponent<TextMeshProUGUI>().text = PlayerOneScore.Value + " Player One -------- Player Two " + PlayerTwoScore.Value;

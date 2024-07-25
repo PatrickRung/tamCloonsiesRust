@@ -16,5 +16,6 @@ public class WorldItemStorage : MonoBehaviour
         player, 
         PlayerCamera;
     //gameobjects required for online
-    public GameObject entitySpawnHandling;
+    public GameObject entitySpawnHandling,
+                      RocketLauncherGameController;
 }
