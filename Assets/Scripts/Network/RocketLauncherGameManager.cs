@@ -31,24 +31,29 @@ public class RocketLauncherGameManager : NetworkBehaviour
         if(PlayerOneScore.Value == winAmount) {
                 GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
                 for(int i = 0; i < players.Length; i++) {
-                    if(playerIDList[0] == players[i].GetComponent<movement>().OwnerClientId) {
-                        players[i].GetComponent<movement>().playerCam.GetComponent<PlayerController>().openUI("DefeatScreen");
-                    }
-                    else {
-                        players[i].GetComponent<movement>().playerCam.GetComponent<PlayerController>().openUI("VictoryScreen");
+                    if(players[i].GetComponent<movement>().playerCam != null) {
+                        if(playerIDList[0] == players[i].GetComponent<movement>().OwnerClientId) {
+                            players[i].GetComponent<movement>().playerCam.GetComponent<PlayerController>().openUI("DefeatScreen");
+                        }
+                        else {
+                            players[i].GetComponent<movement>().playerCam.GetComponent<PlayerController>().openUI("VictoryScreen");
+                        }
                     }
                 }
             }
             else if(PlayerTwoScore.Value == winAmount) {
                 GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
                 for(int i = 0; i < players.Length; i++) {
-                    if(playerIDList[1] == players[i].GetComponent<movement>().OwnerClientId) {
-                        players[i].GetComponent<movement>().playerCam.GetComponent<PlayerController>().openUI("DefeatScreen");
+                    if(players[i].GetComponent<movement>().playerCam != null) {
+                        if(playerIDList[1] == players[i].GetComponent<movement>().OwnerClientId) {
+                            players[i].GetComponent<movement>().playerCam.GetComponent<PlayerController>().openUI("DefeatScreen");
 
+                        }
+                        else {
+                            players[i].GetComponent<movement>().playerCam.GetComponent<PlayerController>().openUI("VictoryScreen");
+                        }
                     }
-                    else {
-                        players[i].GetComponent<movement>().playerCam.GetComponent<PlayerController>().openUI("VictoryScreen");
-                    }
+
                 }
             }
     }
