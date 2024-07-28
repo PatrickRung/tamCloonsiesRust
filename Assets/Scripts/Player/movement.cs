@@ -8,7 +8,6 @@ using UnityEngine.UI;
 using static System.Net.Mime.MediaTypeNames;
 using Unity.Netcode;
 using UnityEngine.SceneManagement;
-using UnityEditor.Build.Content;
 
 public class movement : CharacterTemplate
 {
@@ -80,12 +79,12 @@ public class movement : CharacterTemplate
 
 
         //adds the method call changedActiveScene to be called when scene is changed
-        SceneManager.sceneLoaded += ChangedActiveScene;
+        
         //if the player has the awake funciton called in the menu it will try to grab objects that do not exist thus creating errors
         //MUST RECALL AWAKE FUNCTION IN OTHER SCENES
         if(SceneManager.GetActiveScene().name.Equals("menuScene")) {
             enabled = false;
-
+            SceneManager.sceneLoaded += ChangedActiveScene;
             return;
         }
         else {
@@ -94,7 +93,10 @@ public class movement : CharacterTemplate
 
         //if the the player is not the owner then it will not assign variables however base.awake still needs to be called to calculate health
         base.Awake();
-        if(!IsOwner) return;
+        if(!IsOwner) {
+            SceneManager.sceneLoaded -= ChangedActiveScene;
+            return;
+        } 
         //player controller which is held on the camera will keep on trying to acces the player which is still being loaded by the server
         //activiting the player controller will give time for the server to load and then the player controller can call Awake and Update with 
         //all its needed properties
