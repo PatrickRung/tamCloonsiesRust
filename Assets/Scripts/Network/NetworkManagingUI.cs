@@ -53,7 +53,7 @@ public class NetworkManagingUI : NetworkBehaviour
         AuthenticationService.Instance.SignedIn += () => {
             Debug.Log("signed in " + AuthenticationService.Instance.PlayerId);
         };
-
+        if(AuthenticationService.Instance.IsSignedIn) return;
         await AuthenticationService.Instance.SignInAnonymouslyAsync();
 
 

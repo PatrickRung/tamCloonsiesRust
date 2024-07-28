@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+public class MainMenu : NetworkBehaviour
 {
     public void FireRange()
     {
@@ -23,6 +24,12 @@ public class MainMenu : MonoBehaviour
     }
     public void ReturnToMenu()
     {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        for(int i = 0; i < players.Length; i++) {
+            players[i].GetComponent<movement>().DisableListening();
+        }
+        NetworkManager.Singleton.Shutdown();
+        Destroy(GameObject.Find("NetworkManager"));
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 }

@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using static System.Net.Mime.MediaTypeNames;
 using Unity.Netcode;
 using UnityEngine.SceneManagement;
+using UnityEditor.Build.Content;
 
 public class movement : CharacterTemplate
 {
@@ -79,7 +80,7 @@ public class movement : CharacterTemplate
 
 
         //adds the method call changedActiveScene to be called when scene is changed
-        SceneManager.activeSceneChanged += ChangedActiveScene;
+        SceneManager.sceneLoaded += ChangedActiveScene;
         //if the player has the awake funciton called in the menu it will try to grab objects that do not exist thus creating errors
         //MUST RECALL AWAKE FUNCTION IN OTHER SCENES
         if(SceneManager.GetActiveScene().name.Equals("menuScene")) {
@@ -125,10 +126,16 @@ public class movement : CharacterTemplate
         Cursor.visible = false;
         transform.position = spawnPoint.transform.position;
         Objective = GameObject.Find("Objective");
+        SceneManager.sceneLoaded -= ChangedActiveScene;
         
     }
+    public void DisableListening()
+    {
+        Debug.Log("OnDisable");
+        SceneManager.sceneLoaded -= ChangedActiveScene;
+    }
 
-    private void ChangedActiveScene(Scene current, Scene next)
+    private void ChangedActiveScene(Scene current, LoadSceneMode next)
     {
         Awake();
     }
