@@ -77,7 +77,7 @@ public class EntitySpawnHandler : NetworkBehaviour
         }
     }
     [Rpc(SendTo.Server)]
-    void ServerSetPosRPC(ulong NetworkObjectID, Vector3 position) {
+    public void ServerSetPosRPC(ulong NetworkObjectID, Vector3 position) {
         if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(NetworkObjectID, out NetworkObject netObj)) {
             netObj.gameObject.transform.position = position;
         }

@@ -76,10 +76,8 @@ public class movement : CharacterTemplate
     private GameObject Objective;
 
     public new void Awake() {
-
-
         //adds the method call changedActiveScene to be called when scene is changed
-        
+
         //if the player has the awake funciton called in the menu it will try to grab objects that do not exist thus creating errors
         //MUST RECALL AWAKE FUNCTION IN OTHER SCENES
         if(SceneManager.GetActiveScene().name.Equals("menuScene")) {
@@ -87,9 +85,18 @@ public class movement : CharacterTemplate
             SceneManager.sceneLoaded += ChangedActiveScene;
             return;
         }
-        else {
-            enabled = true;
+        Objective = GameObject.Find("Objective");
+        if(OwnerClientId == Objective.GetComponent<RocketLauncherGameManager>().playerIDList[0]) {
+            spawnPoint = GameObject.Find("SpawnPoint").transform;
         }
+        else {
+            spawnPoint = GameObject.Find("SpawnPoint (1)").transform;
+        }
+
+        transform.position = spawnPoint.transform.position;
+
+            
+
 
         //if the the player is not the owner then it will not assign variables however base.awake still needs to be called to calculate health
         base.Awake();
@@ -101,12 +108,12 @@ public class movement : CharacterTemplate
         //activiting the player controller will give time for the server to load and then the player controller can call Awake and Update with 
         //all its needed properties
         worldStorage = GameObject.Find("World Items");
+
+        if(worldStorage.GetComponent<WorldItemStorage>().player == null) {
+            worldStorage.GetComponent<WorldItemStorage>().player = gameObject;
+        }
         playerCam = worldStorage.GetComponent<WorldItemStorage>().PlayerCamera.transform;
         playerCam.GetComponent<PlayerController>().enabled = true;
-
-
-        //LATER IMPLEMENT CHECK FOR WHEN WE ARE IN MULTIPLAYER MODE
-        multiplayerEnabled = true;
 
         //more assigning
         
@@ -117,18 +124,16 @@ public class movement : CharacterTemplate
         playerCam.GetComponent<PlayerController>().playerMovement = gameObject.GetComponent<movement>();
 
         //will find any game object named "SpawnFloor" and will use it as the spawm point
-        spawnPoint =  GameObject.Find("SpawnPoint").transform;
+
 
         setSensitivity(playerData.playerSensitivity);
-        if(worldStorage.GetComponent<WorldItemStorage>().player == null) {
-            worldStorage.GetComponent<WorldItemStorage>().player = gameObject;
-        }
+
         playerScale =  transform.localScale;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        transform.position = spawnPoint.transform.position;
-        Objective = GameObject.Find("Objective");
+
         SceneManager.sceneLoaded -= ChangedActiveScene;
+        enabled = true;
         
     }
     public void DisableListening()
@@ -201,7 +206,7 @@ public class movement : CharacterTemplate
         }
         base.FixedUpdate();
         //checks if player fell to far
-        if (gameObject.transform.position.y < -100)
+        if (gameObject.transform.position.y < -100 & IsOwner)
         {
             changeHealth(-1000000);
         }
@@ -526,8 +531,6 @@ public class movement : CharacterTemplate
         if(playerCam == null) return;
         inMenu = true;
         playerCam.GetComponent<PlayerController>().openUI("DeathScreen");
-        Debug.Log(ID);
-        Debug.Log(Objective.transform.position);
         Objective.SetActive(true);
         Objective.GetComponent<RocketLauncherGameManager>().UpdateScoreBoardRPC(ID);
     }
