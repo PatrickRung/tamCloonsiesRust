@@ -28,7 +28,7 @@ public class RocketLauncherGameManager : NetworkBehaviour
     }
     void FixedUpdate() {
         UpdateScreenScoreBoard();
-        if(PlayerOneScore.Value == winAmount) {
+        if(PlayerOneScore.Value >= winAmount) {
                 GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
                 for(int i = 0; i < players.Length; i++) {
                     if(players[i].GetComponent<movement>().playerCam != null) {
@@ -41,7 +41,7 @@ public class RocketLauncherGameManager : NetworkBehaviour
                     }
                 }
             }
-            else if(PlayerTwoScore.Value == winAmount) {
+            else if(PlayerTwoScore.Value >= winAmount) {
                 GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
                 for(int i = 0; i < players.Length; i++) {
                     if(players[i].GetComponent<movement>().playerCam != null) {

@@ -93,11 +93,7 @@ public class movement : CharacterTemplate
             Debug.Log("not player 1");
             spawnPoint = GameObject.Find("SpawnPoint (1)").transform;
         }
-
-        transform.position = spawnPoint.transform.position;
-
-            
-
+        
 
         //if the the player is not the owner then it will not assign variables however base.awake still needs to be called to calculate health
         base.Awake();
@@ -136,6 +132,7 @@ public class movement : CharacterTemplate
 
         SceneManager.sceneLoaded -= ChangedActiveScene;
         enabled = true;
+        transform.position = spawnPoint.position;
         
     }
     public void DisableListening()

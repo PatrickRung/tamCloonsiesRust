@@ -30,14 +30,6 @@ public abstract class CharacterTemplate : NetworkBehaviour
         health.Value += value;
         if (health.Value <= 0 && gameObject.TryGetComponent<movement>(out movement PlayerMovement))
         {
-            if(spawnPoint != null)
-            {
-                gameObject.transform.position = spawnPoint.position;
-            }
-            else
-            {
-                gameObject.transform.position = new Vector3(0, 40, 0);
-            }
             gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
             health.Value = maxhealth;
         }
