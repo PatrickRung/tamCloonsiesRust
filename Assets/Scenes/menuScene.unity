@@ -97,8 +97,10 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 66e37a11e8b1c1344a5cc2a3e54021db,
+    type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 08f093a9fc90c694fad6398df2aace02,
+    type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -402,6 +404,79 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 49986750}
   m_CullTransparentMesh: 1
+--- !u!1001 &164639380
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 9c95833a8de57a1428905233b0feee2a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -28.058285
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9c95833a8de57a1428905233b0feee2a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9c95833a8de57a1428905233b0feee2a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 137.04704
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9c95833a8de57a1428905233b0feee2a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9c95833a8de57a1428905233b0feee2a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9c95833a8de57a1428905233b0feee2a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9c95833a8de57a1428905233b0feee2a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9c95833a8de57a1428905233b0feee2a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9c95833a8de57a1428905233b0feee2a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9c95833a8de57a1428905233b0feee2a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9c95833a8de57a1428905233b0feee2a,
+        type: 3}
+      propertyPath: m_Name
+      value: RocketLauncherModel
+      objectReference: {fileID: 0}
+    - target: {fileID: 7071182760956848314, guid: 9c95833a8de57a1428905233b0feee2a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 512d94fc416a59c4ea29e2fc33921184, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9c95833a8de57a1428905233b0feee2a, type: 3}
 --- !u!1 &173047392
 GameObject:
   m_ObjectHideFlags: 0
@@ -3741,3 +3816,4 @@ SceneRoots:
   - {fileID: 2083586152}
   - {fileID: 173047394}
   - {fileID: 1379673896}
+  - {fileID: 164639380}

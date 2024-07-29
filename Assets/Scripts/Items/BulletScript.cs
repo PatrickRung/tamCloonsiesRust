@@ -12,6 +12,7 @@ public class BulletScript : NetworkBehaviour
     public GameObject playerCam;
     public int damage;
     public GameObject explosion = null;
+    private GameObject DebugSphere;
 
     // Start is called before the first frame update
     void Awake()

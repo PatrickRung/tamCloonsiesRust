@@ -179,7 +179,7 @@ MonoBehaviour:
   slideCounterMovement: 1.2
   playerScale: {x: 1, y: 1, z: 1}
   jumpCooldown: 0.25
-  jumpForce: 125
+  jumpForce: 175
   movementSnappiness: 5
   gravityAddedForce: 5
   timeOffGround: 0
