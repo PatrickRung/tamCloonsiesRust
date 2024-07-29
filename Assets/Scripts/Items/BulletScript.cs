@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.Netcode.Components;
 using UnityEngine;
 
 public class BulletScript : NetworkBehaviour
@@ -33,7 +34,7 @@ public class BulletScript : NetworkBehaviour
             GameObject newPackage = Instantiate(explosion, null);
             newPackage.transform.position = gameObject.transform.position;
         }
-        if(worldItems.GetComponent<WorldItemStorage>().multiplayerEnabled) {
+        if(worldItems.GetComponent<WorldItemStorage>().multiplayerEnabled && gameObject.GetComponent<NetworkRigidbody>() != null) {
             despawnRPC();
         }
         Destroy(gameObject);

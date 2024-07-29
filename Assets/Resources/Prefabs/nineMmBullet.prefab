@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2314906534303914708}
   - component: {fileID: 4576646180997632759}
   - component: {fileID: 4042907616338516515}
+  - component: {fileID: -7255161054597415556}
   - component: {fileID: 5448219053006366734}
   - component: {fileID: 3859474475444770322}
   - component: {fileID: 3062180255518974409}
@@ -86,6 +87,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-7255161054597415556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6800465051261347907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2733641402
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &5448219053006366734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,9 +121,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletRigidBody: {fileID: 3859474475444770322}
-  playerGun: {fileID: 0}
-  player: {fileID: 0}
+  worldItems: {fileID: 0}
+  playerCam: {fileID: 0}
   damage: 20
+  explosion: {fileID: 0}
 --- !u!54 &3859474475444770322
 Rigidbody:
   m_ObjectHideFlags: 0

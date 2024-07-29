@@ -50,7 +50,6 @@ public abstract class CharacterTemplate : NetworkBehaviour
     [Rpc(SendTo.Server)]
     public void changeHealthRPC(int value)
     {
-        Debug.Log("processing health changes");
         health.Value += value;
         if (health.Value <= 0 && gameObject.TryGetComponent<movement>(out movement PlayerMovement))
         {

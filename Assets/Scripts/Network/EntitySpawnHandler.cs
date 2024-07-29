@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Unity.Collections;
+using Unity.Mathematics;
 using Unity.Netcode;
 using Unity.Properties;
 using UnityEngine;
@@ -80,6 +81,22 @@ public class EntitySpawnHandler : NetworkBehaviour
     public void ServerSetPosRPC(ulong NetworkObjectID, Vector3 position) {
         if (NetworkManager.Singleton.SpawnManager.SpawnedObjects.TryGetValue(NetworkObjectID, out NetworkObject netObj)) {
             netObj.gameObject.transform.position = position;
+        }
+    }
+
+    //testing new form of prediction from this video
+    //https://www.youtube.com/watch?v=5bLfaGsBXl8&t=563s&ab_channel=BobsiTutorials
+    [Rpc(SendTo.Everyone)]
+    public void spawnProjectileRPC(String Entity, Vector3 position, Quaternion rotation, Vector3 force) {
+        for(int i = 0; i < NetworkPrefabs.PrefabList.Count; i++) {
+            if(NetworkPrefabs.PrefabList[i].Prefab.name == Entity) {
+                Debug.Log(force);
+                GameObject currentProejctile =  Instantiate(NetworkPrefabs.PrefabList[i].Prefab);
+                currentProejctile.transform.position = position;
+                currentProejctile.transform.rotation =  rotation;
+                currentProejctile.GetComponent<Rigidbody>().useGravity = false;
+                currentProejctile.GetComponent<Rigidbody>().AddForce(force);
+            }
         }
     }
 }
