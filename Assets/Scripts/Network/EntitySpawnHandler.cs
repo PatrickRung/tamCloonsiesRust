@@ -88,11 +88,12 @@ public class EntitySpawnHandler : NetworkBehaviour
     //https://www.youtube.com/watch?v=5bLfaGsBXl8&t=563s&ab_channel=BobsiTutorials
     [Rpc(SendTo.Everyone)]
     public void spawnProjectileRPC(String Entity, Vector3 position, Quaternion rotation, Vector3 force) {
+        
         for(int i = 0; i < NetworkPrefabs.PrefabList.Count; i++) {
             if(NetworkPrefabs.PrefabList[i].Prefab.name == Entity) {
-                
+                Debug.Log("spawning on all clients");
                 GameObject currentProejctile =  Instantiate(NetworkPrefabs.PrefabList[i].Prefab);
-                if(IsServer) {
+                if(IsServer || IsHost) {
                     currentProejctile.GetComponent<concussionMine>().isLocatedOnServer = true;
                 }
                 currentProejctile.transform.position = position;

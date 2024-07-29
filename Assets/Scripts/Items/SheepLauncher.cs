@@ -44,9 +44,6 @@ public class SheepLauncher : GunTemplate
             base.bulletCount--;
             if(worldItems.GetComponent<WorldItemStorage>().multiplayerEnabled) {
                 Debug.Log("tying to spawn proj");
-
-                Debug.Log("yes this works on the client");
-             
                 spawnHandler.spawnProjectileRPC(bullet.name, 
                     gameObject.transform.parent.transform.position + (gameObject.transform.parent.transform.forward * 2),
                     transform.rotation,
