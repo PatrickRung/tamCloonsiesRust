@@ -90,8 +90,11 @@ public class EntitySpawnHandler : NetworkBehaviour
     public void spawnProjectileRPC(String Entity, Vector3 position, Quaternion rotation, Vector3 force) {
         for(int i = 0; i < NetworkPrefabs.PrefabList.Count; i++) {
             if(NetworkPrefabs.PrefabList[i].Prefab.name == Entity) {
-                Debug.Log(force);
+                
                 GameObject currentProejctile =  Instantiate(NetworkPrefabs.PrefabList[i].Prefab);
+                if(IsServer) {
+                    currentProejctile.GetComponent<concussionMine>().isLocatedOnServer = true;
+                }
                 currentProejctile.transform.position = position;
                 currentProejctile.transform.rotation =  rotation;
                 currentProejctile.GetComponent<Rigidbody>().useGravity = false;

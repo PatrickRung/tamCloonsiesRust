@@ -9,7 +9,7 @@ using Unity.VisualScripting;
 
 public class RocketLauncherGameManager : NetworkBehaviour
 {
-    private NetworkVariable<int> PlayerOneScore = new NetworkVariable<int>(0);
+    private NetworkVariable<int> PlayerOneScore = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
     private NetworkVariable<int> PlayerTwoScore = new NetworkVariable<int>(0);
     public List<ulong> playerIDList = new List<ulong>();
     public WorldItemStorage worldItems;
@@ -59,6 +59,7 @@ public class RocketLauncherGameManager : NetworkBehaviour
     }
     [Rpc(SendTo.Server)]
     public void UpdateScoreBoardRPC(ulong player) {
+        Debug.Log("test");
         if(player == playerIDList[0]) {
             PlayerOneScore.Value++;
         }

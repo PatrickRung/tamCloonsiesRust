@@ -531,7 +531,6 @@ public class movement : CharacterTemplate
         inMenu = true;
         playerCam.GetComponent<PlayerController>().openUI("DeathScreen");
         Objective.SetActive(true);
-        Objective.GetComponent<RocketLauncherGameManager>().UpdateScoreBoardRPC(ID);
     }
 
 }

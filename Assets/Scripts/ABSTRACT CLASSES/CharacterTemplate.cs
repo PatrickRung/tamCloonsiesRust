@@ -47,6 +47,8 @@ public abstract class CharacterTemplate : NetworkBehaviour
         {
             Debug.Log("Player has died");
             PlayerMovement.PlayerDiedRPC(PlayerMovement.OwnerClientId);
+            GameObject Objective = GameObject.Find("Objective");
+            Objective.GetComponent<RocketLauncherGameManager>().UpdateScoreBoardRPC(PlayerMovement.OwnerClientId);
             if(spawnPoint != null)
             {
                 gameObject.transform.position = spawnPoint.position;
