@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class Rocket : concussionMine
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public float radius;
+    public new void OnCollisionEnter(Collision collision) {
+        Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
+        for(int i = 0; i < colliders.Length; i++) {
+            if(colliders[i].gameObject.TryGetComponent<movement>(out movement players)) {
+                explosion(colliders[i].gameObject);
+            }
+        }
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class BulletScript : NetworkBehaviour
 {
+    public bool isLocatedOnServer;
     public Rigidbody bulletRigidBody;
     private Collider bulletColllider;
     public WorldItemStorage worldItems;

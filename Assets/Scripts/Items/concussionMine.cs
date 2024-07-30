@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class concussionMine : BulletScript
 {
-    public bool isLocatedOnServer;
+    
     public new void OnCollisionEnter(Collision collision) {
         //if it colides with wall or floor
         if (collision.gameObject.layer == 6||collision.gameObject.layer == 9)
