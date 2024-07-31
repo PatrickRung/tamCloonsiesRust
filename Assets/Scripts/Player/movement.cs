@@ -207,7 +207,8 @@ public class movement : CharacterTemplate
         //checks if player fell to far
         if (gameObject.transform.position.y < -100 & IsOwner)
         {
-            changeHealth(-1000000);
+            changeHealthRPC(-maxhealth);
+            Position.Value = spawnPoint.transform.position;
         }
 
     }
@@ -403,6 +404,12 @@ public class movement : CharacterTemplate
             
         }
     }
+
+    public void respawn() {
+        if(IsOwner) {
+            Position.Value = spawnPoint.transform.position;
+        }
+    }
     
     public void ResetJump() {
             readyToJump = true;
@@ -529,6 +536,8 @@ public class movement : CharacterTemplate
     public void PlayerDiedRPC(ulong ID) {
         if(playerCam == null) return;
         inMenu = true;
+        if(Objective.GetComponent<RocketLauncherGameManager>().PlayerOneScore.Value + 1 >= Objective.GetComponent<RocketLauncherGameManager>().winAmount
+            || Objective.GetComponent<RocketLauncherGameManager>().PlayerTwoScore.Value + 1 >= Objective.GetComponent<RocketLauncherGameManager>().winAmount) return;
         playerCam.GetComponent<PlayerController>().openUI("DeathScreen");
         Objective.SetActive(true);
     }

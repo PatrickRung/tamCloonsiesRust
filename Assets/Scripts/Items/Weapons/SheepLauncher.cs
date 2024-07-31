@@ -6,7 +6,7 @@ public class SheepLauncher : GunTemplate
 {
     [HideInInspector] public GameObject projectile;
     public EntitySpawnHandler spawnHandler;
-    void Awake() {
+    new void Awake() {
         base.Awake();
         spawnHandler = worldItems.GetComponent<WorldItemStorage>().entitySpawnHandling.GetComponent<EntitySpawnHandler>();
     }

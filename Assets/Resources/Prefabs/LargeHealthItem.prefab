@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8664731584242617029}
   - component: {fileID: 319531541079635114}
   - component: {fileID: 7085018974569758741}
+  - component: {fileID: -4567244967712954671}
   - component: {fileID: -5124049477413157080}
   m_Layer: 0
   m_Name: LargeHealthItem
@@ -126,6 +127,27 @@ MonoBehaviour:
   descName: {fileID: 0}
   itemWhenPickedUp: {fileID: 2745748587847421920, guid: 8dd4617faf38ede448bae8ff6614abad,
     type: 3}
+--- !u!114 &-4567244967712954671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8296112022186077414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 3179682098
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!114 &-5124049477413157080
 MonoBehaviour:
   m_ObjectHideFlags: 0

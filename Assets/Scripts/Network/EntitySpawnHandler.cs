@@ -91,7 +91,6 @@ public class EntitySpawnHandler : NetworkBehaviour
         
         for(int i = 0; i < NetworkPrefabs.PrefabList.Count; i++) {
             if(NetworkPrefabs.PrefabList[i].Prefab.name == Entity) {
-                Debug.Log("spawning on all clients");
                 GameObject currentProejctile =  Instantiate(NetworkPrefabs.PrefabList[i].Prefab);
                 if(IsServer || IsHost) {
                     currentProejctile.GetComponent<concussionMine>().isLocatedOnServer = true;
@@ -100,7 +99,18 @@ public class EntitySpawnHandler : NetworkBehaviour
                 currentProejctile.transform.rotation =  rotation;
                 currentProejctile.GetComponent<Rigidbody>().useGravity = false;
                 currentProejctile.GetComponent<Rigidbody>().AddForce(force);
+                
+                SpawnID.Value = currentProejctile.GetComponent<BulletScript>().OwnerClientId;
             }
         }
+        SpawnStatus.Value = true;
+    }
+    public async Task<ulong> spawnProjectileNonRPC(String Entity, Vector3 position, Quaternion rotation, Vector3 force) {
+        spawnProjectileRPC(Entity, position, rotation, force);
+        while(!SpawnStatus.Value) {
+            await Task.Delay(25);
+        }
+        SpawnStatus.Value = false;
+        return SpawnID.Value;
     }
 }

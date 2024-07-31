@@ -9,6 +9,7 @@ public class Rocket : concussionMine
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
         for(int i = 0; i < colliders.Length; i++) {
             if(colliders[i].gameObject.TryGetComponent<movement>(out movement players)) {
+                Debug.Log("spawning for players");
                 explosion(colliders[i].gameObject);
             }
         }

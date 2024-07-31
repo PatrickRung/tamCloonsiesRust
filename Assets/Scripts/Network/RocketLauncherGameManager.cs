@@ -9,16 +9,18 @@ using Unity.VisualScripting;
 
 public class RocketLauncherGameManager : NetworkBehaviour
 {
-    private NetworkVariable<int> PlayerOneScore = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
-    private NetworkVariable<int> PlayerTwoScore = new NetworkVariable<int>(0);
+    public NetworkVariable<int> PlayerOneScore = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Server);
+    public NetworkVariable<int> PlayerTwoScore = new NetworkVariable<int>(0);
     public List<ulong> playerIDList = new List<ulong>();
     public WorldItemStorage worldItems;
-    int winAmount = 1;
+    public int winAmount = 5;
+    public bool gameOver;
 
 
     // Start is called before the first frame update
     void Awake()
     {
+        gameOver = false;
         UpdateScreenScoreBoard();
         worldItems = GameObject.Find("World Items").GetComponent<WorldItemStorage>();
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
@@ -29,6 +31,7 @@ public class RocketLauncherGameManager : NetworkBehaviour
     void FixedUpdate() {
         UpdateScreenScoreBoard();
         if(PlayerOneScore.Value >= winAmount) {
+                gameOver = true;
                 GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
                 for(int i = 0; i < players.Length; i++) {
                     if(players[i].GetComponent<movement>().playerCam != null) {
@@ -42,6 +45,7 @@ public class RocketLauncherGameManager : NetworkBehaviour
                 }
             }
             else if(PlayerTwoScore.Value >= winAmount) {
+                gameOver = true;
                 GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
                 for(int i = 0; i < players.Length; i++) {
                     if(players[i].GetComponent<movement>().playerCam != null) {
@@ -59,7 +63,6 @@ public class RocketLauncherGameManager : NetworkBehaviour
     }
     [Rpc(SendTo.Server)]
     public void UpdateScoreBoardRPC(ulong player) {
-        Debug.Log("test");
         if(player == playerIDList[0]) {
             PlayerOneScore.Value++;
         }
@@ -80,9 +83,11 @@ public class RocketLauncherGameManager : NetworkBehaviour
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         //finds the player with the right tag and then respawns them
         for(int i = 0; i < players.Length; i++) {
-            if(playerID == players[i].GetComponent<movement>().OwnerClientId) {
-                players[i].transform.position = players[i].GetComponent<movement>().spawnPoint.position;
-            }
+            Debug.Log("how many times we do");
+            players[i].transform.position = players[i].GetComponent<movement>().spawnPoint.position;
+            players[i].GetComponent<movement>().Position.Value = players[i].GetComponent<movement>().spawnPoint.position;
+            players[i].GetComponent<movement>().respawn();
+            players[i].GetComponent<Rigidbody>().velocity = new Vector3(0,0,0);
         }
 
     }

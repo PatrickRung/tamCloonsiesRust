@@ -267,7 +267,7 @@ Transform:
   m_GameObject: {fileID: 77974803}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.16, y: 3.93, z: 0}
+  m_LocalPosition: {x: -0.16, y: 7.6000004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -842,7 +842,7 @@ GameObject:
   - component: {fileID: 410303786}
   m_Layer: 5
   m_Name: DefeatScreen
-  m_TagString: Untagged
+  m_TagString: MustCloseUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1092,74 +1092,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &779297074
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 994a6b03460d8cc449983ed534bba83d,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3.4180155
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 994a6b03460d8cc449983ed534bba83d,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.9500663
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 994a6b03460d8cc449983ed534bba83d,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -2.1800714
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 994a6b03460d8cc449983ed534bba83d,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 994a6b03460d8cc449983ed534bba83d,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 994a6b03460d8cc449983ed534bba83d,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 994a6b03460d8cc449983ed534bba83d,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 994a6b03460d8cc449983ed534bba83d,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 994a6b03460d8cc449983ed534bba83d,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 994a6b03460d8cc449983ed534bba83d,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 994a6b03460d8cc449983ed534bba83d,
-        type: 3}
-      propertyPath: m_Name
-      value: SheepLauncherOrigninal
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 994a6b03460d8cc449983ed534bba83d, type: 3}
 --- !u!1 &781191929
 GameObject:
   m_ObjectHideFlags: 0
@@ -1624,7 +1556,7 @@ MonoBehaviour:
   playerController: {fileID: 0}
   gameDesc: {fileID: 0}
   descName: {fileID: 0}
-  itemWhenPickedUp: {fileID: 908566879489868119, guid: e3b81a75bb571804dbeed316bc12303b,
+  itemWhenPickedUp: {fileID: 3205602397568695076, guid: 6758ed074923a9e4ea8453d09114e29a,
     type: 3}
 --- !u!65 &815102390
 BoxCollider:
@@ -2041,7 +1973,7 @@ GameObject:
   - component: {fileID: 984644112}
   m_Layer: 5
   m_Name: VictoryScreen
-  m_TagString: Untagged
+  m_TagString: MustCloseUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2189,7 +2121,7 @@ GameObject:
   - component: {fileID: 1255000932}
   m_Layer: 5
   m_Name: DeathScreen
-  m_TagString: Untagged
+  m_TagString: MustCloseUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3110,7 +3042,7 @@ Transform:
   m_GameObject: {fileID: 1720473260}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.5, y: 3.93, z: 0}
+  m_LocalPosition: {x: 7.5, y: 7.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3829,7 +3761,7 @@ MonoBehaviour:
   playerController: {fileID: 0}
   gameDesc: {fileID: 0}
   descName: {fileID: 0}
-  itemWhenPickedUp: {fileID: 6629929318192475798, guid: 8e538cbaade1d694cac369621cea9d55,
+  itemWhenPickedUp: {fileID: 3205602397568695076, guid: 6758ed074923a9e4ea8453d09114e29a,
     type: 3}
 --- !u!222 &1630349979627226211
 CanvasRenderer:
@@ -5667,6 +5599,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1259667739325587371, guid: 952557f16802c3d4bb8d42b3978496b1,
         type: 3}
+      propertyPath: winAmount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1259667739325587371, guid: 952557f16802c3d4bb8d42b3978496b1,
+        type: 3}
       propertyPath: worldItems
       value: 
       objectReference: {fileID: 1310255289500707478}
@@ -5868,7 +5805,7 @@ GameObject:
   - component: {fileID: 770879433097860553}
   m_Layer: 5
   m_Name: Menu
-  m_TagString: Untagged
+  m_TagString: MustCloseUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6737,4 +6674,3 @@ SceneRoots:
   - {fileID: 48608038}
   - {fileID: 598047841}
   - {fileID: 203435790}
-  - {fileID: 779297074}

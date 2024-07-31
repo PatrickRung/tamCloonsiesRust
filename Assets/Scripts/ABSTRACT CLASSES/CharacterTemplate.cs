@@ -15,6 +15,7 @@ public abstract class CharacterTemplate : NetworkBehaviour
     public GameObject worldStorage;
     public void Awake()
     {
+        if(!IsOwner) return;
         changeHealthRPC(maxhealth);
         if(gameObject.layer == 7 && !(SceneManager.GetActiveScene().name == "menuScene")) {
             healthbar = GameObject.Find("healthBar (1)").GetComponent<Image>();
@@ -27,6 +28,7 @@ public abstract class CharacterTemplate : NetworkBehaviour
 
     public void changeHealth(int value)
     {
+        if(worldStorage.GetComponent<WorldItemStorage>().RocketLauncherGameController.GetComponent<RocketLauncherGameManager>().gameOver) return;
         health.Value += value;
         if (health.Value <= 0 && gameObject.TryGetComponent<movement>(out movement PlayerMovement))
         {

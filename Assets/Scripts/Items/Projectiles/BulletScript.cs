@@ -23,7 +23,7 @@ public class BulletScript : NetworkBehaviour
         playerCam = worldItems.PlayerCamera;   
         bulletRigidBody = GetComponent<Rigidbody>();
         
-
+        Debug.Log("setarting bullet");
         Invoke("bulletDespawn", 10f); 
     }
 

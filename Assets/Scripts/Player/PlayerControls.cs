@@ -202,7 +202,7 @@ public class PlayerController : NetworkBehaviour
         playerMovement.inMenu = false;
         for (int i = 0; i < UI.transform.childCount; i++)
         {
-            if (UI.transform.GetChild(i).gameObject.name.Equals("DeathScreen") || UI.transform.GetChild(i).gameObject.name.Equals("Menu"))
+            if (UI.transform.GetChild(i).tag.Equals("MustCloseUI"))
             {
                 UI.transform.GetChild(i).gameObject.SetActive(false);
             }

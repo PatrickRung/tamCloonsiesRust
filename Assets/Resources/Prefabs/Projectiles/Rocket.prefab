@@ -145,9 +145,10 @@ MonoBehaviour:
   bulletRigidBody: {fileID: 0}
   worldItems: {fileID: 0}
   playerCam: {fileID: 0}
-  damage: 0
-  explosion: {fileID: 0}
-  radius: 0
+  damage: 20
+  explosion: {fileID: 5643770024552760341, guid: 5c9997bdfc7193941a0ae11682128c55,
+    type: 3}
+  radius: 40
 --- !u!54 &2628516252050311964
 Rigidbody:
   m_ObjectHideFlags: 0

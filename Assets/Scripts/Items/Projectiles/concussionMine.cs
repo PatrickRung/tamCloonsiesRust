@@ -18,7 +18,7 @@ public class concussionMine : BulletScript
             explosion(collision.gameObject);
         }
     }
-    public void explosion(GameObject player)
+    public new void explosion(GameObject player)
     {
         Vector3 direction = new Vector3(player.transform.position.x, player.transform.position.y - .5f, player.transform.position.z) 
                                         - new Vector3(transform.position.x, transform.position.y, transform.position.z);
