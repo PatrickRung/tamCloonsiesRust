@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 public abstract class CharacterTemplate : NetworkBehaviour
 {
     [Header("Health")]
-    public NetworkVariable<int> health = new NetworkVariable<int>(0);
+    public NetworkVariable<int> health = new NetworkVariable<int>(100);
     public int maxhealth = 100;
     public Image healthbar;
     public Transform spawnPoint;

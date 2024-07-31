@@ -42,15 +42,17 @@ public class PlayerController : NetworkBehaviour
         onMat = Resources.Load<Material>("green");
         offMatt = Resources.Load<Material>("default");
         weaponSpot = GameObject.Find("WeaponSpot");
+        UI = worldItems.GetComponent<WorldItemStorage>().PlayerCamera;
         MenuObject = worldItems.GetComponent<WorldItemStorage>().menu;
         sensitivitySlider = worldItems.GetComponent<WorldItemStorage>().sensitivitySlider;
-        PlayerNetCodeID = (int)NetworkManager.LocalClientId;
-
+        if(worldItems.GetComponent<WorldItemStorage>().multiplayerEnabled) {
+            PlayerNetCodeID = (int)NetworkManager.LocalClientId;
+        }
 
         //making the menu invisible
         for (int i = 0; i < MenuObject.transform.childCount; i++)
         {
-            if(!UI.transform.GetChild(i).gameObject.name.Equals("Objective")) {
+            if(!MenuObject.transform.GetChild(i).gameObject.name.Equals("Objective")) {
                 MenuObject.transform.GetChild(i).gameObject.SetActive(false);
             }
         }

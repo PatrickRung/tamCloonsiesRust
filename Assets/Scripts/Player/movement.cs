@@ -86,13 +86,20 @@ public class movement : CharacterTemplate
             return;
         }
         Objective = GameObject.Find("Objective");
-        if(OwnerClientId == Objective.GetComponent<RocketLauncherGameManager>().playerIDList[0]) {
-            spawnPoint = GameObject.Find("SpawnPoint").transform;
+        worldStorage = GameObject.Find("World Items");
+        if(worldStorage.GetComponent<WorldItemStorage>().multiplayerEnabled) {
+            if(OwnerClientId == Objective.GetComponent<RocketLauncherGameManager>().playerIDList[0]) {
+                spawnPoint = GameObject.Find("SpawnPoint").transform;
+            }
+            else {
+                
+                spawnPoint = GameObject.Find("SpawnPoint (1)").transform;
+            }
         }
         else {
-            Debug.Log("not player 1");
-            spawnPoint = GameObject.Find("SpawnPoint (1)").transform;
+            spawnPoint = GameObject.Find("SpawnPoint").transform;
         }
+
         
 
         //if the the player is not the owner then it will not assign variables however base.awake still needs to be called to calculate health
@@ -105,7 +112,7 @@ public class movement : CharacterTemplate
         //player controller which is held on the camera will keep on trying to acces the player which is still being loaded by the server
         //activiting the player controller will give time for the server to load and then the player controller can call Awake and Update with 
         //all its needed properties
-        worldStorage = GameObject.Find("World Items");
+
 
         if(worldStorage.GetComponent<WorldItemStorage>().player == null) {
             worldStorage.GetComponent<WorldItemStorage>().player = gameObject;
