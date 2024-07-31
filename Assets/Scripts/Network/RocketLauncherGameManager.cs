@@ -76,18 +76,22 @@ public class RocketLauncherGameManager : NetworkBehaviour
     }
     public void Respawn() {
         RespawnResquestRPC(worldItems.player.GetComponent<movement>().OwnerClientId);
+        worldItems = GameObject.Find("World Items").GetComponent<WorldItemStorage>();
         worldItems.player.GetComponent<movement>().playerCam.GetComponent<PlayerController>().closeUI();
     }
-    [Rpc(SendTo.Server)]
+    [Rpc(SendTo.Everyone)]
     public void RespawnResquestRPC(ulong playerID) {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        worldItems = GameObject.Find("World Items").GetComponent<WorldItemStorage>();
         //finds the player with the right tag and then respawns them
         for(int i = 0; i < players.Length; i++) {
             Debug.Log("how many times we do");
-            players[i].transform.position = players[i].GetComponent<movement>().spawnPoint.position;
-            players[i].GetComponent<movement>().Position.Value = players[i].GetComponent<movement>().spawnPoint.position;
-            players[i].GetComponent<movement>().respawn();
-            players[i].GetComponent<Rigidbody>().velocity = new Vector3(0,0,0);
+            if(worldItems.player.GetComponent<movement>().OwnerClientId == players[i].GetComponent<movement>().OwnerClientId) {
+                players[i].transform.position = players[i].GetComponent<movement>().spawnPoint.position;
+                players[i].GetComponent<movement>().Position.Value = players[i].GetComponent<movement>().spawnPoint.position;
+                players[i].GetComponent<movement>().respawn();
+                players[i].GetComponent<Rigidbody>().velocity = new Vector3(0,0,0);
+            }
         }
 
     }
